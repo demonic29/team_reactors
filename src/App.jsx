@@ -9,7 +9,7 @@ const App = () => {
 				placeItems: "center",
 			}}
 		>
-			Hello Features!
+			<h1 className="text-3xl font-bold underline text-primaryColor">Hello world!</h1>
 		</div>
 	);
 };
