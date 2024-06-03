@@ -9,7 +9,7 @@ const App = () => {
 				placeItems: "center",
 			}}
 		>
-			Hello World!
+			Hello Features!
 		</div>
 	);
 };
