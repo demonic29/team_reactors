@@ -4,7 +4,7 @@ import HomePage from "./pages/HomePage";
 import ContactPage from "./pages/ContactPage";
 import MainLayout from "./layouts/MainLayout";
 import TourPage from "./pages/TourPage";
-import Login from "./pages/Login";
+import LoginPage from "./pages/LoginPage";
 
 const App = () => {
 	return (
@@ -17,7 +17,7 @@ const App = () => {
 				></Route>
 				<Route path="/tour" element={<TourPage></TourPage>}></Route>
 			</Route>
-			<Route path="/login" element={<Login></Login>}></Route>
+			<Route path="/login" element={<LoginPage></LoginPage>}></Route>
 		</Routes>
 	);
 };
