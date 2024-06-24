@@ -25,7 +25,7 @@ const NavBar = () => {
                 ))}
             </div>
             <div>
-                <Button>お問い合わせ</Button>
+                <Button>contact</Button>
             </div>
         </div>
     );
