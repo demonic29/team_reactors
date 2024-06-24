@@ -17,7 +17,34 @@ const NavBar = () => {
                         key={nav.content}
                         to={nav.to}
                         className={
-                            "text-black font-semibold text-[10px] hover:text-primaryColor hover:underline hover:underline-offset-2 transition-all"
+                            "text-pink font-semibold text-[10px] hover:text-primaryColor hover:underline hover:underline-offset-2 transition-all"
+                        }
+                    >
+                        {nav.content}
+                    </NavLink>
+                ))}
+            </div>
+            <div>
+                <Button>お問い合わせ</Button>
+            </div>
+        </div>
+    );
+
+    return (
+        <div className="container h-[65px] bg-white shadow-sm items-center flex justify-between">
+            <div className="flex items-center gap-4">
+                <img
+                    srcSet="src/assets/rekiteku-logo.png 2x"
+                    alt="rekiteku-logo"
+                />
+            </div>
+            <div className="flex items-center justify-center gap-16">
+                {navs.map((nav) => (
+                    <NavLink
+                        key={nav.content}
+                        to={nav.to}
+                        className={
+                            "text-black font-semibold text-[18px] hover:text-primaryColor hover:underline hover:underline-offset-2 transition-all"
                         }
                     >
                         {nav.content}
@@ -30,7 +57,6 @@ const NavBar = () => {
         </div>
     );
 };
-
 const navs = [
     {
         content: "ホーム",
