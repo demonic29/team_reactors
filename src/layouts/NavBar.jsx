@@ -25,7 +25,7 @@ const NavBar = () => {
                 ))}
             </div>
             <div>
-                <Button>FUCK</Button>
+                <Button>お問い合わせ</Button>
             </div>
         </div>
     );
