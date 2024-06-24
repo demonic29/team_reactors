@@ -17,7 +17,7 @@ const NavBar = () => {
                         key={nav.content}
                         to={nav.to}
                         className={
-                            "text-black font-semibold text-[18px] hover:text-primaryColor hover:underline hover:underline-offset-2 transition-all"
+                            "text-black font-semibold text-[10px] hover:text-primaryColor hover:underline hover:underline-offset-2 transition-all"
                         }
                     >
                         {nav.content}
