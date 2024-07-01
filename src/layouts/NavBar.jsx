@@ -47,7 +47,7 @@ const navs = [
     },
     {
         content: "連絡",
-        to: "/contact",
+        to: "/about",
     },
 ];
 

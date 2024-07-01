@@ -1,14 +1,13 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import ContactPage from "./pages/ContactPage";
-import TourPage from "./pages/TourPage";
 import LoginPage from "./pages/LoginPage";
 import ManagerLayout from "./layouts/ManagerLayout";
 import ManagerHomePage from "./pages/manager/ManagerHomePage";
 import ManagerAboutPage from "./pages/manager/ManagerAboutPage";
 import PageNotFound from "./pages/PageNotFound";
 import MainLayout from "./layouts/MainLayout";
+import AboutPage from "./pages/AboutPage";
 
 const App = () => {
 	return (
@@ -16,10 +15,10 @@ const App = () => {
 			<Route path="/" element={<MainLayout></MainLayout>}>
 				<Route path="/" element={<HomePage></HomePage>} default></Route>
 				<Route
-					path="/contact"
-					element={<ContactPage></ContactPage>}
+					path="/about"
+					element={<AboutPage></AboutPage>}
 				></Route>
-				<Route path="/tour" element={<TourPage></TourPage>}></Route>
+				{/* <Route path="/tour" element={<TourPage></TourPage>}></Route> */}
 			</Route>
 			<Route path="/login" element={<LoginPage></LoginPage>}></Route>
 			<Route path="/manager" element={<ManagerLayout></ManagerLayout>}>
