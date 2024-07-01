@@ -67,7 +67,7 @@ const ManagerLayout = () => {
 						</div>
 					</div>
 				</div>
-				<div className="px-4 pt-4">
+				<div className="flex w-full h-full px-4 pt-4 max-h-[calc(100vh-65px)] overflow-auto">
 					<Outlet></Outlet>
 				</div>
 			</div>

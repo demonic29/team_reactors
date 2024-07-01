@@ -30,6 +30,7 @@ const App = () => {
 					path="/manager/about"
 					element={<ManagerAboutPage></ManagerAboutPage>}
 				></Route>
+				<Route path="/manager/*" element={<PageNotFound></PageNotFound>}></Route>
 			</Route>
 			<Route path="/*" element={<PageNotFound></PageNotFound>}></Route>
 		</Routes>

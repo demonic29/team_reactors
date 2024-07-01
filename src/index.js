@@ -6,15 +6,18 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
-		<BrowserRouter>
-			<App />
-      <ToastContainer></ToastContainer>
-		</BrowserRouter>
+		<DndProvider backend={HTML5Backend}>
+			<BrowserRouter>
+				<App />
+				<ToastContainer />
+			</BrowserRouter>
+		</DndProvider>
 	</React.StrictMode>
 );
 
