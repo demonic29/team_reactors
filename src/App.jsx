@@ -8,6 +8,7 @@ import ManagerAboutPage from "./pages/manager/ManagerAboutPage";
 import PageNotFound from "./pages/PageNotFound";
 import MainLayout from "./layouts/MainLayout";
 import AboutPage from "./pages/AboutPage";
+import TourPage from './pages/TourPage'
 
 const App = () => {
 	return (
@@ -18,7 +19,7 @@ const App = () => {
 					path="/about"
 					element={<AboutPage></AboutPage>}
 				></Route>
-				{/* <Route path="/tour" element={<TourPage></TourPage>}></Route> */}
+				<Route path="/tour" element={<TourPage></TourPage>}></Route>
 			</Route>
 			<Route path="/login" element={<LoginPage></LoginPage>}></Route>
 			<Route path="/manager" element={<ManagerLayout></ManagerLayout>}>
