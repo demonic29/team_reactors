@@ -67,7 +67,9 @@ const ManagerLayout = () => {
 						</div>
 					</div>
 				</div>
-				<Outlet></Outlet>
+				<div className="px-4 pt-4">
+					<Outlet></Outlet>
+				</div>
 			</div>
 		</div>
 	);
