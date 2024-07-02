@@ -13,7 +13,7 @@ const ManagerHomePage = () => {
 			{/* Slider manager  */}
 			<div className="mb-10">
 				<div className="flex justify-between mb-3 gap-x-4">
-					<SectionTitle>スライダー</SectionTitle>
+					<SectionTitle className={'mb-0'}>スライダー</SectionTitle>
 					<button className="flex items-center gap-1 text-gray-500 cursor-pointer hover:text-primaryColor">
 						<IoMdAddCircleOutline size={16} />
 						<span className="text-sm">スライド追加</span>
