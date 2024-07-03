@@ -8,31 +8,33 @@ import ManagerAboutPage from "./pages/manager/ManagerAboutPage";
 import PageNotFound from "./pages/PageNotFound";
 import MainLayout from "./layouts/MainLayout";
 import AboutPage from "./pages/AboutPage";
+import ManagerTourPage from "./pages/manager/ManagerTourPage";
 
 const App = () => {
 	return (
 		<Routes>
-			<Route path="/" element={<MainLayout></MainLayout>}>
-				<Route path="/" element={<HomePage></HomePage>} default></Route>
-				<Route
-					path="/about"
-					element={<AboutPage></AboutPage>}
-				></Route>
+			<Route path="/" element={<MainLayout />}>
+				<Route path="/" element={<HomePage />} default></Route>
+				<Route path="/about" element={<AboutPage />}></Route>
 				{/* <Route path="/tour" element={<TourPage></TourPage>}></Route> */}
 			</Route>
-			<Route path="/login" element={<LoginPage></LoginPage>}></Route>
-			<Route path="/manager" element={<ManagerLayout></ManagerLayout>}>
+			<Route path="/login" element={<LoginPage />}></Route>
+			<Route path="/manager" element={<ManagerLayout />}>
 				<Route
 					path="/manager/home"
-					element={<ManagerHomePage></ManagerHomePage>}
+					element={<ManagerHomePage />}
 				></Route>
 				<Route
 					path="/manager/about"
-					element={<ManagerAboutPage></ManagerAboutPage>}
+					element={<ManagerAboutPage />}
 				></Route>
-				<Route path="/manager/*" element={<PageNotFound></PageNotFound>}></Route>
+				<Route
+					path="/manager/tour"
+					element={<ManagerTourPage />}
+				></Route>
+				<Route path="/manager/*" element={<PageNotFound />}></Route>
 			</Route>
-			<Route path="/*" element={<PageNotFound></PageNotFound>}></Route>
+			<Route path="/*" element={<PageNotFound />}></Route>
 		</Routes>
 	);
 };

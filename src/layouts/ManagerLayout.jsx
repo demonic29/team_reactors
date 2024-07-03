@@ -22,7 +22,8 @@ const ManagerLayout = () => {
 
 	return (
 		<div className="flex h-screen">
-			<div className="w-[260px] border-r border-r-gray-200">
+			{/*navigation  */}
+			<div className="w-[250px] border-r border-r-gray-200">
 				<div className="h-[65px] border-b border-b-gray-200 px-4 flex items-center">
 					<div className="flex items-center gap-2 font-bold text-secondaryColor text-[22px]">
 						<img
@@ -48,6 +49,7 @@ const ManagerLayout = () => {
 					))}
 				</div>
 			</div>
+			{/* main container  */}
 			<div className="flex-1">
 				<div className="h-[65px] border-b border-b-gray-200 flex items-center justify-between px-4">
 					<span className="text-2xl font-semibold text-secondaryColor">
