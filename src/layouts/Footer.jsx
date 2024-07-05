@@ -67,7 +67,7 @@ export default function Footer() {
         </div>
       </div>
       {/* プライバシポリシー系 */}
-      <div className="mt-16 mb-2">
+      <div className="mt-16 mb-[32px]">
         <ul className="flex justify-center gap-x-20 text-white text-xs font-thin">
           <li>
             <a href="#">旅行業約款</a>

@@ -2,7 +2,7 @@ import React from "react";
 import Footer from "../layouts/Footer";
 
 const AboutPage = () => {
-  const aboutImg = require("../assets/img/yoshimarusan.jpg");
+  const aboutImg = require("../assets/img/owner.jpg");
   const mainImg = require("../assets/img/about-main-img.jpg");
   return (
     <div className="font-kiwiMaru">
