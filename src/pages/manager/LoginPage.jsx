@@ -10,6 +10,14 @@ const LoginPage = () => {
 						<label htmlFor="username">Username</label>
             <input type="text" id="username" name="username" className="border" placeholder="username" />
 					</div>
+					<div className="flex gap-4">
+						<label htmlFor="username">Email</label>
+            <input type="text" id="username" name="username" className="border" placeholder="username" />
+					</div>
+					<div className="flex gap-4">
+						<label htmlFor="username">Password</label>
+            <input type="text" id="username" name="username" className="border" placeholder="username" />
+					</div>
 				</div>
 			</div>
 		</div>
