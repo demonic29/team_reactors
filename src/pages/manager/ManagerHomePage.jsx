@@ -1,19 +1,81 @@
-import React, { useState } from "react";
+import React, {
+	useState,
+} from "react";
 import SectionTitle from "../../components/managerPage/SectionTitle";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import Button from "../../components/buttons/Button";
 import DraggableList from "../../components/managerPage/draggable/DraggableList";
+import { HiXMark } from "react-icons/hi2";
+import { useModal } from "../../contexts/modal-context";
+import ModalBase from "../../components/modals/ModalBase";
+import { FiEdit } from "react-icons/fi";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const ManagerHomePage = () => {
 	const [sliderList, setSliderList] = useState(sliders);
+	const { openModal, toggleModal } = useModal();
+	const initialValue =
+		"「歴てく」は、歴史をてくてくと歩き回るツアーサイトです。知名度が低い国内の歴史的な場所や、歴史上の人物に焦点を当てたツアーを企画。知名度が低い国内の歴史的な場所や、歴史上の人物に焦点を当てたツアーを企画。";
+	const [value, setValue] = useState(initialValue);
+
+	console.log(value);
+
 	// const [recommendTour, setRecommendTour] = useState(tours.slice(0, 3));
 
 	return (
 		<div className="flex-1">
+			<ModalBase openModal={openModal}>
+				<div className="absolute inset-0 flex items-center justify-center w-full h-full px-10 bg-black bg-opacity-40">
+					<div className="bg-white flex flex-col p-6 rounded-xl h-full max-h-[82%] w-full max-w-[1000px] relative">
+						<span
+							className="absolute text-gray-400 transition-all cursor-pointer hover:text-black right-2 top-2"
+							onClick={() => toggleModal()}
+						>
+							<HiXMark size={28} />
+						</span>
+						<div className="flex-1 mb-4">
+							{/* modal content  */}
+							<SectionTitle className={"mb-3"}>
+								アバウト
+							</SectionTitle>
+							<div className="w-full mb-10 max-w-[60%] relative group mx-auto aspect-[16/10] rounded-md overflow-hidden">
+								<div className="overlay">
+									<span className="size-[75px] cursor-pointer bg-black bg-opacity-50 flex items-center justify-center opacity-80 rounded-full">
+										<FiEdit
+											size={35}
+											color="white"
+										></FiEdit>
+									</span>
+								</div>
+								<img
+									src="https://i.pinimg.com/736x/31/4e/59/314e59fc4a0e278fbb4b31ac392cd187.jpg"
+									alt=""
+									className="object-cover object-center w-full h-full"
+								/>
+							</div>
+							<div>
+								{/* <QuillEditor ref={quillRef} /> */}
+								<ReactQuill
+									theme="snow"
+									value={value}
+									
+									onChange={setValue}
+								/>
+							</div>
+						</div>
+						<div className="flex justify-end">
+							<Button className={"py-[6px] px-4"}>保存</Button>
+						</div>
+					</div>
+				</div>
+			</ModalBase>
+			{/* Modal  */}
+
 			{/* Slider manager  */}
 			<div className="mb-10">
 				<div className="flex justify-between mb-3 gap-x-4">
-					<SectionTitle className={'mb-0'}>スライダー</SectionTitle>
+					<SectionTitle className={"mb-0"}>スライダー</SectionTitle>
 					<button className="flex items-center gap-1 text-gray-500 cursor-pointer hover:text-primaryColor">
 						<IoMdAddCircleOutline size={16} />
 						<span className="text-sm">スライド追加</span>
@@ -36,14 +98,18 @@ const ManagerHomePage = () => {
 						<p className="mb-4">
 							「歴てく」は、歴史をてくてくと歩き回るツアーサイトです。知名度が低い国内の歴史的な場所や、歴史上の人物に焦点を当てたツアーを企画。知名度が低い国内の歴史的な場所や、歴史上の人物に焦点を当てたツアーを企画。
 						</p>
-						<Button className={"px-6 py-[6px]"}>編集</Button>
+						<Button
+							onClick={() => toggleModal()}
+							className={"px-6 py-[6px]"}
+						>
+							編集
+						</Button>
 					</div>
 				</div>
 			</div>
 			{/* Recommend tour  */}
 			<div>
 				<SectionTitle className="mb-3">おすすめツアー</SectionTitle>
-				
 			</div>
 		</div>
 	);
@@ -69,478 +135,5 @@ const sliders = [
 		desc: "心を込めて、私たちはお客さんにいろいろなツアーを提供しています。心を込めて、私たちはお客さんにいろいろな 333",
 	},
 ];
-
-// const tours = [
-// 	{
-// 		id: 1,
-// 		title: "忠義の福岡武将物語",
-// 		shortDesc: "場所: 立花山城, 梅岳寺, 四王寺城, ...",
-// 		desc: "「忠義の福岡武将物語」は本当に最高の体験でした！1日目は古代の遺跡を巡り、太宰府天満宮では歴史の深さに感動。2日目は中世の歴史に触れ、元寇の激闘を体感できました。福岡が国防の要所だったと知り、新たな発見に胸躍る旅でした。ガイドさんの説明も分かりやすく、福岡の歴史と文化にどっぷり浸れた2日間。歴史好きにはたまらない、大満足のツアーです！",
-// 		banner: "https://i.pinimg.com/564x/4a/4b/a9/4a4ba9b956fd4d76ddfff7da9bca2c3b.jpg",
-// 		images: [
-// 			"https://i.pinimg.com/564x/b9/b4/a4/b9b4a4d59bf2ed596141859971f56a4c.jpg",
-// 			"https://i.pinimg.com/564x/6d/63/be/6d63be05abade733ebf6449e8a7a7c88.jpg",
-// 			"https://i.pinimg.com/564x/46/50/be/4650bee00c6b3ff5fbce6c782359434e.jpg",
-// 			"https://i.pinimg.com/564x/a7/a7/29/a7a729ca2178096bbd3e2dc01476048c.jpg",
-// 		],
-// 		price: 15000,
-// 		locations: [
-// 			{
-// 				name: "立花山城",
-// 				lever: "1",
-// 				explain: "体力面の説明, 体力面の説明",
-// 			},
-// 			{
-// 				name: "梅岳寺",
-// 				lever: "2",
-// 				explain: "体力面の説明, 体力面の説明",
-// 			},
-// 			{
-// 				name: "四王寺城",
-// 				lever: "1",
-// 				explain: "体力面の説明, 体力面の説明",
-// 			},
-// 			{
-// 				name: "観世音寺 ",
-// 				lever: "5",
-// 				explain: "体力面の説明, 体力面の説明",
-// 			},
-// 		],
-// 		plans: [
-// 			{
-// 				id: 1,
-// 				start: "博多駅or福岡空港",
-// 				end: "博多駅or福岡空港",
-// 				destination: [
-// 					{ id: 1, name: "立花山城" },
-// 					{ id: 2, name: "梅岳寺" },
-// 					{ id: 3, name: "四王寺城" },
-// 					{ id: 4, name: "観世音寺" },
-// 				],
-// 				map: '<iframe src="https://www.google.com/maps/d/u/0/embed?mid=10QqdXqgN2QDRJgB2eTwiTQp8JT_759c&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>',
-// 			},
-// 			{
-// 				id: 2,
-// 				start: "博多駅or福岡空港",
-// 				end: "博多駅or福岡空港",
-// 				destination: [
-// 					{ id: 1, name: "立花山城" },
-// 					{ id: 2, name: "梅岳寺" },
-// 					{ id: 3, name: "四王寺城" },
-// 					{ id: 4, name: "観世音寺" },
-// 				],
-// 				map: '<iframe src="https://www.google.com/maps/d/u/0/embed?mid=10QqdXqgN2QDRJgB2eTwiTQp8JT_759c&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>',
-// 			},
-// 		],
-// 		feedbacks: [
-// 			{
-// 				name: "akiaki",
-// 				avatar: "https://i.pinimg.com/736x/94/94/fa/9494facebfb6dd342d6ce549a2fbbedb.jpg",
-// 				address: "大阪市天王寺区",
-// 				time: "2024/05/19",
-// 				age: "36",
-// 				content:
-// 					"「忠義の福岡武将物語」は本当に最高の体験でした！1日目は古代の遺跡を巡り、太宰府天満宮では歴史の深さに感動。2日目は中世の歴史に触れ、元寇の激闘を体感できました。福岡が国防の要所だったと知り、新たな発見に胸躍る旅でした。ガイドさんの説明も分かりやすく、福岡の歴史と文化にどっぷり浸れた2日間。歴史好きにはたまらない、大満足のツアーです！",
-// 				rate: "4",
-// 			},
-// 			{
-// 				name: "nyamu",
-// 				avatar: "https://i.pinimg.com/736x/94/94/fa/9494facebfb6dd342d6ce549a2fbbedb.jpg",
-// 				address: "大阪市天王寺区",
-// 				time: "",
-// 				age: "18",
-// 				content:
-// 					"「忠義の福岡武将物語」は本当に最高の体験でした！1日目は古代の遺跡を巡り、太宰府天満宮では歴史の深さに感動。2日目は中世の歴史に触れ、元寇の激闘を体感できました。福岡が国防の要所だったと知り、新たな発見に胸躍る旅でした。ガイドさんの説明も分かりやすく、福岡の歴史と文化にどっぷり浸れた2日間。歴史好きにはたまらない、大満足のツアーです！",
-// 				rate: "4",
-// 			},
-// 			{
-// 				name: "ahihi",
-// 				avatar: "https://i.pinimg.com/736x/94/94/fa/9494facebfb6dd342d6ce549a2fbbedb.jpg",
-// 				address: "大阪市天王寺区",
-// 				time: "",
-// 				age: "20",
-// 				content:
-// 					"「忠義の福岡武将物語」は本当に最高の体験でした！1日目は古代の遺跡を巡り、太宰府天満宮では歴史の深さに感動。2日目は中世の歴史に触れ、元寇の激闘を体感できました。福岡が国防の要所だったと知り、新たな発見に胸躍る旅でした。ガイドさんの説明も分かりやすく、福岡の歴史と文化にどっぷり浸れた2日間。歴史好きにはたまらない、大満足のツアーです！",
-// 				rate: "4",
-// 			},
-// 		],
-// 	},
-// 	{
-// 		id: 2,
-// 		title: "忠義の福岡武将物語 2",
-// 		shortDesc: "場所: 立花山城, 梅岳寺, 四王寺城, ...",
-// 		desc: "「忠義の福岡武将物語」は本当に最高の体験でした！1日目は古代の遺跡を巡り、太宰府天満宮では歴史の深さに感動。2日目は中世の歴史に触れ、元寇の激闘を体感できました。福岡が国防の要所だったと知り、新たな発見に胸躍る旅でした。ガイドさんの説明も分かりやすく、福岡の歴史と文化にどっぷり浸れた2日間。歴史好きにはたまらない、大満足のツアーです！",
-// 		banner: "https://i.pinimg.com/564x/4a/4b/a9/4a4ba9b956fd4d76ddfff7da9bca2c3b.jpg",
-// 		images: [
-// 			"https://i.pinimg.com/564x/b9/b4/a4/b9b4a4d59bf2ed596141859971f56a4c.jpg",
-// 			"https://i.pinimg.com/564x/6d/63/be/6d63be05abade733ebf6449e8a7a7c88.jpg",
-// 			"https://i.pinimg.com/564x/46/50/be/4650bee00c6b3ff5fbce6c782359434e.jpg",
-// 			"https://i.pinimg.com/564x/a7/a7/29/a7a729ca2178096bbd3e2dc01476048c.jpg",
-// 		],
-// 		price: 15000,
-// 		locations: [
-// 			{
-// 				name: "立花山城",
-// 				lever: "1",
-// 				explain: "体力面の説明, 体力面の説明",
-// 			},
-// 			{
-// 				name: "梅岳寺",
-// 				lever: "2",
-// 				explain: "体力面の説明, 体力面の説明",
-// 			},
-// 			{
-// 				name: "四王寺城",
-// 				lever: "1",
-// 				explain: "体力面の説明, 体力面の説明",
-// 			},
-// 			{
-// 				name: "観世音寺 ",
-// 				lever: "5",
-// 				explain: "体力面の説明, 体力面の説明",
-// 			},
-// 		],
-// 		plans: [
-// 			{
-// 				id: 1,
-// 				start: "博多駅or福岡空港",
-// 				end: "博多駅or福岡空港",
-// 				destination: [
-// 					{ id: 1, name: "立花山城" },
-// 					{ id: 2, name: "梅岳寺" },
-// 					{ id: 3, name: "四王寺城" },
-// 					{ id: 4, name: "観世音寺" },
-// 				],
-// 				map: '<iframe src="https://www.google.com/maps/d/u/0/embed?mid=10QqdXqgN2QDRJgB2eTwiTQp8JT_759c&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>',
-// 			},
-// 			{
-// 				id: 2,
-// 				start: "博多駅or福岡空港",
-// 				end: "博多駅or福岡空港",
-// 				destination: [
-// 					{ id: 1, name: "立花山城" },
-// 					{ id: 2, name: "梅岳寺" },
-// 					{ id: 3, name: "四王寺城" },
-// 					{ id: 4, name: "観世音寺" },
-// 				],
-// 				map: '<iframe src="https://www.google.com/maps/d/u/0/embed?mid=10QqdXqgN2QDRJgB2eTwiTQp8JT_759c&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>',
-// 			},
-// 		],
-// 		feedbacks: [
-// 			{
-// 				name: "akiaki",
-// 				avatar: "https://i.pinimg.com/736x/94/94/fa/9494facebfb6dd342d6ce549a2fbbedb.jpg",
-// 				address: "大阪市天王寺区",
-// 				time: "2024/05/19",
-// 				age: "36",
-// 				content:
-// 					"「忠義の福岡武将物語」は本当に最高の体験でした！1日目は古代の遺跡を巡り、太宰府天満宮では歴史の深さに感動。2日目は中世の歴史に触れ、元寇の激闘を体感できました。福岡が国防の要所だったと知り、新たな発見に胸躍る旅でした。ガイドさんの説明も分かりやすく、福岡の歴史と文化にどっぷり浸れた2日間。歴史好きにはたまらない、大満足のツアーです！",
-// 				rate: "4",
-// 			},
-// 			{
-// 				name: "nyamu",
-// 				avatar: "https://i.pinimg.com/736x/94/94/fa/9494facebfb6dd342d6ce549a2fbbedb.jpg",
-// 				address: "大阪市天王寺区",
-// 				time: "",
-// 				age: "18",
-// 				content:
-// 					"「忠義の福岡武将物語」は本当に最高の体験でした！1日目は古代の遺跡を巡り、太宰府天満宮では歴史の深さに感動。2日目は中世の歴史に触れ、元寇の激闘を体感できました。福岡が国防の要所だったと知り、新たな発見に胸躍る旅でした。ガイドさんの説明も分かりやすく、福岡の歴史と文化にどっぷり浸れた2日間。歴史好きにはたまらない、大満足のツアーです！",
-// 				rate: "4",
-// 			},
-// 			{
-// 				name: "ahihi",
-// 				avatar: "https://i.pinimg.com/736x/94/94/fa/9494facebfb6dd342d6ce549a2fbbedb.jpg",
-// 				address: "大阪市天王寺区",
-// 				time: "",
-// 				age: "20",
-// 				content:
-// 					"「忠義の福岡武将物語」は本当に最高の体験でした！1日目は古代の遺跡を巡り、太宰府天満宮では歴史の深さに感動。2日目は中世の歴史に触れ、元寇の激闘を体感できました。福岡が国防の要所だったと知り、新たな発見に胸躍る旅でした。ガイドさんの説明も分かりやすく、福岡の歴史と文化にどっぷり浸れた2日間。歴史好きにはたまらない、大満足のツアーです！",
-// 				rate: "4",
-// 			},
-// 		],
-// 	},
-// 	{
-// 		id: 3,
-// 		title: "忠義の福岡武将物語 3",
-// 		shortDesc: "場所: 立花山城, 梅岳寺, 四王寺城, ...",
-// 		desc: "「忠義の福岡武将物語」は本当に最高の体験でした！1日目は古代の遺跡を巡り、太宰府天満宮では歴史の深さに感動。2日目は中世の歴史に触れ、元寇の激闘を体感できました。福岡が国防の要所だったと知り、新たな発見に胸躍る旅でした。ガイドさんの説明も分かりやすく、福岡の歴史と文化にどっぷり浸れた2日間。歴史好きにはたまらない、大満足のツアーです！",
-// 		banner: "https://i.pinimg.com/564x/4a/4b/a9/4a4ba9b956fd4d76ddfff7da9bca2c3b.jpg",
-// 		images: [
-// 			"https://i.pinimg.com/564x/b9/b4/a4/b9b4a4d59bf2ed596141859971f56a4c.jpg",
-// 			"https://i.pinimg.com/564x/6d/63/be/6d63be05abade733ebf6449e8a7a7c88.jpg",
-// 			"https://i.pinimg.com/564x/46/50/be/4650bee00c6b3ff5fbce6c782359434e.jpg",
-// 			"https://i.pinimg.com/564x/a7/a7/29/a7a729ca2178096bbd3e2dc01476048c.jpg",
-// 		],
-// 		price: 15000,
-// 		locations: [
-// 			{
-// 				name: "立花山城",
-// 				lever: "1",
-// 				explain: "体力面の説明, 体力面の説明",
-// 			},
-// 			{
-// 				name: "梅岳寺",
-// 				lever: "2",
-// 				explain: "体力面の説明, 体力面の説明",
-// 			},
-// 			{
-// 				name: "四王寺城",
-// 				lever: "1",
-// 				explain: "体力面の説明, 体力面の説明",
-// 			},
-// 			{
-// 				name: "観世音寺 ",
-// 				lever: "5",
-// 				explain: "体力面の説明, 体力面の説明",
-// 			},
-// 		],
-// 		plans: [
-// 			{
-// 				id: 1,
-// 				start: "博多駅or福岡空港",
-// 				end: "博多駅or福岡空港",
-// 				destination: [
-// 					{ id: 1, name: "立花山城" },
-// 					{ id: 2, name: "梅岳寺" },
-// 					{ id: 3, name: "四王寺城" },
-// 					{ id: 4, name: "観世音寺" },
-// 				],
-// 				map: '<iframe src="https://www.google.com/maps/d/u/0/embed?mid=10QqdXqgN2QDRJgB2eTwiTQp8JT_759c&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>',
-// 			},
-// 			{
-// 				id: 2,
-// 				start: "博多駅or福岡空港",
-// 				end: "博多駅or福岡空港",
-// 				destination: [
-// 					{ id: 1, name: "立花山城" },
-// 					{ id: 2, name: "梅岳寺" },
-// 					{ id: 3, name: "四王寺城" },
-// 					{ id: 4, name: "観世音寺" },
-// 				],
-// 				map: '<iframe src="https://www.google.com/maps/d/u/0/embed?mid=10QqdXqgN2QDRJgB2eTwiTQp8JT_759c&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>',
-// 			},
-// 		],
-// 		feedbacks: [
-// 			{
-// 				name: "akiaki",
-// 				avatar: "https://i.pinimg.com/736x/94/94/fa/9494facebfb6dd342d6ce549a2fbbedb.jpg",
-// 				address: "大阪市天王寺区",
-// 				time: "2024/05/19",
-// 				age: "36",
-// 				content:
-// 					"「忠義の福岡武将物語」は本当に最高の体験でした！1日目は古代の遺跡を巡り、太宰府天満宮では歴史の深さに感動。2日目は中世の歴史に触れ、元寇の激闘を体感できました。福岡が国防の要所だったと知り、新たな発見に胸躍る旅でした。ガイドさんの説明も分かりやすく、福岡の歴史と文化にどっぷり浸れた2日間。歴史好きにはたまらない、大満足のツアーです！",
-// 				rate: "4",
-// 			},
-// 			{
-// 				name: "nyamu",
-// 				avatar: "https://i.pinimg.com/736x/94/94/fa/9494facebfb6dd342d6ce549a2fbbedb.jpg",
-// 				address: "大阪市天王寺区",
-// 				time: "",
-// 				age: "18",
-// 				content:
-// 					"「忠義の福岡武将物語」は本当に最高の体験でした！1日目は古代の遺跡を巡り、太宰府天満宮では歴史の深さに感動。2日目は中世の歴史に触れ、元寇の激闘を体感できました。福岡が国防の要所だったと知り、新たな発見に胸躍る旅でした。ガイドさんの説明も分かりやすく、福岡の歴史と文化にどっぷり浸れた2日間。歴史好きにはたまらない、大満足のツアーです！",
-// 				rate: "4",
-// 			},
-// 			{
-// 				name: "ahihi",
-// 				avatar: "https://i.pinimg.com/736x/94/94/fa/9494facebfb6dd342d6ce549a2fbbedb.jpg",
-// 				address: "大阪市天王寺区",
-// 				time: "",
-// 				age: "20",
-// 				content:
-// 					"「忠義の福岡武将物語」は本当に最高の体験でした！1日目は古代の遺跡を巡り、太宰府天満宮では歴史の深さに感動。2日目は中世の歴史に触れ、元寇の激闘を体感できました。福岡が国防の要所だったと知り、新たな発見に胸躍る旅でした。ガイドさんの説明も分かりやすく、福岡の歴史と文化にどっぷり浸れた2日間。歴史好きにはたまらない、大満足のツアーです！",
-// 				rate: "4",
-// 			},
-// 		],
-// 	},
-// 	{
-// 		id: 4,
-// 		title: "忠義の福岡武将物語 4",
-// 		shortDesc: "場所: 立花山城, 梅岳寺, 四王寺城, ...",
-// 		desc: "「忠義の福岡武将物語」は本当に最高の体験でした！1日目は古代の遺跡を巡り、太宰府天満宮では歴史の深さに感動。2日目は中世の歴史に触れ、元寇の激闘を体感できました。福岡が国防の要所だったと知り、新たな発見に胸躍る旅でした。ガイドさんの説明も分かりやすく、福岡の歴史と文化にどっぷり浸れた2日間。歴史好きにはたまらない、大満足のツアーです！",
-// 		banner: "https://i.pinimg.com/564x/4a/4b/a9/4a4ba9b956fd4d76ddfff7da9bca2c3b.jpg",
-// 		images: [
-// 			"https://i.pinimg.com/564x/b9/b4/a4/b9b4a4d59bf2ed596141859971f56a4c.jpg",
-// 			"https://i.pinimg.com/564x/6d/63/be/6d63be05abade733ebf6449e8a7a7c88.jpg",
-// 			"https://i.pinimg.com/564x/46/50/be/4650bee00c6b3ff5fbce6c782359434e.jpg",
-// 			"https://i.pinimg.com/564x/a7/a7/29/a7a729ca2178096bbd3e2dc01476048c.jpg",
-// 		],
-// 		price: 15000,
-// 		locations: [
-// 			{
-// 				name: "立花山城",
-// 				lever: "1",
-// 				explain: "体力面の説明, 体力面の説明",
-// 			},
-// 			{
-// 				name: "梅岳寺",
-// 				lever: "2",
-// 				explain: "体力面の説明, 体力面の説明",
-// 			},
-// 			{
-// 				name: "四王寺城",
-// 				lever: "1",
-// 				explain: "体力面の説明, 体力面の説明",
-// 			},
-// 			{
-// 				name: "観世音寺 ",
-// 				lever: "5",
-// 				explain: "体力面の説明, 体力面の説明",
-// 			},
-// 		],
-// 		plans: [
-// 			{
-// 				id: 1,
-// 				start: "博多駅or福岡空港",
-// 				end: "博多駅or福岡空港",
-// 				destination: [
-// 					{ id: 1, name: "立花山城" },
-// 					{ id: 2, name: "梅岳寺" },
-// 					{ id: 3, name: "四王寺城" },
-// 					{ id: 4, name: "観世音寺" },
-// 				],
-// 				map: '<iframe src="https://www.google.com/maps/d/u/0/embed?mid=10QqdXqgN2QDRJgB2eTwiTQp8JT_759c&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>',
-// 			},
-// 			{
-// 				id: 2,
-// 				start: "博多駅or福岡空港",
-// 				end: "博多駅or福岡空港",
-// 				destination: [
-// 					{ id: 1, name: "立花山城" },
-// 					{ id: 2, name: "梅岳寺" },
-// 					{ id: 3, name: "四王寺城" },
-// 					{ id: 4, name: "観世音寺" },
-// 				],
-// 				map: '<iframe src="https://www.google.com/maps/d/u/0/embed?mid=10QqdXqgN2QDRJgB2eTwiTQp8JT_759c&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>',
-// 			},
-// 		],
-// 		feedbacks: [
-// 			{
-// 				name: "akiaki",
-// 				avatar: "https://i.pinimg.com/736x/94/94/fa/9494facebfb6dd342d6ce549a2fbbedb.jpg",
-// 				address: "大阪市天王寺区",
-// 				time: "2024/05/19",
-// 				age: "36",
-// 				content:
-// 					"「忠義の福岡武将物語」は本当に最高の体験でした！1日目は古代の遺跡を巡り、太宰府天満宮では歴史の深さに感動。2日目は中世の歴史に触れ、元寇の激闘を体感できました。福岡が国防の要所だったと知り、新たな発見に胸躍る旅でした。ガイドさんの説明も分かりやすく、福岡の歴史と文化にどっぷり浸れた2日間。歴史好きにはたまらない、大満足のツアーです！",
-// 				rate: "4",
-// 			},
-// 			{
-// 				name: "nyamu",
-// 				avatar: "https://i.pinimg.com/736x/94/94/fa/9494facebfb6dd342d6ce549a2fbbedb.jpg",
-// 				address: "大阪市天王寺区",
-// 				time: "",
-// 				age: "18",
-// 				content:
-// 					"「忠義の福岡武将物語」は本当に最高の体験でした！1日目は古代の遺跡を巡り、太宰府天満宮では歴史の深さに感動。2日目は中世の歴史に触れ、元寇の激闘を体感できました。福岡が国防の要所だったと知り、新たな発見に胸躍る旅でした。ガイドさんの説明も分かりやすく、福岡の歴史と文化にどっぷり浸れた2日間。歴史好きにはたまらない、大満足のツアーです！",
-// 				rate: "4",
-// 			},
-// 			{
-// 				name: "ahihi",
-// 				avatar: "https://i.pinimg.com/736x/94/94/fa/9494facebfb6dd342d6ce549a2fbbedb.jpg",
-// 				address: "大阪市天王寺区",
-// 				time: "",
-// 				age: "20",
-// 				content:
-// 					"「忠義の福岡武将物語」は本当に最高の体験でした！1日目は古代の遺跡を巡り、太宰府天満宮では歴史の深さに感動。2日目は中世の歴史に触れ、元寇の激闘を体感できました。福岡が国防の要所だったと知り、新たな発見に胸躍る旅でした。ガイドさんの説明も分かりやすく、福岡の歴史と文化にどっぷり浸れた2日間。歴史好きにはたまらない、大満足のツアーです！",
-// 				rate: "4",
-// 			},
-// 		],
-// 	},
-// 	{
-// 		id: 5,
-// 		title: "忠義の福岡武将物語",
-// 		shortDesc: "場所: 立花山城, 梅岳寺, 四王寺城, ...",
-// 		desc: "「忠義の福岡武将物語」は本当に最高の体験でした！1日目は古代の遺跡を巡り、太宰府天満宮では歴史の深さに感動。2日目は中世の歴史に触れ、元寇の激闘を体感できました。福岡が国防の要所だったと知り、新たな発見に胸躍る旅でした。ガイドさんの説明も分かりやすく、福岡の歴史と文化にどっぷり浸れた2日間。歴史好きにはたまらない、大満足のツアーです！",
-// 		banner: "https://i.pinimg.com/564x/4a/4b/a9/4a4ba9b956fd4d76ddfff7da9bca2c3b.jpg",
-// 		images: [
-// 			"https://i.pinimg.com/564x/b9/b4/a4/b9b4a4d59bf2ed596141859971f56a4c.jpg",
-// 			"https://i.pinimg.com/564x/6d/63/be/6d63be05abade733ebf6449e8a7a7c88.jpg",
-// 			"https://i.pinimg.com/564x/46/50/be/4650bee00c6b3ff5fbce6c782359434e.jpg",
-// 			"https://i.pinimg.com/564x/a7/a7/29/a7a729ca2178096bbd3e2dc01476048c.jpg",
-// 		],
-// 		price: 15000,
-// 		locations: [
-// 			{
-// 				name: "立花山城",
-// 				lever: "1",
-// 				explain: "体力面の説明, 体力面の説明",
-// 			},
-// 			{
-// 				name: "梅岳寺",
-// 				lever: "2",
-// 				explain: "体力面の説明, 体力面の説明",
-// 			},
-// 			{
-// 				name: "四王寺城",
-// 				lever: "1",
-// 				explain: "体力面の説明, 体力面の説明",
-// 			},
-// 			{
-// 				name: "観世音寺 ",
-// 				lever: "5",
-// 				explain: "体力面の説明, 体力面の説明",
-// 			},
-// 		],
-// 		plans: [
-// 			{
-// 				id: 1,
-// 				start: "博多駅or福岡空港",
-// 				end: "博多駅or福岡空港",
-// 				destination: [
-// 					{ id: 1, name: "立花山城" },
-// 					{ id: 2, name: "梅岳寺" },
-// 					{ id: 3, name: "四王寺城" },
-// 					{ id: 4, name: "観世音寺" },
-// 				],
-// 				map: '<iframe src="https://www.google.com/maps/d/u/0/embed?mid=10QqdXqgN2QDRJgB2eTwiTQp8JT_759c&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>',
-// 			},
-// 			{
-// 				id: 2,
-// 				start: "博多駅or福岡空港",
-// 				end: "博多駅or福岡空港",
-// 				destination: [
-// 					{ id: 1, name: "立花山城" },
-// 					{ id: 2, name: "梅岳寺" },
-// 					{ id: 3, name: "四王寺城" },
-// 					{ id: 4, name: "観世音寺" },
-// 				],
-// 				map: '<iframe src="https://www.google.com/maps/d/u/0/embed?mid=10QqdXqgN2QDRJgB2eTwiTQp8JT_759c&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>',
-// 			},
-// 		],
-// 		feedbacks: [
-// 			{
-// 				name: "akiaki",
-// 				avatar: "https://i.pinimg.com/736x/94/94/fa/9494facebfb6dd342d6ce549a2fbbedb.jpg",
-// 				address: "大阪市天王寺区",
-// 				time: "2024/05/19",
-// 				age: "36",
-// 				content:
-// 					"「忠義の福岡武将物語」は本当に最高の体験でした！1日目は古代の遺跡を巡り、太宰府天満宮では歴史の深さに感動。2日目は中世の歴史に触れ、元寇の激闘を体感できました。福岡が国防の要所だったと知り、新たな発見に胸躍る旅でした。ガイドさんの説明も分かりやすく、福岡の歴史と文化にどっぷり浸れた2日間。歴史好きにはたまらない、大満足のツアーです！",
-// 				rate: "4",
-// 			},
-// 			{
-// 				name: "nyamu",
-// 				avatar: "https://i.pinimg.com/736x/94/94/fa/9494facebfb6dd342d6ce549a2fbbedb.jpg",
-// 				address: "大阪市天王寺区",
-// 				time: "",
-// 				age: "18",
-// 				content:
-// 					"「忠義の福岡武将物語」は本当に最高の体験でした！1日目は古代の遺跡を巡り、太宰府天満宮では歴史の深さに感動。2日目は中世の歴史に触れ、元寇の激闘を体感できました。福岡が国防の要所だったと知り、新たな発見に胸躍る旅でした。ガイドさんの説明も分かりやすく、福岡の歴史と文化にどっぷり浸れた2日間。歴史好きにはたまらない、大満足のツアーです！",
-// 				rate: "4",
-// 			},
-// 			{
-// 				name: "ahihi",
-// 				avatar: "https://i.pinimg.com/736x/94/94/fa/9494facebfb6dd342d6ce549a2fbbedb.jpg",
-// 				address: "大阪市天王寺区",
-// 				time: "",
-// 				age: "20",
-// 				content:
-// 					"「忠義の福岡武将物語」は本当に最高の体験でした！1日目は古代の遺跡を巡り、太宰府天満宮では歴史の深さに感動。2日目は中世の歴史に触れ、元寇の激闘を体感できました。福岡が国防の要所だったと知り、新たな発見に胸躍る旅でした。ガイドさんの説明も分かりやすく、福岡の歴史と文化にどっぷり浸れた2日間。歴史好きにはたまらない、大満足のツアーです！",
-// 				rate: "4",
-// 			},
-// 		],
-// 	},
-// ];
 
 export default ManagerHomePage;

@@ -14,4 +14,8 @@
 	}
 }
 
-
+@layer components {
+	.overlay {
+		@apply bg-black bg-opacity-25 absolute inset-0 transition-all opacity-0 group-hover:opacity-100 flex items-center justify-center;
+	}
+}

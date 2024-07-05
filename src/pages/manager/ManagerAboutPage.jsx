@@ -2,10 +2,10 @@ import React from "react";
 import SectionTitle from "../../components/managerPage/SectionTitle";
 import { FiEdit } from "react-icons/fi";
 
+
+
 const ManagerAboutPage = () => {
 	const companyImages = [
-		{},
-		{},
 		{},
 		{},
 		{},
@@ -34,7 +34,7 @@ const ManagerAboutPage = () => {
 						src="https://i.pinimg.com/564x/0b/6f/af/0b6faf498a80c50c9bcaf46c58b787e0.jpg"
 						alt="about-banner"
 					>
-						<div className="absolute inset-0 flex items-center justify-center transition-all bg-black opacity-0 bg-opacity-20 group-hover:opacity-100">
+						<div className="overlay">
 							<span className="size-[75px] cursor-pointer bg-black bg-opacity-50 flex items-center justify-center opacity-80 rounded-full">
 								<FiEdit size={35} color="white"></FiEdit>
 							</span>
@@ -153,7 +153,9 @@ const ManagerAboutPage = () => {
 								  )))}
 						{companyImages && companyImages.length > 8 && (
 							<div className="flex items-center justify-center border border-gray-200 rounded-md cursor-pointer group hover:opacity-60">
-								<span className="text-3xl text-gray-300 transition-all group-hover:text-gray-600 group-hover:scale-110">{`+${companyImages.length - 8}`}</span>
+								<span className="text-3xl text-gray-300 transition-all group-hover:text-gray-600 group-hover:scale-110">{`+${
+									companyImages.length - 8
+								}`}</span>
 							</div>
 						)}
 					</div>
