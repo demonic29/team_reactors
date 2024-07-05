@@ -5,7 +5,8 @@ import Button from "../components/buttons/Button";
 const NavBar = () => {
     const logo = require("../assets/rekiteku-logo.png");
     return (
-        <div className="container h-[65px] bg-white shadow-sm items-center flex justify-between">
+       <div className="border-b border-b-gray-100">
+         <div className="container h-[65px] bg-white items-center flex justify-between">
             <div className="flex items-center gap-4">
                 <img
                     srcSet={`${logo} 2x`}
@@ -29,6 +30,7 @@ const NavBar = () => {
                 <Button>お問い合わせ</Button>
             </div>
         </div>
+       </div>
     );
 };
 
