@@ -5,11 +5,13 @@ import Accordion from "./Accordion";
 const TourPage = () => {
     const mainImg = require("../assets/img/about-main-img.jpg");
 
+    const cssProperties = {
+        "--image-url": `url(${mainImg})`,
+    };
     return (
         <div className="font-kiwiMaru mb-5 ">
             <div className="container rounded-lg overflow-hidden mt-5">
                 {/* main-img */}
-
                 <div>
                     <img
                         className="w-full aspect-[10/3.5] nd object-cover rounded-lg"
@@ -55,23 +57,26 @@ const TourPage = () => {
                 {/* end Accordion day2 */}
 
                 {/* gallery */}
-                <div className="max-w-[1000px] m-auto mb-[65px] ">
+                <div className="max-w-[1000px] m-auto my-[65px] ">
                     <h2>ギャラリー</h2>
                     <div className="flex justify-around mt-[30px]">
-                        <div className=" block bg-current  w-[700px] min-h-[400px] object-cover rounded-lg"></div>
+                        <div className=" block bg-[#ddd]  w-[700px] min-h-[400px] object-cover rounded-lg"></div>
 
                         <div className="flex flex-col justify-between">
-                            <div className=" block bg-current  w-[240px] min-h-[85px] object-cover rounded-lg"></div>
-                            <div className=" block bg-current  w-[240px] min-h-[85px] object-cover rounded-lg"></div>
-                            <div className=" block bg-current  w-[240px] min-h-[85px] object-cover rounded-lg"></div>
-                            <div className=" block bg-current  w-[240px] min-h-[85px] object-cover rounded-lg"></div>
+                            <div className=" block bg-[#ddd]  w-[240px] min-h-[85px] object-cover rounded-lg"></div>
+                            <div className=" block bg-[#ddd]  w-[240px] min-h-[85px] object-cover rounded-lg"></div>
+                            <div className=" block bg-[#ddd]  w-[240px] min-h-[85px] object-cover rounded-lg"></div>
+                            <div className=" block bg-[#ddd]  w-[240px] min-h-[85px] object-cover rounded-lg"></div>
                         </div>
                     </div>
                 </div>
                 {/* end gallery */}
             </div>
             {/* review */}
-            <div className="flex min-h-[500px] bg-current mt-[65px]">
+            <div
+                style={cssProperties}
+                className="flex min-h-[500px] bg-current mt-[65px]"
+            >
                 {/* <img
                     className="w-full aspect-[10/3.5] nd object-cover"
                     srcSet={`${mainImg}`}
