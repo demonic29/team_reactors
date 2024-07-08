@@ -3,12 +3,13 @@ import { NavLink } from "react-router-dom";
 import Button from "../components/buttons/Button";
 
 const NavBar = () => {
+    const logo = require("../assets/rekiteku-logo.png");
     return (
         <div className="container h-[65px] bg-white shadow-sm items-center flex justify-between">
             <div className="flex items-center gap-4">
                 <img
-                    srcSet="src/assets/rekiteku-logo.png 2x"
-                    alt="rekiteku-logo"
+                    srcSet={`${logo} 2x`}
+                    alt="rekiteku-lo1go"
                 />
             </div>
             <div className="flex items-center justify-center gap-16">
@@ -72,7 +73,7 @@ const navs = [
     },
     {
         content: "連絡",
-        to: "/contact",
+        to: "/about",
     },
 ];
 
