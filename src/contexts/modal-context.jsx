@@ -3,13 +3,24 @@ import { createContext, useContext, useState } from "react";
 const ModalContext = createContext();
 
 const ModalProvider = ({ children, ...props }) => {
-	const [openModal, setOpenModal] = useState(false);
-	const toggleModal = () => {
-		setOpenModal(!openModal);
+	const [isOpen, setIsOpen] = useState(false);
+	const [modalContent, setModalContent] = useState(null);
+
+	const openModal = (content) => {
+		setModalContent(content);
+		setIsOpen(true);
 	};
+
+	const closeModal = () => {
+		setIsOpen(false);
+		setModalContent(null);
+	};
+
 	const values = {
+		isOpen,
 		openModal,
-		toggleModal,
+		closeModal,
+		modalContent,
 	};
 
 	return (

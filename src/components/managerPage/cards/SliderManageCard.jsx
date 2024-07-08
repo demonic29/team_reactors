@@ -1,9 +1,6 @@
 import React from "react";
 import Title from "../Title";
-import { MdDragHandle } from "react-icons/md";
-import { FiEdit } from "react-icons/fi";
-import { IoTrashOutline } from "react-icons/io5";
-import PropTypes from "prop-types";
+import { cardFeature, MdDragHandle } from "../../../utils/managerPage/cardFeature";
 
 const SliderManageCard = ({ drag, item }) => {
 	return (
@@ -21,7 +18,7 @@ const SliderManageCard = ({ drag, item }) => {
 					<p className="line-clamp-1">{item.desc}</p>
 				</div>
 				<div className="flex items-center gap-4">
-					{features.map((feature) => (
+					{cardFeature.map((feature) => (
 						<div
 							key={feature.name}
 							className="flex items-center justify-center transition-all bg-gray-200 rounded-full cursor-pointer size-11 hover:bg-gray-300"
@@ -38,20 +35,5 @@ const SliderManageCard = ({ drag, item }) => {
 	);
 };
 
-SliderManageCard.propTypes = {
-	drag: PropTypes.any.isRequired,
-	item: PropTypes.object.isRequired,
-};
-
-const features = [
-	{
-		name: "edit",
-		icon: <FiEdit size={20} />,
-	},
-	{
-		name: "delete",
-		icon: <IoTrashOutline size={20} />,
-	},
-];
 
 export default SliderManageCard;

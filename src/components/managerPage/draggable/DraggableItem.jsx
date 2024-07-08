@@ -1,8 +1,7 @@
-import { useRef } from "react";
+import { cloneElement, useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
-import SliderManageCard from "../cards/SliderManageCard";
 
-export const DraggableItem = ({ item, index, items, setItems }) => {
+export const DraggableItem = ({ item, index, items, setItems, children }) => {
 	const ref = useRef(null);
 
 	const moveItem = (dragIndex, hoverIndex, setItems) => {
@@ -38,7 +37,8 @@ export const DraggableItem = ({ item, index, items, setItems }) => {
 			ref={ref}
 			className={`${isDragging ? "opacity-50" : "opacity-100"}`}
 		>
-			<SliderManageCard drag={drag} item={item}></SliderManageCard>
+			{/* <SliderManageCard drag={drag} item={item}></SliderManageCard> */}
+			{cloneElement(children, { drag, item })}
 		</div>
 	);
 };

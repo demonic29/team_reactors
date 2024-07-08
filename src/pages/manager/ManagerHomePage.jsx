@@ -1,8 +1,5 @@
-import React, {
-	useState,
-} from "react";
+import React, { useState } from "react";
 import SectionTitle from "../../components/managerPage/SectionTitle";
-import { IoMdAddCircleOutline } from "react-icons/io";
 import Button from "../../components/buttons/Button";
 import DraggableList from "../../components/managerPage/draggable/DraggableList";
 import { HiXMark } from "react-icons/hi2";
@@ -11,77 +8,25 @@ import ModalBase from "../../components/modals/ModalBase";
 import { FiEdit } from "react-icons/fi";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import SliderManageCard from "../../components/managerPage/cards/SliderManageCard";
+import EditButton from "../../components/managerPage/buttons/EditButton";
 
 const ManagerHomePage = () => {
 	const [sliderList, setSliderList] = useState(sliders);
-	const { openModal, toggleModal } = useModal();
-	const initialValue =
-		"「歴てく」は、歴史をてくてくと歩き回るツアーサイトです。知名度が低い国内の歴史的な場所や、歴史上の人物に焦点を当てたツアーを企画。知名度が低い国内の歴史的な場所や、歴史上の人物に焦点を当てたツアーを企画。";
-	const [value, setValue] = useState(initialValue);
-
-	console.log(value);
-
-	// const [recommendTour, setRecommendTour] = useState(tours.slice(0, 3));
+	const { openModal, closeModal } = useModal();
+	const [value, setValue] = useState();
 
 	return (
 		<div className="flex-1">
-			<ModalBase openModal={openModal}>
-				<div className="absolute inset-0 flex items-center justify-center w-full h-full px-10 bg-black bg-opacity-40">
-					<div className="bg-white flex flex-col p-6 rounded-xl h-full max-h-[82%] w-full max-w-[1000px] relative">
-						<span
-							className="absolute text-gray-400 transition-all cursor-pointer hover:text-black right-2 top-2"
-							onClick={() => toggleModal()}
-						>
-							<HiXMark size={28} />
-						</span>
-						<div className="flex-1 mb-4">
-							{/* modal content  */}
-							<SectionTitle className={"mb-3"}>
-								アバウト
-							</SectionTitle>
-							<div className="w-full mb-10 max-w-[60%] relative group mx-auto aspect-[16/10] rounded-md overflow-hidden">
-								<div className="overlay">
-									<span className="size-[75px] cursor-pointer bg-black bg-opacity-50 flex items-center justify-center opacity-80 rounded-full">
-										<FiEdit
-											size={35}
-											color="white"
-										></FiEdit>
-									</span>
-								</div>
-								<img
-									src="https://i.pinimg.com/736x/31/4e/59/314e59fc4a0e278fbb4b31ac392cd187.jpg"
-									alt=""
-									className="object-cover object-center w-full h-full"
-								/>
-							</div>
-							<div>
-								{/* <QuillEditor ref={quillRef} /> */}
-								<ReactQuill
-									theme="snow"
-									value={value}
-									
-									onChange={setValue}
-								/>
-							</div>
-						</div>
-						<div className="flex justify-end">
-							<Button className={"py-[6px] px-4"}>保存</Button>
-						</div>
-					</div>
-				</div>
-			</ModalBase>
-			{/* Modal  */}
-
 			{/* Slider manager  */}
 			<div className="mb-10">
 				<div className="flex justify-between mb-3 gap-x-4">
 					<SectionTitle className={"mb-0"}>スライダー</SectionTitle>
-					<button className="flex items-center gap-1 text-gray-500 cursor-pointer hover:text-primaryColor">
-						<IoMdAddCircleOutline size={16} />
-						<span className="text-sm">スライド追加</span>
-					</button>
+					<EditButton>スライトを追加</EditButton>
 				</div>
-				<DraggableList items={sliderList} setItems={setSliderList} />
+				<DraggableList items={sliderList} setItems={setSliderList}>
+					<SliderManageCard></SliderManageCard>
+				</DraggableList>
 			</div>
 			{/* Home about manager  */}
 			<div className="mb-10">
@@ -99,7 +44,6 @@ const ManagerHomePage = () => {
 							「歴てく」は、歴史をてくてくと歩き回るツアーサイトです。知名度が低い国内の歴史的な場所や、歴史上の人物に焦点を当てたツアーを企画。知名度が低い国内の歴史的な場所や、歴史上の人物に焦点を当てたツアーを企画。
 						</p>
 						<Button
-							onClick={() => toggleModal()}
 							className={"px-6 py-[6px]"}
 						>
 							編集
@@ -112,6 +56,26 @@ const ManagerHomePage = () => {
 				<SectionTitle className="mb-3">おすすめツアー</SectionTitle>
 			</div>
 		</div>
+	);
+};
+
+const editIntroModal = () => {
+	return (
+		<ModalBase title="アバウト">
+			<div className="w-full mb-10 max-w-[60%] relative group mx-auto aspect-[16/10] rounded-md overflow-hidden">
+				<div className="overlay">
+					<span className="size-[75px] cursor-pointer bg-black bg-opacity-50 flex items-center justify-center opacity-80 rounded-full">
+						<FiEdit size={35} color="white"></FiEdit>
+					</span>
+				</div>
+				<img
+					src="https://i.pinimg.com/736x/31/4e/59/314e59fc4a0e278fbb4b31ac392cd187.jpg"
+					alt=""
+					className="object-cover object-center w-full h-full"
+				/>
+			</div>
+			<ReactQuill className="h-[520px]"></ReactQuill>
+		</ModalBase>
 	);
 };
 

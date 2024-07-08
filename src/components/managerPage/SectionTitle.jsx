@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const SectionTitle = ({ children = "Your title", className }) => {
 	return (
-		<h2 className={`text-xl font-semibold mb-3 ${className}`}>
+		<h2 className={`text-[22px] font-semibold mb-3 ${className}`}>
 			{children}
 		</h2>
 	);

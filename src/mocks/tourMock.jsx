@@ -1,4 +1,4 @@
-const tours = [
+export const tourMockData = [
 	{
 		id: 1,
 		title: "忠義の福岡武将物語",
@@ -6,10 +6,10 @@ const tours = [
 		desc: "「忠義の福岡武将物語」は本当に最高の体験でした！1日目は古代の遺跡を巡り、太宰府天満宮では歴史の深さに感動。2日目は中世の歴史に触れ、元寇の激闘を体感できました。福岡が国防の要所だったと知り、新たな発見に胸躍る旅でした。ガイドさんの説明も分かりやすく、福岡の歴史と文化にどっぷり浸れた2日間。歴史好きにはたまらない、大満足のツアーです！",
 		banner: "https://i.pinimg.com/564x/4a/4b/a9/4a4ba9b956fd4d76ddfff7da9bca2c3b.jpg",
 		images: [
-"https://i.pinimg.com/564x/b9/b4/a4/b9b4a4d59bf2ed596141859971f56a4c.jpg",
-"https://i.pinimg.com/564x/6d/63/be/6d63be05abade733ebf6449e8a7a7c88.jpg",
-"https://i.pinimg.com/564x/46/50/be/4650bee00c6b3ff5fbce6c782359434e.jpg",
-"https://i.pinimg.com/564x/a7/a7/29/a7a729ca2178096bbd3e2dc01476048c.jpg",
+			"https://i.pinimg.com/564x/b9/b4/a4/b9b4a4d59bf2ed596141859971f56a4c.jpg",
+			"https://i.pinimg.com/564x/6d/63/be/6d63be05abade733ebf6449e8a7a7c88.jpg",
+			"https://i.pinimg.com/564x/46/50/be/4650bee00c6b3ff5fbce6c782359434e.jpg",
+			"https://i.pinimg.com/564x/a7/a7/29/a7a729ca2178096bbd3e2dc01476048c.jpg",
 		],
 		price: 15000,
 		locations: [
