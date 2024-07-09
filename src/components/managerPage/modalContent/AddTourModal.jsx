@@ -16,6 +16,7 @@ const AddTourModalStyle = styled.div`
 const AddTourModal = () => {
 	const [value, setValue] = useState("");
 	const [selectedImages, setSelectedImages] = useState([]);
+	const [banner, setBanner] = useState('')
 
 	const handleSelectImages = (e) => {
 		const files = Array.from(e.target.files);
@@ -83,7 +84,10 @@ const AddTourModal = () => {
 						プライス：
 					</Label>
 					<Input id="price" className="w-[100px]"></Input>
+					<span className="ml-2 text-xl">¥</span>
 				</div>
+
+				{/* Select image field  */}
 				<div className="mb-4">
 					<Label id="images" extendText="写真を4枚まで選択できます。">
 						写真
@@ -114,6 +118,11 @@ const AddTourModal = () => {
 							</Button>
 						)}
 					</div>
+				</div>
+
+				{/* Add locations field  */}
+				<div className="mb-4">
+					
 				</div>
 			</div>
 		</AddTourModalStyle>
