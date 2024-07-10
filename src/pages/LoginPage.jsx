@@ -12,34 +12,34 @@ export default function LoginPage() {
           alt="login-img"
         />
       </div>
-      <div className="w-1/2 pt-[150px] px-[180px]">
+      <div className="w-1/2 px-[10%] py-[6%]">
         <img
           className="aspect-square mx-auto mb-[20px]"
           src={logo}
           alt="歴てくのロゴ"
         />
-        <h1 className="text-center mb-[40px]">
+        <h1 className="text-center mb-[8%]">
           歴てく IN - SIDE <br />
           ログインページへようこそ
         </h1>
-        <div className="w-full mb-[16px] flex flex-col">
+        <div className="w-full mb-[2%] flex flex-col">
           <p className="text-base">メールアドレス</p>
           <input
-            className="border border-black text-xl p-5 rounded-[10px]"
+            className="border border-black text-xl p-2 rounded-[10px]"
             type="email"
           />
         </div>
-        <div className="w-full mb-[56px] flex flex-col">
+        <div className="w-full mb-[16%] flex flex-col">
           <p className="text-base">パスワード</p>
           <input
-            className="border border-black text-xl p-5 rounded-[10px] "
+            className="border border-black text-xl p-2 rounded-[10px] "
             type="password"
           />
           <a className="text-base text-gray-500 text-[12px] underline" href="#">
             パスワードを忘れた場合
           </a>
         </div>
-        <button className="w-full p-5 rounded-[10px] text-white text-xl bg-primaryColor hover:bg-secondaryColor">
+        <button className="w-full p-4 rounded-[10px] text-white text-xl bg-primaryColor hover:bg-secondaryColor">
           ログイン
         </button>
       </div>
