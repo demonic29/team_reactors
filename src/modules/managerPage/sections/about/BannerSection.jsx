@@ -35,7 +35,7 @@ function Skeleton() {
 	return (
 		<SectionContainer>
 			<SectionTitle>バナー</SectionTitle>
-			<SectionImage className="skeleton"></SectionImage>
+			<div className="skeleton w-full h-[300px] rounded-md"></div>
 		</SectionContainer>
 	);
 }

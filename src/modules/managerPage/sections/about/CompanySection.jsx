@@ -40,7 +40,7 @@ function Skeleton() {
 				<EditButton></EditButton>
 			</div>
 			<div>
-				<SectionImage className="skeleton" />
+				<div className="skeleton w-full h-[300px] rounded-md" />
 				<div className="h-4 mt-4 text-lg skeleton"></div>
 				<div className="h-4 mt-4 text-lg skeleton"></div>
 			</div>
