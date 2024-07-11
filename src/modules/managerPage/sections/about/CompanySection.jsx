@@ -1,44 +1,34 @@
-import axios from "axios";
 import EditButton from "components/managerPage/buttons/EditButton";
 import SectionTitle from "components/managerPage/SectionTitle";
+import { useApi } from "contexts/managerPage/api-context";
 import { SectionContainer, SectionImage } from "pages/manager/ManagerAboutPage";
-import React, { useEffect, useState } from "react";
-import { API } from "utils/end_points";
+import React from "react";
 
-const CompanySection = () => {
-	const [company, setCompany] = useState();
-	const [loading, setLoading] = useState(false);
-
-	useEffect(() => {
-		const getAbout = async () => {
-			try {
-				setLoading(true);
-				const { data } = await axios.get(
-					`${API.GET_DATA}?action=getAbout`
-				);
-				setCompany(data?.data?.company);
-				setLoading(false);
-				console.log('CompanySection done')
-			} catch (error) {
-				console.log(error);
-			}
-		};
-		getAbout();
-	}, []);
-
-	if (loading) return <Skeleton />;
+const CompanySection = ({ company }) => {
+	const { loading } = useApi();
 
 	return (
-		<SectionContainer>
-			<div className="flex items-center justify-between mb-3">
-				<SectionTitle className="mb-[0px]">会社概要</SectionTitle>
-				<EditButton></EditButton>
-			</div>
-			<div>
-				<SectionImage src={company?.image} alt="about-company-img" />
-				<div className="mt-4 text-lg">{company?.content}</div>
-			</div>
-		</SectionContainer>
+		<>
+			{loading ? (
+				<Skeleton></Skeleton>
+			) : (
+				<SectionContainer>
+					<div className="flex items-center justify-between mb-3">
+						<SectionTitle className="mb-[0px]">
+							会社概要
+						</SectionTitle>
+						<EditButton></EditButton>
+					</div>
+					<div>
+						<SectionImage
+							src={company?.image}
+							alt="about-company-img"
+						/>
+						<div className="mt-4 text-lg">{company?.content}</div>
+					</div>
+				</SectionContainer>
+			)}
+		</>
 	);
 };
 

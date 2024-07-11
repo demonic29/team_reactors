@@ -1,32 +1,11 @@
-import axios from "axios";
 import EditButton from "components/managerPage/buttons/EditButton";
 import SectionTitle from "components/managerPage/SectionTitle";
+import { useApi } from "contexts/managerPage/api-context";
 import { SectionContainer } from "pages/manager/ManagerAboutPage";
-import React, { useEffect, useState } from "react";
-import { API } from "utils/end_points";
+import React from "react";
 
-const AccessSection = () => {
-	const [access, setAccess] = useState({});
-	const [loading, setLoading] = useState(false);
-
-	useEffect(() => {
-		const getAbout = async () => {
-			try {
-				setLoading(true);
-				const { data } = await axios.get(
-					`${API.GET_DATA}?action=getAbout`
-				);
-				setAccess(data?.data?.access);
-				setLoading(false);
-				console.log('AccessSection done')
-			} catch (error) {
-				console.log(error);
-			}
-		};
-		getAbout();
-	}, []);
-
-	const { distance, desc, map } = access;
+const AccessSection = ({ access }) => {
+	const { loading } = useApi();
 
 	return (
 		<>
@@ -50,14 +29,15 @@ const AccessSection = () => {
 							</div>
 							<div
 								dangerouslySetInnerHTML={{
-									__html: `${map}`,
+									__html: `${access?.map}`,
 								}}
 							></div>
 						</div>
 						{/* Station  */}
 						<div className="flex flex-wrap gap-2 mb-4 text-lg">
-							{distance && distance.length > 0 &&
-								distance.map((item, index) => (
+							{access?.distance &&
+								access?.distance.length > 0 &&
+								access?.distance.map((item, index) => (
 									<div
 										key={index}
 										className="px-4 py-2 gap-3 border-l-[3px] whitespace-nowrap flex-1 border-l-secondaryColor"
@@ -67,7 +47,7 @@ const AccessSection = () => {
 								))}
 						</div>
 						{/* Note  */}
-						<div className="mt-4 text-lg">{desc}</div>
+						<div className="mt-4 text-lg">{access?.desc}</div>
 					</div>
 				</SectionContainer>
 			)}

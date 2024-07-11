@@ -9,18 +9,21 @@ import "react-toastify/dist/ReactToastify.css";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { ModalProvider } from "./contexts/modal-context";
+import { ApiProvider } from "contexts/managerPage/api-context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
-		<ModalProvider>
-			<DndProvider backend={HTML5Backend}>
-				<BrowserRouter>
-					<App /> {/* App Component */}
-					<ToastContainer />
-				</BrowserRouter>
-			</DndProvider>
-		</ModalProvider>
+		<ApiProvider>
+			<ModalProvider>
+				<DndProvider backend={HTML5Backend}>
+					<BrowserRouter>
+						<App /> {/* App Component */}
+						<ToastContainer />
+					</BrowserRouter>
+				</DndProvider>
+			</ModalProvider>
+		</ApiProvider>
 	</React.StrictMode>
 );
 

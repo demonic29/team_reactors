@@ -3,38 +3,15 @@ import SectionTitle from "../../../../components/managerPage/SectionTitle";
 import EditButton from "../../../../components/managerPage/buttons/AddButton";
 import DraggableList from "../../../../components/managerPage/draggable/DraggableList";
 import SliderManageCard from "../../../../components/managerPage/cards/SliderManageCard";
-import { API } from "../../../../utils/end_points";
+import { useApi } from "contexts/managerPage/api-context";
 
-const SliderSection = () => {
+const SliderSection = ({ processedOrder }) => {
 	const [sortedSlide, setSortedSlide] = useState([]);
-	const [loading, setLoading] = useState(false);
+	const { loading } = useApi();
 
 	useEffect(() => {
-		async function getSlide() {
-			try {
-				setLoading(true);
-				const [slideRes, generalRes] = await Promise.all([
-					fetch(`${API.GET_DATA}?action=getSlide`),
-					fetch(`${API.GET_DATA}?action=getGeneral`),
-				]);
-
-				const slideData = await slideRes.json();
-				const GeneralData = await generalRes.json();
-
-				const slide = slideData.data;
-				const slideOrder = GeneralData?.data?.sliderOrder;
-				const processedSlide = slideOrder.map((id) =>
-					slide.find((s) => s.slideId === id)
-				);
-				setSortedSlide(processedSlide);
-
-				setLoading(false);
-			} catch (error) {
-				console.log(error);
-			}
-		}
-		getSlide();
-	}, []);
+    setSortedSlide(processedOrder);
+  }, [processedOrder]);
 
 	return (
 		<div className="mb-10">

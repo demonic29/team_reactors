@@ -1,30 +1,12 @@
-import axios from "axios";
 import EditButton from "components/managerPage/buttons/EditButton";
 import SectionTitle from "components/managerPage/SectionTitle";
+import { useApi } from "contexts/managerPage/api-context";
 import { SectionContainer } from "pages/manager/ManagerAboutPage";
-import React, { useEffect, useState } from "react";
-import { API } from "utils/end_points";
+import React from "react";
 
-const CompanyImageSection = () => {
-	const [companyImages, setCompanyImages] = useState({});
-	const [loading, setLoading] = useState(false);
+const CompanyImageSection = ({ companyImages }) => {
+	const { loading } = useApi();
 
-	useEffect(() => {
-		const getAbout = async () => {
-			try {
-				setLoading(true);
-				const { data } = await axios.get(
-					`${API.GET_DATA}?action=getAbout`
-				);
-				setCompanyImages(data?.data?.companyImages);
-				setLoading(false);
-				console.log('CompanyImageSection done')
-			} catch (error) {
-				console.log(error);
-			}
-		};
-		getAbout();
-	}, []);
 	return (
 		<>
 			{loading ? (

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useModal } from "contexts/modal-context";
-import { API } from "utils/end_points";
 import ModalBase from "components/modals/ModalBase";
 import Title from "components/managerPage/Title";
 import AddTourModal from "components/managerPage/modalContent/AddTourModal";
@@ -9,27 +7,18 @@ import AddButton from "components/managerPage/buttons/AddButton";
 import DraggableList from "components/managerPage/draggable/DraggableList";
 import TourManageCard from "components/managerPage/cards/TourManageCard";
 import Button from "components/buttons/Button";
+import { useApi } from "contexts/managerPage/api-context";
 
 const ManagerTourPage = () => {
-	const [tourList, setTourList] = useState();
+	const { loading, data } = useApi();
+	const [tourList, setTourList] = useState([]);
 	const { openModal } = useModal();
-	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
-		async function getTour() {
-			try {
-				setLoading(true);
-				const { data } = await axios.get(
-					`${API.GET_DATA}?action=getTour`
-				);
-				setTourList(data.data);
-				setLoading(false);
-			} catch (error) {
-				console.log(error);
-			}
-		}
-		getTour();
-	}, []);
+    if (data) {
+      setTourList(data?.tours);
+    }
+  }, [data]);
 
 	return (
 		<div className="flex flex-col w-full">

@@ -1,30 +1,10 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { API } from "utils/end_points";
+import React from "react";
 import SectionTitle from "components/managerPage/SectionTitle";
 import Button from "components/buttons/Button";
+import { useApi } from "contexts/managerPage/api-context";
 
-const AboutSection = () => {
-	const [homeAbout, setHomeAbout] = useState({});
-	const [loading, setLoading] = useState(false);
-
-	useEffect(() => {
-		const getHomeAbout = async () => {
-			try {
-				setLoading(true);
-				const { data } = await axios.get(
-					`${API.GET_DATA}?action=getAbout`
-				);
-				setHomeAbout(data.data.homePage);
-				setLoading(false);
-			} catch (error) {
-				console.log(error);
-			}
-		};
-		getHomeAbout();
-	}, []);
-
-	const { image, content } = homeAbout;
+const AboutSection = ({homeAbout}) => {
+	const { loading } = useApi();
 
 	return (
 		<div className="mb-10">
@@ -35,13 +15,13 @@ const AboutSection = () => {
 				<div className="flex gap-8">
 					<div className="w-[300px] h-[200px] rounded-lg overflow-hidden">
 						<img
-							src={image}
+							src={homeAbout?.image}
 							alt="about-image"
 							className="object-cover object-center w-full h-full"
 						/>
 					</div>
 					<div className="w-full max-w-[580px] text-lg tracking-wider leading-relaxed">
-						<p className="mb-4">{content}</p>
+						<p className="mb-4">{homeAbout?.content}</p>
 						<Button className={"px-6 py-[6px]"}>編集</Button>
 					</div>
 				</div>

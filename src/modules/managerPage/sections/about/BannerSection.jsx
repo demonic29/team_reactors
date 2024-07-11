@@ -1,30 +1,11 @@
-import axios from "axios";
 import FiEdit from "components/managerPage/icons/FiEdit";
 import SectionTitle from "components/managerPage/SectionTitle";
+import { useApi } from "contexts/managerPage/api-context";
 import { SectionContainer, SectionImage } from "pages/manager/ManagerAboutPage";
-import React, { useEffect, useState } from "react";
-import { API } from "utils/end_points";
+import React from "react";
 
-const BannerSection = () => {
-	const [banner, setBanner] = useState();
-	const [loading, setLoading] = useState(false);
-
-	useEffect(() => {
-		const getAbout = async () => {
-			try {
-				setLoading(true);
-				const { data } = await axios.get(
-					`${API.GET_DATA}?action=getAbout`
-				);
-				setBanner(data?.data?.banner);
-				setLoading(false);
-				console.log('BannerSection done')
-			} catch (error) {
-				console.log(error);
-			}
-		};
-		getAbout();
-	}, []);
+const BannerSection = ({ banner }) => {
+	const { loading } = useApi();
 
 	return (
 		<>

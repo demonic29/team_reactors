@@ -1,30 +1,11 @@
-import axios from "axios";
 import EditButton from "components/managerPage/buttons/EditButton";
 import SectionTitle from "components/managerPage/SectionTitle";
+import { useApi } from "contexts/managerPage/api-context";
 import { SectionContainer, SectionImage } from "pages/manager/ManagerAboutPage";
-import React, { useEffect, useState } from "react";
-import { API } from "utils/end_points";
+import React from "react";
 
-const VisionSection = () => {
-	const [vision, setVision] = useState({});
-	const [loading, setLoading] = useState(false);
-
-	useEffect(() => {
-		const getAbout = async () => {
-			try {
-				setLoading(true);
-				const { data } = await axios.get(
-					`${API.GET_DATA}?action=getAbout`
-				);
-				setVision(data?.data?.vision);
-				setLoading(false);
-				console.log('VisionSection done')
-			} catch (error) {
-				console.log(error);
-			}
-		};
-		getAbout();
-	}, []);
+const VisionSection = ({vision}) => {
+	const {loading} = useApi()
 
 	return (
 		<>
@@ -38,10 +19,10 @@ const VisionSection = () => {
 					</div>
 					<div>
 						<SectionImage
-							src={vision.image}
+							src={vision?.image}
 							alt="about-company-img"
 						/>
-						<div className="mt-4 text-lg">{vision.content}</div>
+						<div className="mt-4 text-lg">{vision?.content}</div>
 					</div>
 				</SectionContainer>
 			)}
