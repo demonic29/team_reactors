@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+<script src="../path/to/flowbite/dist/flowbite.min.js"></script>
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
