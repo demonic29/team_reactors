@@ -18,6 +18,7 @@ const BannerSection = () => {
 				);
 				setBanner(data?.data?.banner);
 				setLoading(false);
+				console.log('BannerSection done')
 			} catch (error) {
 				console.log(error);
 			}

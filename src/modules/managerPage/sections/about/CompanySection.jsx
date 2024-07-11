@@ -18,6 +18,7 @@ const CompanySection = () => {
 				);
 				setCompany(data?.data?.company);
 				setLoading(false);
+				console.log('CompanySection done')
 			} catch (error) {
 				console.log(error);
 			}
