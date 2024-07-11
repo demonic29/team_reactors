@@ -3,6 +3,8 @@ import axios from "axios";
 import EditButton from "components/managerPage/buttons/EditButton";
 import { API } from "utils/end_points";
 import SectionTitle from "components/managerPage/SectionTitle";
+import BannerSection from "modules/managerPage/sections/about/BannerSection";
+import CompanySection from "modules/managerPage/sections/about/CompanySection";
 
 const ManagerAboutPage = () => {
 	const [aboutData, setAboutData] = useState({});
@@ -35,16 +37,7 @@ const ManagerAboutPage = () => {
 		<div className="grid flex-1 grid-cols-3 gap-4 2xl:grid-cols-2">
 			{/* Col 1  */}
 			<div>
-				<SectionContainer>
-					<SectionTitle>バナー</SectionTitle>
-					<SectionImage src={banner} alt="about-banner">
-						<div className="overlay">
-							<span className="size-[75px] cursor-pointer bg-black bg-opacity-50 flex items-center justify-center opacity-80 rounded-full">
-								{/* <FiEdit size={35} color="white"></FiEdit> */}
-							</span>
-						</div>
-					</SectionImage>
-				</SectionContainer>
+				<BannerSection></BannerSection>
 				<SectionContainer>
 					<div className="flex items-center justify-between mb-3">
 						<SectionTitle className="mb-[0px]">
@@ -84,21 +77,7 @@ const ManagerAboutPage = () => {
 			</div>
 			{/* Col 2  */}
 			<div>
-				<SectionContainer>
-					<div className="flex items-center justify-between mb-3">
-						<SectionTitle className="mb-[0px]">
-							会社概要
-						</SectionTitle>
-						<EditButton></EditButton>
-					</div>
-					<div>
-						<SectionImage
-							src={company?.image}
-							alt="about-company-img"
-						/>
-						<div className="mt-4 text-lg">{company.content}</div>
-					</div>
-				</SectionContainer>
+				<CompanySection />
 				<SectionContainer>
 					<div className="flex items-center justify-between mb-3">
 						<SectionTitle className="mb-[0px]">
@@ -166,23 +145,26 @@ const ManagerAboutPage = () => {
 	);
 };
 
-const SectionImage = ({
+export const SectionImage = ({
 	className = "",
 	imgClassName = "",
 	src = "",
 	alt = "image",
+	loading,
 	children,
 }) => {
 	return (
 		<div
 			className={`w-full h-[300px] rounded-md relative overflow-hidden group ${className}`}
 		>
+			{!loading && (
+				<img
+					src={src}
+					alt={alt}
+					className={`object-cover object-center w-full h-full ${imgClassName}`}
+				/>
+			)}
 			{children}
-			<img
-				src={src}
-				alt={alt}
-				className={`object-cover object-center w-full h-full ${imgClassName}`}
-			/>
 		</div>
 	);
 };
