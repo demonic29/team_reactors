@@ -5,7 +5,7 @@ export default function Accordion() {
         setActive(!active);
     };
     return (
-        <div>
+        <div className=" max-w-[1000px] m-auto ">
             <button
                 onClick={classToggle}
                 type="button"
@@ -34,14 +34,14 @@ export default function Accordion() {
                 </svg>
             </button>
             <div className={active ? "hidden" : ""}>
-                <div className="mt-[50px] flex justify-around ">
+                <div className="mt-[60px] flex justify-between ">
                     <div>
                         <h3>集合場所:博多駅or福岡空港</h3>
-                        <div className="ml-[40px] ">
-                            <p>ai</p>
-                            <p>aii</p>
-                            <p>aii</p>
-                            <p>aii</p>
+                        <div className="">
+                            <p>立花山城</p>
+                            <p>立花山城</p>
+                            <p>立花山城</p>
+                            <p>立花山城</p>
                         </div>
                         <h3>解散場所:博多駅or福岡空港</h3>
                     </div>
