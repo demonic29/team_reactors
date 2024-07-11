@@ -12,7 +12,7 @@ const TourPage = () => {
             id: 1,
             user: {
                 name: "山田 太郎",
-                role: "旅行者",
+                role: "住所",
                 image: "https://via.placeholder.com/150",
             },
             review: {
@@ -24,11 +24,11 @@ const TourPage = () => {
             id: 2,
             user: {
                 name: "佐藤 花子",
-                role: "観光客",
-                image: "https://via.placeholder.com/150",
+                role: "住所",
+                image: "https://scontent.cdninstagram.com/v/t51.2885-19/432026586_1051243769300222_3106032260111082432_n.jpg?stp=dst-jpg_s150x150&_nc_ht=scontent.cdninstagram.com&_nc_cat=102&_nc_ohc=WiEj87Pi9PYQ7kNvgGnj7-d&edm=APs17CUBAAAA&ccb=7-5&oh=00_AYBr2r36Qv4kHnPpv9Xm0iUjjN9mbzN--zUDfRxIkyzjnw&oe=669608B8&_nc_sid=10d13b",
             },
             review: {
-                text: "初めての旅行でしたが、最高の体験でした。また参加したいです！",
+                text: "初めての旅行でしたが、最高の体験でした。また参加したいです！初めての旅行でしたが、最高の体験でした。また参加したいです！初めての旅行でしたが、最高の体験でした。また参加したいです！初めての旅行でしたが、最高の体験でした。また参加したいです！",
             },
             date: "2024-07-13",
         },
@@ -36,7 +36,7 @@ const TourPage = () => {
             id: 3,
             user: {
                 name: "鈴木 次郎",
-                role: "冒険者",
+                role: "住所",
                 image: "https://via.placeholder.com/150",
             },
             review: {
@@ -118,24 +118,32 @@ const TourPage = () => {
                 {/* end gallery */}
             </div>
             {/* review */}
-            <div className="bg-[#333]">
+            <div className="bg-[#333] pt-[60px]">
                 <div
-                    className="max-w-[1000px] overflow-x-scroll m-auto min-h-full bg-cover bg-center "
-                    style={{
-                        backgroundImage: "url('/path/to/background.jpg')",
-                    }}
+                    className="max-w-[1000px]  overflow-x-scroll m-auto  bg-cover bg-center "
+                    // style={{
+                    //     backgroundImage: "url('/path/to/background.jpg')",
+                    // }}
                 >
-                    <div className="">
-                        <div className="flex justify-center ">
+                    <div className=" min-h-[400px] ">
+                        <div className="flex justify-center">
                             {reviews.map((review, index) => (
                                 <div
                                     key={review.id}
+                                    className={`transition-transform duration-300 ease-in-out ${
+                                        centerIndex === index
+                                            ? "transform translate-x-0 scale-110"
+                                            : index < centerIndex
+                                            ? "transform -translate-x-8"
+                                            : "transform translate-x-8"
+                                    }`}
                                     onClick={() => handleCardClick(index)}
                                 >
                                     <ReviewCard
                                         user={review.user}
                                         review={review.review}
                                         date={review.date}
+                                        avatar={review.avatar}
                                     />
                                 </div>
                             ))}
@@ -150,11 +158,3 @@ const TourPage = () => {
 };
 
 export default TourPage;
-
-// className={`w-[800px] transition-transform duration-300 ease-in-out ${
-//     centerIndex === index
-//         ? "transform translate-x-0 scale-110"
-//         : index < centerIndex
-//         ? "transform -translate-x-full"
-//         : "transform translate-x-full"
-// }`}
