@@ -9,7 +9,7 @@ export default function Accordion() {
             <button
                 onClick={classToggle}
                 type="button"
-                className="flex items-center justify-between min-w-[400px] min-h-[50px] px-[20px] bg-[#0075D4] text-[#fefefe] text-[18px] rounded-md"
+                className="flex items-center justify-between min-w-[400px] min-h-[50px] px-[20px] bg-[#0075D4] text-[#fefefe] text-[18px] rounded-md ease-in-out"
             >
                 1日目
                 <svg
@@ -34,14 +34,14 @@ export default function Accordion() {
                 </svg>
             </button>
             <div className={active ? "hidden" : ""}>
-                <div className="mt-[60px] flex justify-between ">
+                <div className="mt-[60px] flex justify-between items-center ">
                     <div>
                         <h3>集合場所:博多駅or福岡空港</h3>
-                        <div className="">
-                            <p>立花山城</p>
-                            <p>立花山城</p>
-                            <p>立花山城</p>
-                            <p>立花山城</p>
+                        <div className="py-[10px] ">
+                            <p className="py-[10px]">立花山城</p>
+                            <p className="py-[10px]">立花山城</p>
+                            <p className="py-[10px]">立花山城</p>
+                            <p className="py-[10px]">立花山城</p>
                         </div>
                         <h3>解散場所:博多駅or福岡空港</h3>
                     </div>

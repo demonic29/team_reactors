@@ -54,6 +54,7 @@ const TourPage = () => {
                 {/* end Accordion day1 */}
 
                 {/* Accordion day2 */}
+                <Accordion />
                 {/* end Accordion day2 */}
 
                 {/* gallery */}
