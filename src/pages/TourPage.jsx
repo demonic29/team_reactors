@@ -1,13 +1,57 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import Accordion from "./Accordion";
+import Accordion from "../layouts/Accordion";
+import ReviewCard from "../layouts/ReviewCard";
+import { useState } from "react";
 
 const TourPage = () => {
     const mainImg = require("../assets/img/about-main-img.jpg");
 
-    const cssProperties = {
-        "--image-url": `url(${mainImg})`,
+    const reviews = [
+        {
+            id: 1,
+            user: {
+                name: "山田 太郎",
+                role: "旅行者",
+                image: "https://via.placeholder.com/150",
+            },
+            review: {
+                text: "このツアーは素晴らしかったです。ガイドさんが非常に詳しく、非常に楽しめました！",
+            },
+            date: "2024-07-12",
+        },
+        {
+            id: 2,
+            user: {
+                name: "佐藤 花子",
+                role: "観光客",
+                image: "https://via.placeholder.com/150",
+            },
+            review: {
+                text: "初めての旅行でしたが、最高の体験でした。また参加したいです！",
+            },
+            date: "2024-07-13",
+        },
+        {
+            id: 3,
+            user: {
+                name: "鈴木 次郎",
+                role: "冒険者",
+                image: "https://via.placeholder.com/150",
+            },
+            review: {
+                text: "自然が大好きな私にとって、このツアーは夢のようなものでした。",
+            },
+            date: "2024-07-14",
+        },
+    ];
+
+    const [centerIndex, setCenterIndex] = useState(1);
+
+    const handleCardClick = (index) => {
+        setCenterIndex(index);
     };
+
     return (
         <div className="font-kiwiMaru mb-5 ">
             <div className="container rounded-lg overflow-hidden mt-5">
@@ -74,22 +118,43 @@ const TourPage = () => {
                 {/* end gallery */}
             </div>
             {/* review */}
-            <div
-                style={cssProperties}
-                className="flex min-h-[500px] bg-current mt-[65px]"
-            >
-                {/* <img
-                    className="w-full aspect-[10/3.5] nd object-cover"
-                    srcSet={`${mainImg}`}
-                    alt="main"
-                /> */}
-                <h2 className="text-red-400">review</h2>
+            <div className="bg-[#333]">
+                <div
+                    className="max-w-[1000px] overflow-x-scroll m-auto min-h-full bg-cover bg-center "
+                    style={{
+                        backgroundImage: "url('/path/to/background.jpg')",
+                    }}
+                >
+                    <div className="">
+                        <div className="flex justify-center ">
+                            {reviews.map((review, index) => (
+                                <div
+                                    key={review.id}
+                                    onClick={() => handleCardClick(index)}
+                                >
+                                    <ReviewCard
+                                        user={review.user}
+                                        review={review.review}
+                                        date={review.date}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
             </div>
             {/*　end review */}
-
             {/*　footer */}
         </div>
     );
 };
 
 export default TourPage;
+
+// className={`w-[800px] transition-transform duration-300 ease-in-out ${
+//     centerIndex === index
+//         ? "transform translate-x-0 scale-110"
+//         : index < centerIndex
+//         ? "transform -translate-x-full"
+//         : "transform translate-x-full"
+// }`}
