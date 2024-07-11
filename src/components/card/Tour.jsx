@@ -4,7 +4,7 @@ import React from 'react';
 
 const Card = ({ imgSrc, title, desc, location, link }) => {
   return (
-    <div className="max-w-sm bg-white mt-[100px]">
+    <div className="bg-white mt-[100px]">
       <a href={link}>
         <img className="rounded-lg" src={imgSrc} alt={title} />
       </a>
