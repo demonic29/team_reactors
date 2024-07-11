@@ -19,4 +19,21 @@
 		// Add group & relative class to overlay parent node to display overlay when hover
 		@apply bg-black bg-opacity-25 absolute inset-0 transition-all opacity-0 group-hover:opacity-100 flex items-center justify-center;
 	}
+	.skeleton {
+		background: #eee;
+		background: linear-gradient(
+			110deg,
+			#ececec 8%,
+			#f5f5f5 18%,
+			#ececec 33%
+		);
+		border-radius: 5px;
+		background-size: 200% 100%;
+		animation: 1.5s shine linear infinite;
+	}
+	@keyframes shine {
+		to {
+			background-position-x: -200%;
+		}
+	}
 }

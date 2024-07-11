@@ -1,21 +1,21 @@
 import React from "react";
 import Title from "../Title";
-import { cardFeature, MdDragHandle } from "../../../utils/managerPage/cardFeature";
+import { cardFeature, MdDragHandle } from "utils/managerPage/cardFeature";
 
-const SliderManageCard = ({ drag, item }) => {
+const SliderManageCard = ({ drag, item: { banner, title, desc } }) => {
 	return (
 		<div>
 			<div className="border-gray-200 w-full border-[1px] mb-4 p-2 rounded-lg flex gap-4 items-center">
 				<div className="w-[120px] aspect-video overflow-hidden rounded-md">
 					<img
-						src={item.image}
+						src={banner}
 						className="object-cover object-center"
 						alt="slide-img"
 					/>
 				</div>
 				<div className="flex-1 mr-20">
-					<Title className={"mb-1"}>{item.title}</Title>
-					<p className="line-clamp-1">{item.desc}</p>
+					<Title className={"mb-1"}>{title}</Title>
+					<p className="line-clamp-1">{desc}</p>
 				</div>
 				<div className="flex items-center gap-4">
 					{cardFeature.map((feature) => (
@@ -34,6 +34,5 @@ const SliderManageCard = ({ drag, item }) => {
 		</div>
 	);
 };
-
 
 export default SliderManageCard;

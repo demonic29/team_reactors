@@ -1,8 +1,8 @@
+import Button from "components/buttons/Button";
+import { useModal } from "contexts/modal-context";
 import React from "react";
 import { createPortal } from "react-dom";
-import { useModal } from "../../contexts/modal-context";
 import { HiXMark } from "react-icons/hi2";
-import Button from "../buttons/Button";
 import Swal from "sweetalert2";
 
 const ModalBase = () => {

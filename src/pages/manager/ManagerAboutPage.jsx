@@ -1,28 +1,35 @@
-import React from "react";
-import SectionTitle from "../../components/managerPage/SectionTitle";
-import { FiEdit } from "react-icons/fi";
-
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import EditButton from "components/managerPage/buttons/EditButton";
+import { API } from "utils/end_points";
+import SectionTitle from "components/managerPage/SectionTitle";
 
 const ManagerAboutPage = () => {
-	const companyImages = [
-		{},
-		{},
-		{},
-		{},
-		{},
-		{},
-		{},
-		{},
-		{},
-		{},
-		{},
-		{},
-		{},
-		{},
-		{},
-		{},
-	];
+	const [aboutData, setAboutData] = useState({});
+	// const { openModal } = useModal();
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		async function getAbout() {
+			try {
+				setLoading(true);
+				const { data } = await axios.get(
+					`${API.GET_DATA}?action=getAbout`
+				);
+				setAboutData(data.data);
+				setLoading(false);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		getAbout();
+	}, []);
+
+	const { banner, company, vision, access, companyImages } = aboutData;
+
+	if (loading || !aboutData) {
+		return <Skeleton></Skeleton>;
+	}
 
 	return (
 		<div className="grid flex-1 grid-cols-3 gap-4 2xl:grid-cols-2">
@@ -30,13 +37,10 @@ const ManagerAboutPage = () => {
 			<div>
 				<SectionContainer>
 					<SectionTitle>バナー</SectionTitle>
-					<SectionImage
-						src="https://i.pinimg.com/564x/0b/6f/af/0b6faf498a80c50c9bcaf46c58b787e0.jpg"
-						alt="about-banner"
-					>
+					<SectionImage src={banner} alt="about-banner">
 						<div className="overlay">
 							<span className="size-[75px] cursor-pointer bg-black bg-opacity-50 flex items-center justify-center opacity-80 rounded-full">
-								<FiEdit size={35} color="white"></FiEdit>
+								{/* <FiEdit size={35} color="white"></FiEdit> */}
 							</span>
 						</div>
 					</SectionImage>
@@ -56,20 +60,15 @@ const ManagerAboutPage = () => {
 									見るだけ
 								</span>
 							</div>
-							<iframe
-								src="https://www.google.com/maps/d/u/0/embed?mid=1sp_iuTX6MJCBDIFilElFruxcrB7Pqjw&ehbc=2E312F&noprof=1"
-								width="100%"
-								height="280"
-								title="company-location"
-							></iframe>
+							<div
+								dangerouslySetInnerHTML={{
+									__html: `${access?.map}`,
+								}}
+							></div>
 						</div>
 						{/* Station  */}
 						<div className="flex flex-wrap gap-2 mb-4 text-lg">
-							{[
-								"博多駅から３分徒歩",
-								"大阪梅田から６分徒歩",
-								"大阪梅田から６分徒歩",
-							].map((item, index) => (
+							{access?.distance.map((item, index) => (
 								<div
 									key={index}
 									className="px-4 py-2 gap-3 border-l-[3px] whitespace-nowrap flex-1 border-l-secondaryColor"
@@ -79,11 +78,7 @@ const ManagerAboutPage = () => {
 							))}
 						</div>
 						{/* Note  */}
-						<div className="mt-4 text-lg">
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit. Odit iure placeat maxime dolorem dolores ullam
-							amet accusamus laborum architecto possimus!
-						</div>
+						<div className="mt-4 text-lg">{access?.desc}</div>
 					</div>
 				</SectionContainer>
 			</div>
@@ -98,26 +93,16 @@ const ManagerAboutPage = () => {
 					</div>
 					<div>
 						<SectionImage
-							src="https://i.pinimg.com/564x/af/6b/c4/af6bc40ad25389c74d0ea0afcaf6068d.jpg"
+							src={company?.image}
 							alt="about-company-img"
 						/>
-						<div className="mt-4 text-lg">
-							会社名（事業名）：「歴てく」 ~ INSIDE（いんさいど）
-							<br />
-							成立：2024/05/20
-							<br />
-							住所：福岡市西区横浜３丁目２７－１５
-							<br />
-							連絡先：０９０－２３９５－２４２７
-							<br />
-							問い合わせメールアドレス：rekiteku2024@icloud.com
-						</div>
+						<div className="mt-4 text-lg">{company.content}</div>
 					</div>
 				</SectionContainer>
 				<SectionContainer>
 					<div className="flex items-center justify-between mb-3">
 						<SectionTitle className="mb-[0px]">
-							会社概要
+							会社の写真
 						</SectionTitle>
 						<EditButton></EditButton>
 					</div>
@@ -127,25 +112,25 @@ const ManagerAboutPage = () => {
 							(companyImages.length > 8
 								? companyImages
 										.slice(0, 8)
-										.map((item, index) => (
+										.map((image, index) => (
 											<div
 												key={index}
 												className="overflow-hidden rounded-md aspect-square"
 											>
 												<img
-													src="https://i.pinimg.com/564x/66/e7/88/66e78802fc81839141d8c6f4fe343bc1.jpg"
+													src={image}
 													alt="company-img"
 													className="object-cover object-center w-full h-full"
 												/>
 											</div>
 										))
-								: companyImages.map((item, index) => (
+								: companyImages.map((image, index) => (
 										<div
 											key={index}
 											className="rounded-md aspect-square"
 										>
 											<img
-												src="https://i.pinimg.com/564x/66/e7/88/66e78802fc81839141d8c6f4fe343bc1.jpg"
+												src={image}
 												alt="company-img"
 												className="object-cover object-center w-full h-full"
 											/>
@@ -170,13 +155,10 @@ const ManagerAboutPage = () => {
 					</div>
 					<div>
 						<SectionImage
-							src="https://i.pinimg.com/736x/b6/59/ab/b659ab1befc5d0d1dea398d18c7f8624.jpg"
+							src={vision.image}
 							alt="about-company-img"
 						/>
-						<div className="mt-4 text-lg">
-							歴史は人が生きていくための教科書。栄養剤です。いにしえの人物それぞれが歩んだ足跡を訪ね、遺構や文物を目にすると、生き方の助けになる「発見」があります。また、地域の過去~現在にわたる史跡を巡り、通史を知れば、その地域の「個性」が見えてきます。
-							有名、無名の史跡をてくてくと歩き、「今後の人生の糧」や「地域のより深い魅力」を見つけませんか。
-						</div>
+						<div className="mt-4 text-lg">{vision.content}</div>
 					</div>
 				</SectionContainer>
 			</div>
@@ -205,22 +187,21 @@ const SectionImage = ({
 	);
 };
 
-const EditButton = ({ children = "編集", onClick = () => {} }) => {
-	return (
-		<button
-			onClick={onClick}
-			className="flex items-center gap-1 text-gray-500 cursor-pointer hover:text-primaryColor"
-		>
-			<FiEdit size={20} />
-			<span>{children}</span>
-		</button>
-	);
-};
-
-const SectionContainer = ({ children }) => {
+export const SectionContainer = ({ children }) => {
 	return (
 		<div className="p-4 mb-4 border border-gray-200 rounded-xl h-fit">
 			{children}
+		</div>
+	);
+};
+
+const Skeleton = () => {
+	return (
+		<div className="w-1/3 p-4 mb-4 border border-gray-200 rounded-xl h-fit">
+			<div className="w-1/6 h-6 mb-4 skeleton"></div>
+			<div className="w-full skeleton h-[300px] mb-4 rounded-md"></div>
+			<div className="w-3/4 h-4 mb-4 skeleton"></div>
+			<div className="w-1/2 h-4 skeleton"></div>
 		</div>
 	);
 };

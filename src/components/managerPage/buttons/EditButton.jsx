@@ -1,11 +1,13 @@
-import React from "react";
-import { IoMdAddCircleOutline } from "react-icons/io";
+import { FiEdit } from "react-icons/fi";
 
-const EditButton = ({ children, onClick }) => {
+const EditButton = ({ children = "編集", onClick = () => {} }) => {
 	return (
-		<button onClick={onClick} className="flex items-center gap-1 text-gray-500 cursor-pointer hover:text-primaryColor">
-			<IoMdAddCircleOutline size={16} />
-			<span className="text-sm">{children}</span>
+		<button
+			onClick={onClick}
+			className="flex items-center gap-1 text-gray-500 cursor-pointer hover:text-primaryColor"
+		>
+			<FiEdit size={20} />
+			<span>{children}</span>
 		</button>
 	);
 };

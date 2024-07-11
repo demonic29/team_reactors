@@ -1,6 +1,6 @@
+import Button from "components/buttons/Button";
 import React from "react";
 import { NavLink } from "react-router-dom";
-import Button from "../components/buttons/Button";
 
 const NavBar = () => {
     const logo = require("../assets/rekiteku-logo.png");

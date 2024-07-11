@@ -1,5 +1,5 @@
+import Footer from 'layouts/Footer';
 import React from 'react';
-import Footer from '../layouts/Footer';
 
 const AboutPage = () => {
 
@@ -10,7 +10,7 @@ const AboutPage = () => {
 
       {/* main-img */}
       
-       <div className='container rounded-lg overflow-hidden mt-5'>
+       <div className='container mt-5 overflow-hidden rounded-lg'>
           <img 
             className='w-full aspect-[10/3.5] nd object-cover rounded-lg'
             srcSet={`${mainImg}`}
@@ -21,8 +21,8 @@ const AboutPage = () => {
       {/* main-text */}
       <div className='text-center mt-[50px] flex justify-center'>
         <div className='w-full max-w-[1080px] px-10'>
-          <h2 className='text-3xl font-bold mb-10'>我々の理念</h2>
-          <p className='text-gray-800 text-xl leading-8'>歴史は人が生きていくための教科書。栄養剤です。いにしえの人物それぞれが歩んだ足跡を訪ね、遺構や文物を目にすると、生き方の助けになる「発見」があります。また、地域の過去~現在にわたる史跡を巡り、通史を知れば、その地域の「個性」が見えてきます。 　有名、無名の史跡をてくてくと歩き、「今後の人生の糧」や「地域のより深い魅力」を見つけませんか。</p>
+          <h2 className='mb-10 text-3xl font-bold'>我々の理念</h2>
+          <p className='text-xl leading-8 text-gray-800'>歴史は人が生きていくための教科書。栄養剤です。いにしえの人物それぞれが歩んだ足跡を訪ね、遺構や文物を目にすると、生き方の助けになる「発見」があります。また、地域の過去~現在にわたる史跡を巡り、通史を知れば、その地域の「個性」が見えてきます。 　有名、無名の史跡をてくてくと歩き、「今後の人生の糧」や「地域のより深い魅力」を見つけませんか。</p>
         </div>
       </div>
 
@@ -31,9 +31,9 @@ const AboutPage = () => {
 
         <div className='m-auto'>
             <h2 className='text-[50px] font-bold mb-5 text-white'>私について</h2>
-            <p className='text-slate-100 text-xl leading-7 tracking-wider'>福岡県福岡市に在住。歴史が大好き。 <br /> 趣味は名所や旧跡、足跡巡り。特に好きな時代は中世史と幕末。</p>
+            <p className='text-xl leading-7 tracking-wider text-slate-100'>福岡県福岡市に在住。歴史が大好き。 <br /> 趣味は名所や旧跡、足跡巡り。特に好きな時代は中世史と幕末。</p>
             <div className='mt-[80px]'>
-              <button className='text-black bg-white px-5 py-2 rounded-md'>note ページへ</button>
+              <button className='px-5 py-2 text-black bg-white rounded-md'>note ページへ</button>
             </div>
         </div>
         <div>

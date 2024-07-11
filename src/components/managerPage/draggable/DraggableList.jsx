@@ -6,7 +6,7 @@ const DraggableList = ({ items, setItems, children }) => {
 		<>
 			{items.map((item, index) => (
 				<DraggableItem
-					key={item.id}
+					key={index}
 					index={index}
 					item={item}
 					items={items}

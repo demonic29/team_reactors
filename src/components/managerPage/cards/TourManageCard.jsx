@@ -1,5 +1,5 @@
 import React from "react";
-import { cardFeature, MdDragHandle } from "../../../utils/managerPage/cardFeature";
+import { cardFeature, MdDragHandle } from "utils/managerPage/cardFeature";
 
 const TourManageCard = ({ drag, item: tour }) => {
 	return (
