@@ -74,17 +74,7 @@ const HomePage = () => {
 
           {/* card-datas */}
           <div className='flex gap-10 justify-center'>
-            {filterImages.map((item, index) => (
-              <Card
-                key={index}
-                imgSrc={tourImages[index % tourImages.length]}
-                item={item}
-                title={item.title}
-                desc={item.desc}
-                location={item.location}
-                link={item.link}
-              />
-            ))}
+            <filterImages.
           </div>
 
           <div className='mt-[100px] text-center'>

@@ -9,18 +9,19 @@ import PageNotFound from "./pages/PageNotFound";
 import MainLayout from "./layouts/MainLayout";
 import AboutPage from "./pages/AboutPage";
 import TourPage from './pages/TourPage'
-import TourList from "./pages/TourList";
 
 const App = () => {
 	return (
 		<Routes>
 			<Route path="/" element={<MainLayout></MainLayout>}>
-			<Route path="/" element={<HomePage></HomePage>} default></Route>
-			<Route path="/about" element={<AboutPage></AboutPage>}></Route>
-			<Route path="/tour" element={<TourPage></TourPage>}></Route>
+				<Route path="/" element={<HomePage></HomePage>} default></Route>
+				<Route
+					path="/about"
+					element={<AboutPage></AboutPage>}
+				></Route>
+				<Route path="/tour" element={<TourPage></TourPage>}></Route>
 			</Route>
 			<Route path="/login" element={<LoginPage></LoginPage>}></Route>
-			<Route path="/tourList" element={<TourList></TourList>}></Route>
 			<Route path="/manager" element={<ManagerLayout></ManagerLayout>}>
 				<Route
 					path="/manager/home"

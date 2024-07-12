@@ -21,8 +21,6 @@ const HomePage = () => {
   const [noteData, setNoteData] = useState([]);
   const [carouselImgs, setCarouselImgs] = useState([]);
 
-  const filterImages = tourInfo.filter(item => item.show)
-
   useEffect(() => {
     setInfo(tourInfo);
   }, []);
@@ -74,7 +72,7 @@ const HomePage = () => {
 
           {/* card-datas */}
           <div className='flex gap-10 justify-center'>
-            {filterImages.map((item, index) => (
+            {info.map((item, index) => (
               <Card
                 key={index}
                 imgSrc={tourImages[index % tourImages.length]}
@@ -88,7 +86,7 @@ const HomePage = () => {
           </div>
 
           <div className='mt-[100px] text-center'>
-            <NavLink to={"/tourList"}>
+            <NavLink to={"/TourList"}>
               <Button>もっとツアーをみる</Button>
             </NavLink>
           </div>
