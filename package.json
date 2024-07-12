@@ -6,6 +6,7 @@
 		"@testing-library/jest-dom": "^5.17.0",
 		"@testing-library/react": "^13.4.0",
 		"@testing-library/user-event": "^13.5.0",
+		"firebase": "^10.12.3",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
 		"react-hook-form": "^7.51.3",
@@ -15,6 +16,7 @@
 		"react-toastify": "^10.0.5",
 		"sass": "^1.77.6",
 		"styled-components": "^6.1.11",
+		"sweetalert2": "^11.12.2",
 		"web-vitals": "^2.1.4",
 		"yup": "^1.4.0"
 	},
