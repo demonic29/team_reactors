@@ -11,6 +11,8 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { ModalProvider } from "./contexts/modal-context";
 import { ApiProvider } from "contexts/managerPage/api-context";
 
+<script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>

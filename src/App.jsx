@@ -9,14 +9,18 @@ import MainLayout from "./layouts/MainLayout";
 import AboutPage from "./pages/AboutPage";
 import ManagerTourPage from "./pages/manager/ManagerTourPage";
 import LoginPage from "./pages/manager/LoginPage";
+import TourPage from './pages/TourPage'
 
 const App = () => {
 	return (
 		<Routes>
-			<Route path="/" element={<MainLayout />}>
-				<Route path="/" element={<HomePage />} default></Route>
-				<Route path="/about" element={<AboutPage />}></Route>
-				{/* <Route path="/tour" element={<TourPage></TourPage>}></Route> */}
+			<Route path="/" element={<MainLayout></MainLayout>}>
+				<Route path="/" element={<HomePage></HomePage>} default></Route>
+				<Route
+					path="/about"
+					element={<AboutPage></AboutPage>}
+				></Route>
+				<Route path="/tour" element={<TourPage></TourPage>}></Route>
 			</Route>
 			<Route path="/login" element={<LoginPage />}></Route>
 			<Route path="/manager" element={<ManagerLayout />}>
