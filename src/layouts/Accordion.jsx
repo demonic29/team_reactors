@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-// import axios from "axios";
-// import { API } from "../utils/end_points";
-
-export default function Accordion() {
+export default function Accordion({
+    // tours,
+    // onClick,
+    destination,
+    start,
+    end,
+    map,
+}) {
     const [active, setActive] = useState(false);
     const classToggle = () => {
         setActive(!active);
@@ -10,7 +14,6 @@ export default function Accordion() {
 
     return (
         <div>
-            {/* // tourAbouts.map((tourAbout) => ( */}
             <div className=" max-w-[1000px] mx-auto mb-[50px] ">
                 <button
                     onClick={classToggle}
@@ -42,16 +45,16 @@ export default function Accordion() {
                 <div className={active ? "hidden" : ""}>
                     <div className="mt-[60px] flex justify-between items-center ">
                         <div>
-                            <h3>集合場所:博多駅or福岡空港</h3>
-                            <div className="py-[10px] ">
+                            <h3>{start}</h3>
+                            <div className="py-[10px]">
                                 <p className="py-[10px]"></p>
-                                <p className="py-[10px]">立花山城</p>
-                                <p className="py-[10px]">立花山城</p>
-                                <p className="py-[10px]">立花山城</p>
+                                <p className="py-[10px]">{destination}</p>
+                                <p className="py-[10px]">{destination}</p>
+                                <p className="py-[10px]">{destination}</p>
                             </div>
-                            <h3>解散場所:博多駅or福岡空港</h3>
+                            <h3>{end}</h3>
                         </div>
-                        <div className="w-[500px] h-[320px] bg-[#0077D4] rounded-[10px] "></div>
+                        <div className="rounded-[10px] "> {map} </div>
                     </div>
                 </div>
             </div>
