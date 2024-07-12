@@ -16,7 +16,6 @@ const AddTourModalStyle = styled.div`
 const AddTourModal = () => {
 	const [value, setValue] = useState("");
 	const [selectedImages, setSelectedImages] = useState([]);
-	const [banner, setBanner] = useState('')
 
 	const handleSelectImages = (e) => {
 		const files = Array.from(e.target.files);
