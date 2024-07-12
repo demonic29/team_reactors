@@ -2,25 +2,32 @@
 // import React, { useState } from "react";
 // import Accordion from "../layouts/Accordion";
 import { useApi } from "../contexts/managerPage/api-context";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const TourPage = () => {
-    const { data } = useApi();
-    const tours = data?.tours || [];
-    const { loading } = useApi();
-    // const [ showTours, setShowTours ] = useState([data]);
+    const { loading, data } = useApi();
+    const [tourList, setTourList] = useState([]);
+    useEffect(() => {
+        if (data) {
+            setTourList(data?.tours);
+        }
+    }, [data]);
+    // const { data } = useApi();
+    // const tours = data?.tours || [];
+    // const { loading } = useApi();
+    // // const [ showTours, setShowTours ] = useState([data]);
 
-    const [active, setActive] = useState(false);
-    const classToggle = () => {
-        setActive(!active);
-    };
+    // const [active, setActive] = useState(false);
+    // const classToggle = () => {
+    //     setActive(!active);
+    // };
 
-    tours.forEach((tour) => {
-        console.log(tour);
-        // tour.plans.forEach((plan) => {
-        //     console.log(plan);
-        // });
-    });
+    // tours.forEach((tour) => {
+    //     console.log(tour);
+    //     // tour.plans.forEach((plan) => {
+    //     //     console.log(plan);
+    //     // });
+    // });
 
     return (
         <>
