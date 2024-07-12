@@ -3,9 +3,12 @@ import React from "react";
 import Accordion from "../layouts/Accordion";
 import ReviewCard from "../layouts/ReviewCard";
 import { useState } from "react";
+import { useApi } from "../contexts/managerPage/api-context";
 
 const TourPage = () => {
     const mainImg = require("../assets/img/about-main-img.jpg");
+    const { data } = useApi();
+    console.log(data);
 
     const reviews = [
         {
