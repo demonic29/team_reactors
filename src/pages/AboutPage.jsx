@@ -2,7 +2,6 @@ import Footer from "layouts/Footer";
 import React from "react";
 
 const AboutPage = () => {
-	const yoshimaru = require("../assets/img/yoshimarusan.jpg");
 	const mainImg = require("../assets/img/about-main-img.jpg");
 	return (
 		<div>
@@ -46,7 +45,7 @@ const AboutPage = () => {
 				<div>
 					<img
 						className="w-[100%] h-[600px] object-cover"
-						srcSet={`${yoshimaru}`}
+						srcSet={`https://i.pinimg.com/564x/ce/4f/3e/ce4f3e2e41e7bf8715400de9b34a5b61.jpg`}
 						alt="吉丸さんの写真"
 					/>
 				</div>

@@ -1,7 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-
-
 	content: [
 		"./src/**/*.{js,jsx,ts,tsx}",
 	],
@@ -13,6 +11,9 @@ module.exports = {
 				secondaryColor: "#004B88",
 			},
 		},
+		fontFamily: {
+      kiwiMaru: ["Kiwi Maru", "serif"],
+    },
 		screens: {
 			"2xl": { max: "1535px" },
 			// => @media (max-width: 1535px) { ... }
@@ -33,6 +34,4 @@ module.exports = {
 
 	plugins: [
 	],
-	
-
 };
