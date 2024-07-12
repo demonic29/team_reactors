@@ -1,15 +1,15 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import ManagerLayout from "./layouts/ManagerLayout";
-import ManagerHomePage from "./pages/manager/ManagerHomePage";
-import ManagerAboutPage from "./pages/manager/ManagerAboutPage";
-import PageNotFound from "./pages/PageNotFound";
-import MainLayout from "./layouts/MainLayout";
-import AboutPage from "./pages/AboutPage";
-import ManagerTourPage from "./pages/manager/ManagerTourPage";
-import LoginPage from "./pages/manager/LoginPage";
-import TourPage from './pages/TourPage'
+import HomePage from "pages/HomePage";
+import MainLayout from "layouts/MainLayout";
+import TourPage from "pages/TourPage";
+import AboutPage from "pages/AboutPage";
+import LoginPage from "pages/LoginPage";
+import ManagerLayout from "layouts/ManagerLayout";
+import ManagerHomePage from "pages/manager/ManagerHomePage";
+import ManagerAboutPage from "pages/manager/ManagerAboutPage";
+import ManagerTourPage from "pages/manager/ManagerTourPage";
+import PageNotFound from "pages/PageNotFound";
 
 const App = () => {
 	return (
