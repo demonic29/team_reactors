@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SectionTitle from "../../../../components/managerPage/SectionTitle";
 import EditButton from "../../../../components/managerPage/buttons/AddButton";
-import DraggableList from "../../../../components/managerPage/draggable/DraggableList";
 import SliderManageCard from "../../../../components/managerPage/cards/SliderManageCard";
 import { useApi } from "contexts/managerPage/api-context";
 
@@ -10,21 +9,23 @@ const SliderSection = ({ processedOrder }) => {
 	const { loading } = useApi();
 
 	useEffect(() => {
-    setSortedSlide(processedOrder);
-  }, [processedOrder]);
+		setSortedSlide(processedOrder);
+	}, [processedOrder]);
 
 	return (
 		<div className="mb-10">
 			<div className="flex justify-between mb-3 gap-x-4">
-				<SectionTitle className={"mb-0"}>スライダー</SectionTitle>
-				<EditButton>スライトを追加</EditButton>
+				<SectionTitle className={"mb-[0px]"}>スライダー</SectionTitle>
+				<EditButton>編集</EditButton>
 			</div>
 			{loading ? (
 				<Skeleton></Skeleton>
 			) : (
-				<DraggableList items={sortedSlide} setItems={setSortedSlide}>
-					<SliderManageCard></SliderManageCard>
-				</DraggableList>
+				<div className="grid grid-cols-2 gap-4">
+					{sortedSlide.length > 0 && sortedSlide.map(slide => (
+						<SliderManageCard key={slide.slideId} item={slide} />
+					))}
+				</div>
 			)}
 		</div>
 	);

@@ -8,7 +8,7 @@ const AddButton = ({ children, onClick }) => {
 			className="flex items-center gap-1 text-gray-500 cursor-pointer hover:text-primaryColor"
 		>
 			<IoMdAddCircleOutline size={16} />
-			<span className="text-sm">{children}</span>
+			<span className="text-base">{children}</span>
 		</button>
 	);
 };

@@ -10,16 +10,14 @@ import ManagerHomePage from "pages/manager/ManagerHomePage";
 import ManagerAboutPage from "pages/manager/ManagerAboutPage";
 import ManagerTourPage from "pages/manager/ManagerTourPage";
 import PageNotFound from "pages/PageNotFound";
+import ManagerNotePage from "pages/manager/ManagerNotePage";
 
 const App = () => {
 	return (
 		<Routes>
 			<Route path="/" element={<MainLayout></MainLayout>}>
 				<Route path="/" element={<HomePage></HomePage>} default></Route>
-				<Route
-					path="/about"
-					element={<AboutPage></AboutPage>}
-				></Route>
+				<Route path="/about" element={<AboutPage></AboutPage>}></Route>
 				<Route path="/tour" element={<TourPage></TourPage>}></Route>
 			</Route>
 			<Route path="/login" element={<LoginPage />}></Route>
@@ -33,8 +31,12 @@ const App = () => {
 					element={<ManagerAboutPage />}
 				></Route>
 				<Route
-					path="/manager/tour"
+					path="/manager/tours"
 					element={<ManagerTourPage />}
+				></Route>
+				<Route
+					path="/manager/notes"
+					element={<ManagerNotePage />}
 				></Route>
 				<Route path="/manager/*" element={<PageNotFound />}></Route>
 			</Route>

@@ -86,12 +86,12 @@ const managerNavs = [
 		to: "/manager/about",
 	},
 	{
-		name: "Tour",
-		to: "/manager/tour",
+		name: "Tours",
+		to: "/manager/tours",
 	},
 	{
-		name: "Contact",
-		to: "/manager/contact",
+		name: "Notes",
+		to: "/manager/notes",
 	},
 ];
 

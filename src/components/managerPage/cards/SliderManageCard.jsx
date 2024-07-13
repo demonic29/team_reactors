@@ -5,19 +5,19 @@ import { cardFeature, MdDragHandle } from "utils/managerPage/cardFeature";
 const SliderManageCard = ({ drag, item: { banner, title, desc } }) => {
 	return (
 		<div>
-			<div className="border-gray-200 w-full border-[1px] mb-4 p-2 rounded-lg flex gap-4 items-center">
-				<div className="w-[120px] aspect-video overflow-hidden rounded-md">
+			<div className="border-gray-200 w-full border-[1px] p-2 rounded-lg flex gap-4 items-center">
+				<div className="w-[180px] aspect-video overflow-hidden rounded-md">
 					<img
 						src={banner}
 						className="object-cover object-center"
 						alt="slide-img"
 					/>
 				</div>
-				<div className="flex-1 mr-20">
-					<Title className={"mb-1"}>{title}</Title>
-					<p className="line-clamp-1">{desc}</p>
+				<div className="flex-1 mr-6">
+					<Title className={"mb-2 line-clamp-1 text-xl"}>{title}</Title>
+					<p className="line-clamp-2">{desc}</p>
 				</div>
-				<div className="flex items-center gap-4">
+				<div className={`flex items-center gap-4 ${!drag && 'mr-4'}`}>
 					{cardFeature.map((feature) => (
 						<div
 							key={feature.name}
@@ -27,9 +27,9 @@ const SliderManageCard = ({ drag, item: { banner, title, desc } }) => {
 						</div>
 					))}
 				</div>
-				<div className="text-gray-400 cursor-move" ref={drag}>
+				{drag && <div className="text-gray-400 cursor-move" ref={drag}>
 					<MdDragHandle size={30} />
-				</div>
+				</div>}
 			</div>
 		</div>
 	);
