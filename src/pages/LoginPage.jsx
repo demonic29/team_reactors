@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import loginImg from "../assets/img/about-main-img.jpg";
 import logo from "../assets/img/rekiteku-logo.svg";
 import { auth } from "../firebase-config";
@@ -7,28 +7,59 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth/cordova";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
-  const handleLogin = (e) => {
+  const navigate = useNavigate();
+  const handleLogin = async (e) => {
     e.preventDefault();
     const { email, password } = e.target.elements;
-    signInWithEmailAndPassword(auth, email.value, password.value)
-      .then((userLogin) => {
-        // ユーザーのログインに成功
-        const user = userLogin.user;
-        console.log("ログイン成功:", user);
-      })
-      .catch((error) => {
-        // エラー処理
-        console.error("ログイン:", error);
-        Swal.fire({
-          icon: "error",
-          title: "ログイン失敗",
-          text: "メールアドレスまたはパスワードが間違っています",
-        });
-        email.value = "";
-        password.value = "";
+
+    const showError = (message) => {
+      Swal.fire({
+        icon: "error",
+        title: "入力してください",
+        text: message,
+        customClass: {
+          confirmButton:
+            "bg-primaryColor text-white hover:bg-[#005AA3] transition-all",
+        },
       });
+    };
+    // 何も入力されていない場合
+    if (!email.value && !password.value) {
+      showError("メールアドレスとパスワードを入力してください。");
+      return;
+    }
+    // メールアドレスが入力されていない場合
+    if (!email.value) {
+      showError("メールアドレスを入力してください。");
+      return;
+    }
+    // パスワードが入力されていない場合
+    if (!password.value) {
+      showError("パスワードを入力してください。");
+      return;
+    }
+
+    try {
+      const userLogin = await signInWithEmailAndPassword(
+        auth,
+        email.value,
+        password.value
+      );
+      console.log("ログイン成功:", userLogin.user);
+      navigate("/manager/home");
+    } catch (error) {
+      console.error("ログイン:", error);
+      Swal.fire({
+        icon: "error",
+        title: "ログイン失敗",
+        text: "メールアドレスまたはパスワードが間違っています",
+      });
+      email.value = "";
+      password.value = "";
+    }
   };
 
   return (
@@ -40,7 +71,7 @@ export default function LoginPage() {
           alt="login-img"
         />
       </div>
-      <div className="w-1/2 px-[10%] py-[6%] text-[#333333]">
+      <div className="w-1/2 px-[10%] py-[6%] ">
         <img
           className="aspect-square mx-auto mb-[20px]"
           src={logo}
@@ -66,14 +97,14 @@ export default function LoginPage() {
               type="password"
               name="password"
             />
-            <a
+            {/* <a
               className="text-base text-gray-500 text-[12px] underline"
               href="#"
             >
               パスワードを忘れた場合
-            </a>
+            </a> */}
           </div>
-          <button className="w-full p-4 rounded-[10px] text-[#fefefe] text-xl bg-primaryColor hover:bg-secondaryColor">
+          <button className="w-full p-4 rounded-[10px] text-[#fefefe] text-xl bg-primaryColor hover:bg-[#005AA3] transition-all">
             ログイン
           </button>
         </form>

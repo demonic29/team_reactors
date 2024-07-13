@@ -7,9 +7,9 @@ import note from "../assets/img/note-logo.svg";
 
 export default function Footer() {
   return (
-    <footer className=" bg-secondaryColor mt-[100px] pt-[50px] px-[200px] pb-[16px]">
+    <footer className="bg-secondaryColor mt-[100px] pt-[50px] pb-[16px]">
       {/* ロゴ・SNS・連絡先のWrap */}
-      <div className="container flex justify-evenly gap-x-16">
+      <div className="container flex justify-between gap-x-16 px-[100px]">
         {/* 左半分 ロゴとSNS */}
         <div className="flex flex-col gap-y-6">
           {/* ロゴと企業名 */}
@@ -70,10 +70,10 @@ export default function Footer() {
       <div className="mt-16 mb-[32px]">
         <ul className="flex justify-center gap-x-20 text-white text-xs font-thin">
           <li>
-            <a href="#">旅行業約款</a>
+            <a href="/travelAgencyAgreement">旅行業約款</a>
           </li>
           <li>
-            <a href="#">プライバシーポリシー</a>
+            <a href="/privacyPolicy">プライバシーポリシー</a>
           </li>
           <li>国内旅行業務取扱管理者第〇〇〇〇-〇〇〇〇号</li>
         </ul>
