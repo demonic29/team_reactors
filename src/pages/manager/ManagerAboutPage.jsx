@@ -8,7 +8,6 @@ import { useApi } from "contexts/managerPage/api-context";
 
 const ManagerAboutPage = () => {
 	const { data } = useApi();
-
 	const { about } = data;
 
 	return (
@@ -62,5 +61,7 @@ export const SectionContainer = ({ children }) => {
 		</div>
 	);
 };
+
+
 
 export default ManagerAboutPage;

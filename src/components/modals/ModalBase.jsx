@@ -3,7 +3,14 @@ import { useModal } from "contexts/modal-context";
 import React from "react";
 import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
+import styled from "styled-components";
 import Swal from "sweetalert2";
+
+const ModalBaseStyles = styled.div`
+	.ql-editor p {
+		font-size: 18px;
+	}
+`;
 
 const ModalBase = () => {
 	const { modalContent, isOpen, closeModal } = useModal();
@@ -28,7 +35,7 @@ const ModalBase = () => {
 	return (
 		isOpen &&
 		createPortal(
-			<div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40">
+			<ModalBaseStyles className="absolute inset-0 z-20 flex items-center justify-center bg-black bg-opacity-40">
 				{/* ModalContainer  */}
 				<div className="p-6 flex flex-col relative bg-white rounded-xl w-full max-w-[800px] mx-5 h-full max-h-[85%]">
 					<span
@@ -47,7 +54,7 @@ const ModalBase = () => {
 					</div>
 				</div>
 				{/* ModalContainer  */}
-			</div>,
+			</ModalBaseStyles>,
 			document.body
 		)
 	);

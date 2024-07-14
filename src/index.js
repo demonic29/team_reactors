@@ -10,22 +10,25 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { ModalProvider } from "./contexts/modal-context";
 import { ApiProvider } from "contexts/managerPage/api-context";
+import { AuthProvider } from "contexts/auth-context";
 
-<script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+<script src="../path/to/flowbite/dist/flowbite.min.js"></script>;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
-		<ApiProvider>
-			<ModalProvider>
-				<DndProvider backend={HTML5Backend}>
-					<BrowserRouter>
-						<App /> {/* App Component */}
-						<ToastContainer />
-					</BrowserRouter>
-				</DndProvider>
-			</ModalProvider>
-		</ApiProvider>
+		<AuthProvider>
+			<ApiProvider>
+				<ModalProvider>
+					<DndProvider backend={HTML5Backend}>
+						<BrowserRouter>
+							<App /> {/* App Component */}
+							<ToastContainer />
+						</BrowserRouter>
+					</DndProvider>
+				</ModalProvider>
+			</ApiProvider>
+		</AuthProvider>
 	</React.StrictMode>
 );
 

@@ -1,11 +1,14 @@
 import EditButton from "components/managerPage/buttons/EditButton";
 import SectionTitle from "components/managerPage/SectionTitle";
 import { useApi } from "contexts/managerPage/api-context";
+import { useModal } from "contexts/modal-context";
+import AccessModal from "modules/managerPage/modals/about/AccessModal";
 import { SectionContainer } from "pages/manager/ManagerAboutPage";
 import React from "react";
 
 const AccessSection = ({ access }) => {
 	const { loading } = useApi();
+	const {openModal} = useModal()
 
 	return (
 		<>
@@ -17,7 +20,7 @@ const AccessSection = ({ access }) => {
 						<SectionTitle className="mb-[0px]">
 							会社へのアクセス
 						</SectionTitle>
-						<EditButton></EditButton>
+						<EditButton onClick={() => openModal(<AccessModal access={access} />)}></EditButton>
 					</div>
 					<div>
 						{/* Map  */}

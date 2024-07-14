@@ -14,3 +14,5 @@ export const cardFeature = [
 ];
 
 export { FiEdit, IoTrashOutline, MdDragHandle };
+
+export default MdDragHandle

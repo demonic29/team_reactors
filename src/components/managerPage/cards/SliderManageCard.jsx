@@ -1,6 +1,7 @@
 import React from "react";
 import Title from "../Title";
-import { cardFeature, MdDragHandle } from "utils/managerPage/cardFeature";
+import { cardFeature } from "utils/managerPage/cardFeature";
+import { MdOutlineDragHandle } from "react-icons/md";
 
 const SliderManageCard = ({ drag, item: { banner, title, desc } }) => {
 	return (
@@ -28,7 +29,7 @@ const SliderManageCard = ({ drag, item: { banner, title, desc } }) => {
 					))}
 				</div>
 				{drag && <div className="text-gray-400 cursor-move" ref={drag}>
-					<MdDragHandle size={30} />
+					<MdOutlineDragHandle size={30} />
 				</div>}
 			</div>
 		</div>

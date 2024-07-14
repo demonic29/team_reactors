@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useModal } from "contexts/modal-context";
 import ModalBase from "components/modals/ModalBase";
 import Title from "components/managerPage/Title";
-import AddTourModal from "components/managerPage/modalContent/AddTourModal";
 import AddButton from "components/managerPage/buttons/AddButton";
 import DraggableList from "components/managerPage/draggable/DraggableList";
 import TourManageCard from "components/managerPage/cards/TourManageCard";
@@ -25,7 +24,7 @@ const ManagerTourPage = () => {
 			<ModalBase></ModalBase>
 			<div className="flex items-center justify-between mb-2">
 				<Title>ツアーリスト</Title>
-				<AddButton onClick={() => openModal(<AddTourModal />)}>
+				<AddButton onClick={() => openModal()}>
 					ツアーを追加
 				</AddButton>
 			</div>

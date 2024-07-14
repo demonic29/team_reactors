@@ -20,9 +20,17 @@ const BannerSection = ({ banner }) => {
 						alt="about-banner"
 					>
 						<div className="overlay">
-							<span className="size-[75px] cursor-pointer bg-black bg-opacity-50 flex items-center justify-center opacity-80 rounded-full">
+							<label
+								htmlFor="choose-banner"
+								className="size-[75px] cursor-pointer bg-black bg-opacity-50 flex items-center justify-center opacity-80 rounded-full"
+							>
 								<FiEdit />
-							</span>
+								<input
+									type="file"
+									id="choose-banner"
+									className="hidden"
+								/>
+							</label>
 						</div>
 					</SectionImage>
 				</SectionContainer>

@@ -1,11 +1,14 @@
 import EditButton from "components/managerPage/buttons/EditButton";
 import SectionTitle from "components/managerPage/SectionTitle";
 import { useApi } from "contexts/managerPage/api-context";
+import { useModal } from "contexts/modal-context";
+import CompanyImagesModal from "modules/managerPage/modals/about/CompanyImagesModal";
 import { SectionContainer } from "pages/manager/ManagerAboutPage";
 import React from "react";
 
 const CompanyImageSection = ({ companyImages }) => {
 	const { loading } = useApi();
+	const { openModal } = useModal();
 
 	return (
 		<>
@@ -17,7 +20,15 @@ const CompanyImageSection = ({ companyImages }) => {
 						<SectionTitle className="mb-[0px]">
 							会社の写真
 						</SectionTitle>
-						<EditButton></EditButton>
+						<EditButton
+							onClick={() =>
+								openModal(
+									<CompanyImagesModal
+										companyImages={companyImages}
+									/>
+								)
+							}
+						></EditButton>
 					</div>
 					<div className="grid grid-cols-3 gap-2">
 						{companyImages &&
