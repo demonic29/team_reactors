@@ -56,6 +56,10 @@ export default function LoginPage() {
         icon: "error",
         title: "ログイン失敗",
         text: "メールアドレスまたはパスワードが間違っています",
+        customClass: {
+          confirmButton:
+            "bg-primaryColor text-white hover:bg-[#005AA3] transition-all",
+        },
       });
       email.value = "";
       password.value = "";
