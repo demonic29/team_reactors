@@ -16,26 +16,6 @@ const TourPage = () => {
 
     console.log(tourList);
 
-    // const [active, setActive] = useState(false);
-    // const classToggle = () => {
-    //     setActive(!active);
-    // };
-
-    // const [centerIndex, setCenterIndex] = useState(1);
-
-    // const handleCardClick = (index) => {
-    //     setCenterIndex(index);
-    // };
-
-    // if (
-    //     tourList.plans &&
-    //     tourList.plans[0] &&
-    //     tourList.plans[0].destination &&
-    //     tourList.plans[0].destination[0]
-    // ) {
-    //     console.log(tourList.plans[0].destination[0].name);
-    // }
-
     return (
         <>
             {loading ? (

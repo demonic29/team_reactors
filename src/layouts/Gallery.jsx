@@ -22,7 +22,7 @@ export default function Gallery() {
             setTimeout(() => {
                 setMainImage(clickedImage);
                 setIsFading(false);
-            }, 700); // Duration of the fade-out transition
+            }, 600);
         }
     };
 
