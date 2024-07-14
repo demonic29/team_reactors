@@ -7,9 +7,6 @@ module.exports = {
                 primaryColor: "#0078DA",
                 secondaryColor: "#004B88",
             },
-            backgroundImage: {
-                reviewImg: "url('../assets/img/about-main-img.jpg')",
-            },
         },
         fontFamily: {
             kiwiMaru: ["Kiwi Maru", "serif"],
