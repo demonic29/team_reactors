@@ -80,6 +80,11 @@ export default function Accordion() {
                                 </div>
                                 <div>
                                     {plan.map && (
+                                        // <div
+                                        //     dangerouslySetInnerHTML={{
+                                        //         __html: plan.map,
+                                        //     }}
+                                        // ></div>
                                         <iframe
                                             src={
                                                 plan.map.match(

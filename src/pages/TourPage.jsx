@@ -2,6 +2,7 @@
 import Accordion from "../layouts/Accordion";
 import Gallery from "../layouts/Gallery";
 import ReviewCard from "../layouts/ReviewCard";
+import Footer from "../layouts/Footer";
 import { useApi } from "../contexts/managerPage/api-context";
 import { useEffect, useState } from "react";
 
@@ -77,6 +78,7 @@ const TourPage = () => {
                     )}
                 </div>
             )}
+            <Footer></Footer>
         </>
     );
 };
