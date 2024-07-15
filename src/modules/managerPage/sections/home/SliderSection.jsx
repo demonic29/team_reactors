@@ -3,9 +3,12 @@ import SectionTitle from "../../../../components/managerPage/SectionTitle";
 import EditButton from "../../../../components/managerPage/buttons/AddButton";
 import SliderManageCard from "../../../../components/managerPage/cards/SliderManageCard";
 import { useApi } from "contexts/managerPage/api-context";
+import { useModal } from "contexts/modal-context";
+import SlideAddModal from "modules/managerPage/modals/home/SlideAddModal";
 
 const SliderSection = ({ processedOrder }) => {
 	const [sortedSlide, setSortedSlide] = useState([]);
+	const {openModal} = useModal()
 	const { loading } = useApi();
 
 	useEffect(() => {
@@ -16,7 +19,7 @@ const SliderSection = ({ processedOrder }) => {
 		<div className="mb-10">
 			<div className="flex justify-between mb-3 gap-x-4">
 				<SectionTitle className={"mb-[0px]"}>スライダー</SectionTitle>
-				<EditButton>編集</EditButton>
+				<EditButton onClick={() => openModal(<SlideAddModal />)}>編集</EditButton>
 			</div>
 			{loading ? (
 				<Skeleton></Skeleton>

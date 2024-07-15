@@ -2,9 +2,12 @@ import React from "react";
 import SectionTitle from "components/managerPage/SectionTitle";
 import Button from "components/buttons/Button";
 import { useApi } from "contexts/managerPage/api-context";
+import { useModal } from "contexts/modal-context";
+import HomeAboutModal from "modules/managerPage/modals/home/HomeAboutModal";
 
-const AboutSection = ({homeAbout}) => {
+const AboutSection = ({ homeAbout }) => {
 	const { loading } = useApi();
+	const { openModal } = useModal();
 
 	return (
 		<div className="mb-10">
@@ -22,7 +25,16 @@ const AboutSection = ({homeAbout}) => {
 					</div>
 					<div className="w-full max-w-[580px] text-lg tracking-wider leading-relaxed">
 						<p className="mb-4">{homeAbout?.content}</p>
-						<Button className={"px-6 py-[6px]"}>編集</Button>
+						<Button
+							className={"px-6 py-[6px]"}
+							onClick={() =>
+								openModal(
+									<HomeAboutModal homeAbout={homeAbout} />
+								)
+							}
+						>
+							編集
+						</Button>
 					</div>
 				</div>
 			)}
