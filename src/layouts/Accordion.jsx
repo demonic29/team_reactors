@@ -186,7 +186,7 @@ export default function Accordion() {
                                                                 }}
                                                             >
                                                                 {renderStars(
-                                                                    location.noteId
+                                                                    location.lever
                                                                 )}
                                                             </IconContext.Provider>
                                                         </div>
