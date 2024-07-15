@@ -24,16 +24,6 @@ const HomePage = () => {
   const [noteData, setNoteData] = useState([]);
   const [carouselImgs, setCarouselImgs] = useState([]);
 
-  // useApi
-  const { data } = useApi();
-  const [tourImg , setTourImg] = useState({});
-  useEffect(() => {
-    if(data && data.tours && data.tours.length > 0) {
-        setTourImg(data.tours[0])
-    }
-}, [data]) 
-
-
   const filterImages = tourInfo.filter(item => item.show)
 
   useEffect(() => {
@@ -52,7 +42,9 @@ const HomePage = () => {
     <div>
       <div className="container">
         
-      {tourImg.images && <CarouselImages slides={tourImg.images.map(img => ({ src: img, title: tourImg.title, desc: tourImg.shortDesc }))}/>}
+        <div className='mt-5'>
+          <CarouselImages slides={slides}/>
+        </div>
 
         {/* about-us */}
         <div className='sub-container'>

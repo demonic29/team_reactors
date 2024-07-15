@@ -26,13 +26,6 @@ const HomePage = () => {
 
   // useApi
   const { data } = useApi();
-  const [tourImg , setTourImg] = useState({});
-  useEffect(() => {
-    if(data && data.tours && data.tours.length > 0) {
-        setTourImg(data.tours[0])
-    }
-}, [data]) 
-
 
   const filterImages = tourInfo.filter(item => item.show)
 

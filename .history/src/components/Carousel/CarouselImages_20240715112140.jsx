@@ -8,8 +8,12 @@ import 'swiper/css/scrollbar';
 import './Carousel.css';
 import Button from '../buttons/Button'
 import { NavLink } from 'react-router-dom';
+
+import { useApi } from '../../contexts/managerPage/api-context';
 const CarouselImages = ({ slides }) => {
   const [imgHover, setImgHover] = useState(false);
+
+  const {data} = useApi();
 
   return (
     <Swiper
