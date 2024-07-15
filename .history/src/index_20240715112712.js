@@ -6,19 +6,16 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ApiProvider } from "./contexts/managerPage/api-context";
 <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
-		<ApiProvider>
-			<BrowserRouter>
-				<App />
-				<ToastContainer></ToastContainer>
-			</BrowserRouter>
-		</ApiProvider>
+		<BrowserRouter>
+			<App />
+      		<ToastContainer></ToastContainer>
+		</BrowserRouter>
 	</React.StrictMode>
 );
 
