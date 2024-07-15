@@ -46,8 +46,8 @@ const CompanyImageSection = ({ companyImages }) => {
 										<ImageItem key={index} image={image} />
 								  )))}
 						{companyImages && companyImages.length > 8 && (
-							<div className="flex items-center justify-center border border-gray-200 rounded-md cursor-pointer group hover:opacity-60">
-								<span className="text-3xl text-gray-300 transition-all group-hover:text-gray-600 group-hover:scale-110">{`+${
+							<div className="flex items-center justify-center border border-gray-200 rounded-md cursor-default group">
+								<span className="text-3xl text-gray-300">{`+${
 									companyImages.length - 8
 								}`}</span>
 							</div>

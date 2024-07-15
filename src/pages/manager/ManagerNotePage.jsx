@@ -1,15 +1,28 @@
+import AddButton from "components/managerPage/buttons/AddButton";
 import SectionTitle from "components/managerPage/SectionTitle";
+import ModalBase from "components/modals/ModalBase";
 import { useApi } from "contexts/managerPage/api-context";
+import { useModal } from "contexts/modal-context";
+import AddNoteModal from "modules/managerPage/modals/note/AddNoteModal";
 import React from "react";
 import { HiMiniXMark } from "react-icons/hi2";
 
 const ManagerNotePage = () => {
 	const { data, loading } = useApi();
+	const { openModal } = useModal();
 	const notes = data?.notes || [];
 
 	return (
 		<div className="w-full">
-			<SectionTitle>ノードマネジャー</SectionTitle>
+			<ModalBase></ModalBase>
+			<div className="flex items-center justify-between mb-2">
+				<SectionTitle className="mb-[0px]">
+					ノードマネジャー
+				</SectionTitle>
+				<AddButton onClick={() => openModal(<AddNoteModal />)}>
+					ノートを追加
+				</AddButton>
+			</div>
 			{loading ? (
 				<Skeleton></Skeleton>
 			) : (
@@ -17,7 +30,7 @@ const ManagerNotePage = () => {
 					{notes.length > 0 &&
 						notes.map((note) => (
 							<div key={note.noteId} className="relative group">
-								<span className="absolute group-hover:visible cursor-pointer grid place-items-center bg-white border border-gray-200 rounded-full invisible shadow-sm -right-1.5 -top-0.5 size-6">
+								<span className="absolute hover:cursor-pointer group-hover:visible cursor-pointer grid place-items-center bg-white border border-gray-200 rounded-full invisible shadow-sm -right-1.5 -top-0.5 size-6">
 									<HiMiniXMark size={20} />
 								</span>
 								<div

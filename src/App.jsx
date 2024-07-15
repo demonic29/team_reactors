@@ -11,6 +11,7 @@ import ManagerAboutPage from "pages/manager/ManagerAboutPage";
 import ManagerTourPage from "pages/manager/ManagerTourPage";
 import PageNotFound from "pages/PageNotFound";
 import ManagerNotePage from "pages/manager/ManagerNotePage";
+import ManagerPracticePage from "pages/manager/ManagerPracticePage";
 
 const App = () => {
 	return (
@@ -37,6 +38,10 @@ const App = () => {
 				<Route
 					path="/manager/notes"
 					element={<ManagerNotePage />}
+				></Route>
+				<Route
+					path="/manager/practice"
+					element={<ManagerPracticePage />}
 				></Route>
 				<Route path="/manager/*" element={<PageNotFound />}></Route>
 			</Route>

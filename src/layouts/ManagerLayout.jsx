@@ -130,6 +130,10 @@ const managerNavs = [
 		name: "Notes",
 		to: "/manager/notes",
 	},
+	{
+		name: "Practice",
+		to: "/manager/practice",
+	},
 ];
 
 export default ManagerLayout;

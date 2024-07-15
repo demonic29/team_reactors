@@ -8,7 +8,7 @@ import React, { useState } from "react";
 const SlideEditModal = ({ slide }) => {
 	const { data } = useApi();
 	const [choosedTour, setChoosedTour] = useState(slide?.tour);
-	console.log(slide);
+
 	return (
 		<div className="flex flex-col h-full">
 			<SectionTitle>スライド編集</SectionTitle>
@@ -56,9 +56,11 @@ const SlideEditModal = ({ slide }) => {
 				<div className="grid grid-cols-2 gap-4">
 					{data?.tours.map((tour) => (
 						<div
-						onClick={() => setChoosedTour(tour?.id)}
+							onClick={() => setChoosedTour(tour?.id)}
+							key={tour.id}
 							className={`flex items-center gap-2 p-1 border-2 border-gray-200 rounded-lg ${
-								choosedTour === tour.id && "border-2 border-primaryColor"
+								choosedTour === tour.id &&
+								"border-2 border-primaryColor"
 							}`}
 						>
 							<div className="w-[120px] aspect-[5/4] rounded-md overflow-hidden shrink-0">
