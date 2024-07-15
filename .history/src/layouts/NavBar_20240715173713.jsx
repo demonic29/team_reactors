@@ -36,7 +36,7 @@ const navs = [
     },
     {
         content: "ノート",
-        to: "/note",
+        to: "/https://note.com/reki_teku0531/",
     },
     {
         content: "ツアー",

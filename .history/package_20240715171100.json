@@ -1,0 +1,64 @@
+{
+	"name": "team_reactors",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"@testing-library/jest-dom": "^5.17.0",
+		"@testing-library/react": "^13.4.0",
+		"@testing-library/user-event": "^13.5.0",
+		"axios": "^1.7.2",
+		"class-variance-authority": "^0.7.0",
+		"clsx": "^2.1.1",
+		"firebase": "^10.12.3",
+		"flowbite": "^2.4.1",
+		"metatags-generator": "^1.1.8",
+		"prop-types": "^15.8.1",
+		"react": "^18.3.1",
+		"react-dnd": "^16.0.1",
+		"react-dnd-html5-backend": "^16.0.1",
+		"react-dom": "^18.3.1",
+		"react-hook-form": "^7.51.3",
+		"react-icons": "^5.2.1",
+		"react-quill": "^2.0.0",
+		"react-router-dom": "^6.24.1",
+		"react-scripts": "5.0.1",
+		"react-toastify": "^10.0.5",
+		"sass": "^1.77.6",
+		"styled-components": "^6.1.11",
+		"sweetalert2": "^11.12.2",
+		"swiper": "^11.1.4",
+		"tailwind-merge": "^2.4.0",
+		"tailwindcss-animate": "^1.0.7",
+		"web-vitals": "^2.1.4",
+		"yup": "^1.4.0"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "npm run generate-meta-tag && react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject",
+		"generate-meta-tag": "node scripts/generateMetaTag.js"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"devDependencies": {
+		"@babel/plugin-proposal-private-property-in-object": "^7.14.5",
+		"tailwindcss": "^3.4.4"
+	}
+}

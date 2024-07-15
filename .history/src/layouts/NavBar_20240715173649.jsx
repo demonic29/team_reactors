@@ -36,7 +36,7 @@ const navs = [
     },
     {
         content: "ノート",
-        to: "/note",
+        to: "/",
     },
     {
         content: "ツアー",

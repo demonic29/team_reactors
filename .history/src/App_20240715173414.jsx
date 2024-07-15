@@ -31,8 +31,8 @@ const App = () => {
                     element={<PrivacyPolicyPage></PrivacyPolicyPage>}
                 ></Route>
             </Route>
-            <Route path="/tourList" element={<TourList></TourList>}></Route>
             <Route path="/login" element={<LoginPage></LoginPage>}></Route>
+            <Route path="tourList" element={<TourList></TourList>}></Routes>
             <Route path="/manager" element={<ManagerLayout></ManagerLayout>}>
                 <Route
                     path="/manager/home"

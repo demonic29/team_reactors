@@ -11,7 +11,6 @@ import AboutPage from "./pages/AboutPage";
 import TourPage from "./pages/TourPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import TravelAgencyAgreementPage from "./pages/TravelAgencyAgreementPage";
-import TourList from "pages/TourList";
 
 const App = () => {
     return (
@@ -31,7 +30,6 @@ const App = () => {
                     element={<PrivacyPolicyPage></PrivacyPolicyPage>}
                 ></Route>
             </Route>
-            <Route path="/tourList" element={<TourList></TourList>}></Route>
             <Route path="/login" element={<LoginPage></LoginPage>}></Route>
             <Route path="/manager" element={<ManagerLayout></ManagerLayout>}>
                 <Route

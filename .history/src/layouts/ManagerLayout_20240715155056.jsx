@@ -2,7 +2,11 @@ import React from "react";
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
+<<<<<<< HEAD
+import "react-quill/dist/quill.snow.css";
+=======
 import 'react-quill/dist/quill.snow.css';
+>>>>>>> feature/tour
 
 const ManagerLayout = () => {
 	const navigate = useNavigate();
@@ -14,14 +18,29 @@ const ManagerLayout = () => {
 	}, [pathname, navigate]);
 
 	const getPageName = () => {
+<<<<<<< HEAD
+		const managerNav = managerNavs.filter(
+			(item) => item.to === pathname
+		)[0];
+		return managerNav?.name;
+	};
+=======
 		const managerNav = managerNavs.filter(item => item.to === pathname)[0]
 		return managerNav?.name
 	}
+>>>>>>> feature/tour
 
 	const logo = require("../assets/rekiteku-logo.png");
 
 	return (
 		<div className="flex h-screen">
+<<<<<<< HEAD
+			{/*navigation  */}
+			<div className="w-[250px] border-r border-r-gray-200">
+				<div className="h-[65px] border-b border-b-gray-200 px-4 flex items-center">
+					<div className="flex items-center gap-2 font-bold text-secondaryColor text-[22px]">
+						<img srcSet={`${logo} 2.2x`} alt="rekiteku-logo" />
+=======
 			<div className="w-[260px] border-r border-r-gray-200">
 				<div className="h-[65px] border-b border-b-gray-200 px-4 flex items-center">
 					<div className="flex items-center gap-2 font-bold text-secondaryColor text-[22px]">
@@ -29,6 +48,7 @@ const ManagerLayout = () => {
 							srcSet={`${logo} 2.2x`}
 							alt="rekiteku-logo"
 						/>
+>>>>>>> feature/tour
 						<span>歴てく</span>
 					</div>
 				</div>
@@ -48,6 +68,10 @@ const ManagerLayout = () => {
 					))}
 				</div>
 			</div>
+<<<<<<< HEAD
+			{/* main container  */}
+=======
+>>>>>>> feature/tour
 			<div className="flex-1">
 				<div className="h-[65px] border-b border-b-gray-200 flex items-center justify-between px-4">
 					<span className="text-2xl font-semibold text-secondaryColor">
@@ -67,7 +91,11 @@ const ManagerLayout = () => {
 						</div>
 					</div>
 				</div>
+<<<<<<< HEAD
+				<div className="flex w-full h-full px-4 pt-4 max-h-[calc(100vh-65px)] overflow-auto">
+=======
 				<div className="px-4 pt-4">
+>>>>>>> feature/tour
 					<Outlet></Outlet>
 				</div>
 			</div>
