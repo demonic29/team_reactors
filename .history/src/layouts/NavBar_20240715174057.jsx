@@ -14,7 +14,7 @@ const NavBar = () => {
                 {navs.map((nav) => (
                     <NavLink
                         key={nav.content}
-                        to={nav.to} target={nav.target ? nav.target : ''}
+                        to={nav.to}
                         className={
                             "text-pink font-semibold text-[18px] hover:text-primaryColor hover:underline hover:underline-offset-2 transition-all"
                         }
@@ -33,23 +33,18 @@ const navs = [
     {
         content: "ホーム",
         to: "/",
-        target: ''
     },
     {
         content: "ノート",
-        to: "https://note.com/reki_teku0531/",
-        target: '_blank'
-        
+        to: "/",
     },
     {
         content: "ツアー",
         to: "/tour",
-        target: ''
     },
     {
         content: "連絡",
         to: "/about",
-        target: ''
     },
 ];
 
