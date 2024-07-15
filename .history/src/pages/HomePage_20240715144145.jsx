@@ -99,7 +99,7 @@ const HomePage = () => {
 					</div>
 
 					<div className="mt-[100px] text-center">
-						<Button>もっとツアーをる</Button>
+						<Button>もっとツアーをみる</Button>
 					</div>
 				</div>
 
