@@ -41,7 +41,7 @@ const AboutPage = () => {
             学部社会科で地理歴史を学び、社会科の教員免許も取得している。
           </p>
           <div className="mt-[80px]">
-            <button className="text-black bg-white px-8 py-4 rounded-md hover:bg-slate-200">
+            <button className="text-black bg-white px-8 py-4 rounded-md transition-all hover:bg-slate-200">
               note ページへ
             </button>
           </div>
@@ -71,9 +71,9 @@ const AboutPage = () => {
         <div>
           <iframe
             className="rounded-lg"
-            src="https://www.google.com/maps/d/embed?mid=1WXqpVV81x3-GEBP2vF4UkctoIPtATAU&ehbc=2E312F"
+            src="https://www.google.com/maps/d/u/1/embed?mid=1nIy4OvAZ4RIMF624Zknzy8ratWlrD8Y&ehbc=2E312F"
             width="640"
-            height="400"
+            height="420"
           ></iframe>
         </div>
       </div>
