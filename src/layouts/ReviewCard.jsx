@@ -5,7 +5,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 
 export default function ReviewCard() {
     const { data } = useApi();
@@ -26,11 +26,10 @@ export default function ReviewCard() {
             >
                 <div className="min-h-full py-[100px]">
                     <Swiper
-                        modules={[Navigation, Pagination]}
+                        modules={[Navigation]}
                         spaceBetween={50}
                         slidesPerView={1}
                         navigation
-                        pagination={{ clickable: true }}
                     >
                         {tourList.feedback &&
                             tourList.feedback.length > 0 &&
