@@ -108,7 +108,7 @@ const TourPage = () => {
                     )}
                 </div>
             )}
-            <Footer/>
+            <Footer></Footer>
         </>
     );
 };

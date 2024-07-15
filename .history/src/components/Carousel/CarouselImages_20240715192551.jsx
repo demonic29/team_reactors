@@ -31,7 +31,7 @@ const CarouselImages = ({ slides }) => {
 			onSwiper={(swiper) => null}
 			className="h-[700px]"
 		>
-			{slides.map((slide, index) => (
+			{/* {slides.map((slide, index) => ( */}
 				<SwiperSlide
 					key={index}
 					className={`relative left-0 top-0 h-[500px] bg-cover bg-center fade-in duration-100 transition-all`}

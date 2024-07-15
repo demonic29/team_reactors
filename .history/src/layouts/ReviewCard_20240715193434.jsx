@@ -37,7 +37,7 @@ export default function ReviewCard() {
                                 <SwiperSlide key={feedback.rate}>
                                     <div className="flex justify-center">
                                         <div className="block w-[800px] h-[350px] my-[20px] bg-white rounded-lg shadow-md">
-                                            <div className="flex gap-[20px] p-[30px] pb-[15px]">
+                                            <div className="flex gap-[20px] justify-start p-[30px] pb-[15px]">
                                                 <div>
                                                     <img
                                                         src={feedback.avatar}

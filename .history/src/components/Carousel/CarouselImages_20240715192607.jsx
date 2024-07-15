@@ -34,7 +34,7 @@ const CarouselImages = ({ slides }) => {
 			{slides.map((slide, index) => (
 				<SwiperSlide
 					key={index}
-					className={`relative left-0 top-0 h-[500px] bg-cover bg-center fade-in duration-100 transition-all`}
+					className={`relative left-0 top-0 h-[500px] duration-100 transition-all`}
 					onMouseEnter={() => setImgHover(true)}
 					onMouseLeave={() => setImgHover(false)}
 					style={{
