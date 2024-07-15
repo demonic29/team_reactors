@@ -3,8 +3,8 @@ import SectionTitle from "components/managerPage/SectionTitle";
 import React, { useState } from "react";
 import QuillEditor from "react-quill";
 
-const VisionModal = ({ vision }) => {
-	const [value, setValue] = useState(vision?.content);
+const HomeAboutModal = ({ homeAbout }) => {
+	const [value, setValue] = useState(homeAbout?.content);
 
 	return (
 		<div className="flex flex-col h-full">
@@ -24,7 +24,7 @@ const VisionModal = ({ vision }) => {
 					</label>
 				</div>
 				<img
-					src={vision?.image}
+					src={homeAbout?.image}
 					alt="company-img"
 					className="object-cover object-center w-full h-full"
 				/>
@@ -41,4 +41,4 @@ const VisionModal = ({ vision }) => {
 	);
 };
 
-export default VisionModal;
+export default HomeAboutModal;
