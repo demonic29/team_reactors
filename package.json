@@ -35,7 +35,8 @@
 		"start": "react-scripts start",
 		"build": "npm run generate-meta-tag && react-scripts build",
 		"test": "react-scripts test",
-		"eject": "react-scripts eject"
+		"eject": "react-scripts eject",
+		"generate-meta-tag": "node scripts/generateMetaTag.js"
 	},
 	"eslintConfig": {
 		"extends": [
