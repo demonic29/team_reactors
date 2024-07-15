@@ -6,8 +6,7 @@ import fb from "../assets/img/Facebook logo.svg";
 import insta from "../assets/img/Instagram logo.svg";
 import x from "../assets/img/X logo.svg";
 import note from "../assets/img/Note Logo.svg";
-import PrivacyPolicy from "../pages/Privacy Policy Page";
-import TravelAgencyAgreement from "../pages/TravelAgencyAgreementPage";
+import { NavLink } from "react-router-dom";
 
 export default function Footer() {
     const { loading, data } = useApi();
@@ -17,8 +16,6 @@ export default function Footer() {
             setFooters(data.footer);
         }
     }, [data]);
-
-    console.log(footers);
 
     return (
         <>
@@ -54,9 +51,6 @@ export default function Footer() {
                                             <ul className="flex gap-x-6 items-center">
                                                 <li>
                                                     <a href={footers.sns.fb}>
-                                                        {console.log(
-                                                            footers.sns.fb
-                                                        )}
                                                         <img
                                                             src={fb}
                                                             alt="facebook"
@@ -119,17 +113,17 @@ export default function Footer() {
                                 </div>
                             </div>
                             {/* プライバシポリシー系 */}
-                            <div className="mt-16 mb-[32px]">
+                            <div className="my-16">
                                 <ul className="flex justify-center gap-x-20 text-white text-xs font-thin">
                                     <li>
-                                        <a href={TravelAgencyAgreement}>
+                                        <NavLink to={"/travelAgencyAgreement"}>
                                             旅行業約款
-                                        </a>
+                                        </NavLink>
                                     </li>
                                     <li>
-                                        <a href={PrivacyPolicy}>
+                                        <NavLink to={"/PrivacyPolicyPage"}>
                                             プライバシーポリシー
-                                        </a>
+                                        </NavLink>
                                     </li>
                                     <li>
                                         国内旅行業務取扱管理者第〇〇〇〇-〇〇〇〇号

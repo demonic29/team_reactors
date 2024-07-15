@@ -1,11 +1,12 @@
 import { useApi } from "../contexts/managerPage/api-context";
 import { useEffect, useState } from "react";
+import { FaStar } from "react-icons/fa";
+import { IconContext } from "react-icons";
 
 export default function Accordion() {
     const { data } = useApi();
     const [tourList, setTourList] = useState([]);
     const [activeId, setActiveId] = useState(null);
-
     useEffect(() => {
         if (data && data.tours && data.tours.length > 0) {
             setTourList(data.tours[0]);
@@ -15,6 +16,28 @@ export default function Accordion() {
 
     const toggleAccordion = (id) => {
         setActiveId(activeId === id ? null : id);
+    };
+
+    const renderStars = (noteId) => {
+        console.log(noteId);
+        const stars = [];
+        for (let i = 0; i < 5; i++) {
+            stars.push(
+                <FaStar
+                    key={i}
+                    color={i < noteId ? "#B94047" : "#B8B8B8"}
+                    size="20px"
+                />
+            );
+        }
+        return (
+            <div className="relative group flex">
+                {stars}
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max bg-[#C55A53] text-white text-xs rounded py-2 px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <p>体力消費率 {noteId}/5</p>
+                </div>
+            </div>
+        );
     };
 
     return (
@@ -46,9 +69,9 @@ export default function Accordion() {
                             >
                                 <path
                                     stroke="currentColor"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
                                     d="M9 5 5 1 1 5"
                                 />
                             </svg>
@@ -80,11 +103,6 @@ export default function Accordion() {
                                 </div>
                                 <div>
                                     {plan.map && (
-                                        // <div
-                                        //     dangerouslySetInnerHTML={{
-                                        //         __html: plan.map,
-                                        //     }}
-                                        // ></div>
                                         <iframe
                                             src={
                                                 plan.map.match(
@@ -125,8 +143,17 @@ export default function Accordion() {
                                                                 }
                                                             </span>
                                                         </p>
-                                                        <div className="pl-[40px]">
-                                                            星
+                                                        <div className="flex pl-[40px]">
+                                                            <IconContext.Provider
+                                                                value={{
+                                                                    color: "#B94047",
+                                                                    size: "20px",
+                                                                }}
+                                                            >
+                                                                {renderStars(
+                                                                    location.lever
+                                                                )}
+                                                            </IconContext.Provider>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -151,8 +178,17 @@ export default function Accordion() {
                                                                 }
                                                             </span>
                                                         </p>
-                                                        <div className="pl-[40px]">
-                                                            星
+                                                        <div className="flex pl-[40px]">
+                                                            <IconContext.Provider
+                                                                value={{
+                                                                    color: "#B94047",
+                                                                    size: "20px",
+                                                                }}
+                                                            >
+                                                                {renderStars(
+                                                                    location.noteId
+                                                                )}
+                                                            </IconContext.Provider>
                                                         </div>
                                                     </div>
                                                 </div>

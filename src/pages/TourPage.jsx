@@ -9,13 +9,15 @@ import { useEffect, useState } from "react";
 const TourPage = () => {
     const { loading, data } = useApi();
     const [tourList, setTourList] = useState([]);
+    const [noteData, setNoteData] = useState([]);
     useEffect(() => {
         if (data && data.tours && data.tours.length > 0) {
             setTourList(data.tours[0]);
+            setNoteData(data.notes);
         }
     }, [data]);
 
-    console.log(tourList);
+    console.log(noteData);
 
     return (
         <>
@@ -73,6 +75,34 @@ const TourPage = () => {
                                 {/* review */}
                                 <ReviewCard />
                                 {/* end review */}
+
+                                {/* note */}
+                                <div>
+                                    <div className="text-center mt-[100px]">
+                                        <h2 className="text-3xl font-bold">
+                                            ノート
+                                        </h2>
+                                    </div>
+
+                                    <div className="flex flex-wrap justify-between items-center mt-5">
+                                        {noteData &&
+                                            noteData.length > 0 &&
+                                            noteData
+                                                .slice(0, 3)
+                                                .map((note, index) => (
+                                                    <div
+                                                        key={index}
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: note.iframe.replace(
+                                                                "<iframe",
+                                                                '<iframe style="border: 0; display: flex; justify-contents : center; max-width: 100%; width: 350px; height: 300px; margin: 0px 0;"'
+                                                            ),
+                                                        }}
+                                                    />
+                                                ))}
+                                    </div>
+                                </div>
+                                {/* end note */}
                             </div>
                         </div>
                     )}
@@ -84,3 +114,69 @@ const TourPage = () => {
 };
 
 export default TourPage;
+
+// {/* <div>
+// <div className="text-center mt-[100px]">
+//     <h2 className="text-3xl font-bold">
+//         ノート
+//     </h2>
+// </div>
+
+// <div className="flex flex-wrap justify-around items-center mt-5">
+//     {/* {noteData &&
+//         noteData.length > 0 &&
+//         noteData.map.match &&
+//         noteData
+//             .slice(0, 3)
+//             .map((note, index) => (
+
+//                 <div
+//                     key={index}
+//                     dangerouslySetInnerHTML={{
+//                         __html: `<iframe class="note-embed"
+//                                     src=${
+//                                         note.map.match(
+//                                             /src="([^"]+)"/
+//                                         )[1]
+//                                     }
+//                                     style="
+//                                         border: 0;
+//                                         display: block;
+//                                         max-width: 99%;
+//                                         width: 500px;
+//                                         padding: 0px;
+//                                         margin: 10px 0px;
+//                                         position: static;
+//                                         visibility: visible;"
+//                                         height="300px"
+//                                     >
+//                                     </iframe>
+//                                     <script async src="https://note.com/scripts/embed.js" charset="utf-8"></script>`,
+//                     }}
+//                 />
+//             ))} */}
+//     {noteData.length > 0 &&
+//         noteData.slice(0, 3).map(
+//             (note, index) =>
+//                 note.map && (
+//                     <div
+//                         key={index}
+//                         dangerouslySetInnerHTML={{
+//                             __html: note,
+//                         }}
+//                         // src={
+//                         //     note.map.match(
+//                         //         /src="([^"]+)"/
+//                         //     )[1]
+//                         // }
+//                         // width="600px"
+//                         // height="700px"
+//                         // className="rounded-[10px]"
+//                         // frameBorder="0"
+//                         // allowFullScreen
+//                         // title={`note${noteData.noteId}`}
+//                     ></div>
+//                 )
+//         )}
+// </div>
+// </div> */}

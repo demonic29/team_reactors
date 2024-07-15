@@ -9,6 +9,8 @@ import PageNotFound from "./pages/PageNotFound";
 import MainLayout from "./layouts/MainLayout";
 import AboutPage from "./pages/AboutPage";
 import TourPage from "./pages/TourPage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import TravelAgencyAgreementPage from "./pages/TravelAgencyAgreementPage";
 
 const App = () => {
     return (
@@ -17,6 +19,16 @@ const App = () => {
                 <Route path="/" element={<HomePage></HomePage>} default></Route>
                 <Route path="/about" element={<AboutPage></AboutPage>}></Route>
                 <Route path="/tour" element={<TourPage></TourPage>}></Route>
+                <Route
+                    path="/travelAgencyAgreement"
+                    element={
+                        <TravelAgencyAgreementPage></TravelAgencyAgreementPage>
+                    }
+                ></Route>
+                <Route
+                    path="/privacyPolicy"
+                    element={<PrivacyPolicyPage></PrivacyPolicyPage>}
+                ></Route>
             </Route>
             <Route path="/login" element={<LoginPage></LoginPage>}></Route>
             <Route path="/manager" element={<ManagerLayout></ManagerLayout>}>
