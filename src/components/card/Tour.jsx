@@ -6,7 +6,7 @@ const Card = ({ imgSrc, title, desc, location, link }) => {
   return (
     <div className="bg-white mt-[100px]">
       <a href={link}>
-        <img className="rounded-lg" src={imgSrc} alt={title} />
+        <img className="rounded-lg h-[300px] w-full object-cover" src={imgSrc} alt={title} />
       </a>
       <div className="mt-5">
         <a href={link}>
