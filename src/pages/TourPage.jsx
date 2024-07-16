@@ -60,7 +60,7 @@ const TourPage = () => {
                                                 ¥{tourList.price}
                                             </p>
                                         </div>
-                                        <p className="ml-[85px] text-xs text-[#666666] ">
+                                        <p className="ml-[85px] text-lg text-[#666666] ">
                                             ※食事代、宿泊費、交通費は別途お客様ご本人負担になります。
                                         </p>
                                     </div>
@@ -108,7 +108,7 @@ const TourPage = () => {
                     )}
                 </div>
             )}
-            <Footer/>
+            <Footer></Footer>
         </>
     );
 };
