@@ -1,4 +1,3 @@
-import Button from "components/buttons/Button";
 import { useModal } from "contexts/modal-context";
 import React from "react";
 import { createPortal } from "react-dom";
@@ -44,13 +43,8 @@ const ModalBase = () => {
 					>
 						<HiXMark size={30} />
 					</span>
-					<div className="flex-1 mb-4 overflow-y-auto">
+					<div className="flex-1 flex flex-col overflow-y-auto">
 						{modalContent}
-					</div>
-					<div className="flex justify-end">
-						<Button onClick={closeModal} className="py-[6px]">
-							保存
-						</Button>
 					</div>
 				</div>
 				{/* ModalContainer  */}

@@ -4,7 +4,7 @@ import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -23,7 +23,17 @@ root.render(
 					<DndProvider backend={HTML5Backend}>
 						<BrowserRouter>
 							<App /> {/* App Component */}
-							<ToastContainer />
+							<ToastContainer
+								position="top-center"
+								autoClose={3000}
+								hideProgressBar={true}
+								newestOnTop={true}
+								closeOnClick
+								rtl={false}
+								pauseOnHover={false}
+								theme="light"
+								transition={Slide}
+							/>
 						</BrowserRouter>
 					</DndProvider>
 				</ModalProvider>

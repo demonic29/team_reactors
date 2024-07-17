@@ -1,21 +1,31 @@
 import AddButton from "components/managerPage/buttons/AddButton";
+import NoteManagerCard from "components/managerPage/cards/NoteManagerCard";
 import SectionTitle from "components/managerPage/SectionTitle";
 import ModalBase from "components/modals/ModalBase";
 import { useApi } from "contexts/managerPage/api-context";
 import { useModal } from "contexts/modal-context";
 import AddNoteModal from "modules/managerPage/modals/note/AddNoteModal";
 import React from "react";
-import { HiMiniXMark } from "react-icons/hi2";
 
 const ManagerNotePage = () => {
 	const { data, loading } = useApi();
-	const { openModal } = useModal();
 	const notes = data?.notes || [];
 
 	return (
 		<div className="w-full">
-			<ModalBase></ModalBase>
+			<HeaderBar />
+			<NoteList loading={loading} notes={notes} />
+		</div>
+	);
+};
+
+function HeaderBar() {
+	const { openModal } = useModal();
+
+	return (
+		<>
 			<div className="flex items-center justify-between mb-2">
+				<ModalBase />
 				<SectionTitle className="mb-[0px]">
 					ノードマネジャー
 				</SectionTitle>
@@ -23,33 +33,33 @@ const ManagerNotePage = () => {
 					ノートを追加
 				</AddButton>
 			</div>
+		</>
+	);
+}
+
+function NoteList({ loading, notes }) {
+	return (
+		<>
 			{loading ? (
 				<Skeleton></Skeleton>
 			) : (
-				<div className="grid grid-cols-4 gap-2">
+				<div className="grid grid-cols-4 gap-2 xl:grid-cols-3">
 					{notes.length > 0 &&
 						notes.map((note) => (
-							<div key={note.noteId} className="relative group">
-								<span className="absolute hover:cursor-pointer group-hover:visible cursor-pointer grid place-items-center bg-white border border-gray-200 rounded-full invisible shadow-sm -right-1.5 -top-0.5 size-6">
-									<HiMiniXMark size={20} />
-								</span>
-								<div
-									className="h-[195px]"
-									dangerouslySetInnerHTML={{
-										__html: `${note.iframe}`,
-									}}
-								></div>
-							</div>
+							<NoteManagerCard
+								key={note.noteId}
+								note={note}
+							></NoteManagerCard>
 						))}
 				</div>
 			)}
-		</div>
+		</>
 	);
-};
+}
 
 const Skeleton = () => {
 	return (
-		<div className="grid grid-cols-4 gap-2">
+		<div className="grid grid-cols-4 gap-2 xl:grid-cols-3">
 			<div className="h-[196px] w-full border border-gray-200 p-2 rounded-lg">
 				<div className="flex h-full gap-3">
 					<div className="flex flex-col justify-between flex-1 py-2">
