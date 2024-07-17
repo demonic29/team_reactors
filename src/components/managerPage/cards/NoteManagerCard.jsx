@@ -1,13 +1,11 @@
-import { useApi } from "contexts/managerPage/api-context";
+import { db } from "firebase-config";
+import { deleteDoc, doc } from "firebase/firestore";
 import React from "react";
 import { HiMiniXMark } from "react-icons/hi2";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-import { API } from "utils/end_points";
 
-const NoteManagerCard = ({ note: { noteId, iframe } }) => {
-	const { data, setData } = useApi();
-
+const NoteManagerCard = ({ note: { noteId, content } }) => {
 	const handleDeleteNote = async (noteId) => {
 		Swal.fire({
 			title: "ノートを削除しますか？",
@@ -26,17 +24,12 @@ const NoteManagerCard = ({ note: { noteId, iframe } }) => {
     // Datebase handle function
 		async function deleteNote(noteId) {
 			try {
-				toast.warn("データベースから削除中...");
-				setData({
-					...data,
-					notes: data?.notes.filter((note) => note.noteId !== noteId),
-				});
-				await fetch(
-					`${API.GET_DATA}?action=getNote&deleteId=${noteId}`
-				);
+				const docRef = doc(db, 'notes', noteId)
+				await deleteDoc(docRef)
 				toast.success("削除済み");
 			} catch (error) {
 				console.log(error);
+				toast.error("ノートの削除に失敗しました");
 			}
 		}
 	};
@@ -52,7 +45,7 @@ const NoteManagerCard = ({ note: { noteId, iframe } }) => {
 			<div
 				className="h-[195px]"
 				dangerouslySetInnerHTML={{
-					__html: `${iframe}`,
+					__html: `${content}`,
 				}}
 			></div>
 		</div>

@@ -2,19 +2,32 @@ import AddButton from "components/managerPage/buttons/AddButton";
 import NoteManagerCard from "components/managerPage/cards/NoteManagerCard";
 import SectionTitle from "components/managerPage/SectionTitle";
 import ModalBase from "components/modals/ModalBase";
-import { useApi } from "contexts/managerPage/api-context";
 import { useModal } from "contexts/modal-context";
+import { db } from "firebase-config";
+import { collection, onSnapshot } from "firebase/firestore";
 import AddNoteModal from "modules/managerPage/modals/note/AddNoteModal";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const ManagerNotePage = () => {
-	const { data, loading } = useApi();
-	const notes = data?.notes || [];
+	const [notes, setNotes] = useState([]);
+
+	useEffect(() => {
+		const colRef = collection(db, "notes");
+		const unsubscribe = onSnapshot(colRef, (querySnapshot) => {
+			const notes = [];
+			querySnapshot.forEach((doc) => {
+				notes.push(doc.data());
+			});
+			console.log("Current cities in CA: ", notes);
+			setNotes(notes);
+		});
+		return () => unsubscribe();
+	}, []);
 
 	return (
 		<div className="w-full">
 			<HeaderBar />
-			<NoteList loading={loading} notes={notes} />
+			<NoteList notes={notes} />
 		</div>
 	);
 };

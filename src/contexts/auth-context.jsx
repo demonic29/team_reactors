@@ -19,7 +19,7 @@ const AuthProvider = ({ children, ...props }) => {
 		user,setUser
 	};
 	return (
-		<AuthContext.Provider value={values}>{children}</AuthContext.Provider>
+		<AuthContext.Provider value={values} {...props}>{children}</AuthContext.Provider>
 	);
 };
 
