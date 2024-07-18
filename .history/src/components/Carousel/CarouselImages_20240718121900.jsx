@@ -8,7 +8,6 @@ import 'swiper/css/scrollbar';
 import './Carousel.css';
 import Button from '../buttons/Button'
 import { NavLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 const CarouselImages = ({ slides }) => {
 	const [imgHover, setImgHover] = useState(false);

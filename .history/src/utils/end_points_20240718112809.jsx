@@ -1,6 +1,6 @@
 // Google App Script API
 export const API = {
-    GET_DATA: "https://script.google.com/macros/s/AKfycbyWnvO4knlOh5e1yJzgL2ZFSd8fWpKegnIGBIgmI-5xOVCD_-GTmS9XSwiesWFPV6jw/exec"
+    GET_DATA: "https://script.google.com/macros/s/AKfycbzOSIFIbV-Ew0bpoGnmsZoQhl4txvxSkZc6ekMywDUvIJ5929eM7GbCXnTZVdtenDXx/exec"
 };
 
 /**

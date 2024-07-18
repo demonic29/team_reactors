@@ -11,6 +11,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { ModalProvider } from "./contexts/modal-context";
 import { ApiProvider } from "contexts/managerPage/api-context";
 import { AuthProvider } from "pages/context/AuthContext";
+import {contentser}
 
 <script src="../path/to/flowbite/dist/flowbite.min.js"></script>;
 
@@ -36,5 +37,3 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-
-
