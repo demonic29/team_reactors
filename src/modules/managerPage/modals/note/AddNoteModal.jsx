@@ -4,14 +4,10 @@ import SectionTitle from "components/managerPage/SectionTitle";
 import ModalFooter from "components/modals/ModalFooter";
 import { useModal } from "contexts/modal-context";
 import { db } from "firebase-config";
-import {
-	addDoc,
-	collection,
-	doc,
-	updateDoc,
-} from "firebase/firestore";
+import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import React, { useRef, useState } from "react";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 import { getTimestampInSeconds } from "utils/functions";
 
 const AddNoteModal = () => {
@@ -20,12 +16,23 @@ const AddNoteModal = () => {
 	const { closeModal } = useModal();
 
 	const handleReview = () => {
+		if (!inputRef.current.value) {
+			Swal.fire({
+				text: "データを入力してください！",
+				icon: "warning",
+				confirmButtonColor: "#3085d6",
+			});
+		}
 		setNoteFrame(inputRef.current.value);
 	};
 
 	const handleAddNote = async () => {
 		if (!inputRef.current.value) {
-			alert("ノートを入力してください");
+			Swal.fire({
+				text: "データを入力してください！",
+				icon: "warning",
+				confirmButtonColor: "#3085d6",
+			});
 			return;
 		}
 		try {

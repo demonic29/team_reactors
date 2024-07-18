@@ -19,11 +19,14 @@ import Swal from "sweetalert2";
 const HomeAboutEditModal = ({ homeAbout }) => {
 	const [value, setValue] = useState(homeAbout?.content);
 	const [file, setFile] = useState();
-	const [filePreview, setFilePreview] = useState(homeAbout?.image?.downloadURL);
+	const [filePreview, setFilePreview] = useState(
+		homeAbout?.image?.downloadURL
+	);
 	const inputFileRef = useRef();
 	const { closeModal } = useModal();
 	const {
-		formState: { isSubmitting }, handleSubmit
+		formState: { isSubmitting },
+		handleSubmit,
 	} = useForm({
 		defaultValues: {
 			content: "",
@@ -52,12 +55,7 @@ const HomeAboutEditModal = ({ homeAbout }) => {
 		if (filePreview === homeAbout?.image?.downloadURL) {
 			// if image no changes
 			await updateDoc(doc(db, "general", "pageData"), {
-				"about.homeAbout": {
-					content: value,
-					image: {
-						name: file?.name,
-					},
-				},
+				"about.homeAbout.content": value,
 			});
 			closeModal();
 			toast.success("更新成功");
@@ -65,7 +63,10 @@ const HomeAboutEditModal = ({ homeAbout }) => {
 		} else {
 			// if image changed
 			try {
-				const desertRef = ref(storage, `images/${homeAbout?.image?.name}`);
+				const desertRef = ref(
+					storage,
+					`images/${homeAbout?.image?.name}`
+				);
 				await deleteObject(desertRef);
 				const downloadURL = await uploadFile();
 				if (!downloadURL) {

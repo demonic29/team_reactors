@@ -30,7 +30,6 @@ root.render(
 									autoClose={3000}
 									hideProgressBar={true}
 									newestOnTop={true}
-									closeOnClick
 									rtl={false}
 									pauseOnHover={false}
 									theme="light"
