@@ -68,6 +68,7 @@ const TourPage = () => {
                                 {/* end about the fee */}
                                 {/* Accordion */}
                                 <Accordion />
+                                <Accordion />
                                 {/* end Accordion */}
                                 {/* gallery */}
                                 <Gallery />
