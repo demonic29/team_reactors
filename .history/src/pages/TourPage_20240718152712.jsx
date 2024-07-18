@@ -5,22 +5,19 @@ import ReviewCard from "../layouts/ReviewCard";
 import Footer from "../layouts/Footer";
 import { useApi } from "../contexts/managerPage/api-context";
 import { useEffect, useState } from "react";
-// import note from '../../src/components/card/note.josn'
 import Button from "components/buttons/Button";
-
 const TourPage = () => {
     const { loading, data } = useApi();
     const [tourList, setTourList] = useState([]);
-    const [noteData, setNoteData] = useState([
-        {"link" : "https://note.com/embed/notes/n6b12ce0e47ac"},
-        {"link" : "https://note.com/embed/notes/n05552824c0b4"}
-    ]);
+    const [noteData, setNoteData] = useState([]);
     useEffect(() => {
         if (data && data.tours && data.tours.length > 0) {
             setTourList(data.tours[0]);
-            // setNoteData(data.notes);
+            setNoteData(data.notes);
         }
     }, [data]);
+
+    console.log(noteData);
 
     return (
         <>
@@ -113,7 +110,7 @@ const TourPage = () => {
             <div className='text-center'>
               <Button>ノートのページへ</Button>
             </div>
-          </div>
+        </div>
                                 {/* end note */}
                             </div>
                         </div>

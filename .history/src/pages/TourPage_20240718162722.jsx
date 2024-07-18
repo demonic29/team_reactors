@@ -5,7 +5,7 @@ import ReviewCard from "../layouts/ReviewCard";
 import Footer from "../layouts/Footer";
 import { useApi } from "../contexts/managerPage/api-context";
 import { useEffect, useState } from "react";
-// import note from '../../src/components/card/note.josn'
+import note from '../../src/components/card/note.josn'
 import Button from "components/buttons/Button";
 
 const TourPage = () => {

@@ -107,40 +107,7 @@ const HomePage = () => {
         </div>
 
         {/* note */}
-          <div>
-            <div className="text-center mt-[100px]">
-              <h2 className="text-3xl font-bold">ノート</h2>
-            </div>
-
-            <div className='flex mt-5'>
-              {noteData.map((item, index) => (
-                <div 
-                  key={index}
-                  dangerouslySetInnerHTML={{ 
-                    __html: 
-                      `<iframe class="note-embed" 
-                        src=${item.link} 
-                        style="
-                          border: 0; 
-                          display: block; 
-                          max-width: 99%; 
-                          width: 500px; 
-                          padding: 0px; 
-                          margin: 10px 0px; 
-                          position: static; 
-                          visibility: visible;" 
-                          height="300px"
-                        >
-                      </iframe>
-                      <script async src="https://note.com/scripts/embed.js" charset="utf-8"></script>`
-                  }} 
-                />
-              ))}
-            </div>
-            <div className='text-center'>
-              <Button>ノートのページへ</Button>
-            </div>
-          </div>
+          
       </div>
 
       <Footer />

@@ -140,7 +140,7 @@ const HomePage = () => {
             <div className='text-center'>
               <Button>ノートのページへ</Button>
             </div>
-          </div>
+        </div>
       </div>
 
       <Footer />
