@@ -11,7 +11,7 @@ const ManagerHomePage = () => {
 	return (
 		<div className="flex-1">
 			<SliderSection/>
-			{/* <AboutSection homeAbout={data?.about?.homePage} /> */}
+			<AboutSection />
 			<RecommendTourSection></RecommendTourSection>
 		</div>
 	);

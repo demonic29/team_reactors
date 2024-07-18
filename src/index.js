@@ -11,6 +11,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { ModalProvider } from "./contexts/modal-context";
 import { ApiProvider } from "contexts/managerPage/api-context";
 import { AuthProvider } from "contexts/auth-context";
+import { DataProvider } from "contexts/managerPage/data-context";
 
 <script src="../path/to/flowbite/dist/flowbite.min.js"></script>;
 
@@ -18,26 +19,28 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
 		<AuthProvider>
-			<ApiProvider>
-				<ModalProvider>
-					<DndProvider backend={HTML5Backend}>
-						<BrowserRouter>
-							<App /> {/* App Component */}
-							<ToastContainer
-								position="top-center"
-								autoClose={3000}
-								hideProgressBar={true}
-								newestOnTop={true}
-								closeOnClick
-								rtl={false}
-								pauseOnHover={false}
-								theme="light"
-								transition={Slide}
-							/>
-						</BrowserRouter>
-					</DndProvider>
-				</ModalProvider>
-			</ApiProvider>
+			<DataProvider>
+				<ApiProvider>
+					<ModalProvider>
+						<DndProvider backend={HTML5Backend}>
+							<BrowserRouter>
+								<App /> {/* App Component */}
+								<ToastContainer
+									position="top-center"
+									autoClose={3000}
+									hideProgressBar={true}
+									newestOnTop={true}
+									closeOnClick
+									rtl={false}
+									pauseOnHover={false}
+									theme="light"
+									transition={Slide}
+								/>
+							</BrowserRouter>
+						</DndProvider>
+					</ModalProvider>
+				</ApiProvider>
+			</DataProvider>
 		</AuthProvider>
 	</React.StrictMode>
 );

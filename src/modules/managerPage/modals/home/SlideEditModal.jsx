@@ -15,7 +15,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-import { getTourList } from "utils/managerPage/getTourList";
+import { getTourList } from "utils/managerPage/firebase-getData";
 
 const SlideEditModal = ({ item }) => {
 	const [file, setFile] = useState();

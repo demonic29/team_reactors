@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { getTimestampInSeconds } from "utils/functions";
-import { getTourList } from "utils/managerPage/getTourList";
+import { getTourList } from "utils/managerPage/firebase-getData";
 
 const SlideAddModal = () => {
 	const [file, setFile] = useState();
