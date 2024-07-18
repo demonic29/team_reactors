@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {
   return (
-    <div>
+    <div className="font-kiwiMaru text-[#333333]">
       <div className="">
         <NavBar></NavBar>
       </div>
