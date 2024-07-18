@@ -2,50 +2,63 @@ import React, { useEffect, useState } from "react";
 import SectionTitle from "../../../../components/managerPage/SectionTitle";
 import EditButton from "../../../../components/managerPage/buttons/AddButton";
 import SliderManageCard from "../../../../components/managerPage/cards/SliderManageCard";
-import { useApi } from "contexts/managerPage/api-context";
 import { useModal } from "contexts/modal-context";
 import SlideAddModal from "modules/managerPage/modals/home/SlideAddModal";
+import ModalBase from "components/modals/ModalBase";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "firebase-config";
+import { GoPlus } from "react-icons/go";
 
-const SliderSection = ({ processedOrder }) => {
-	const [sortedSlide, setSortedSlide] = useState([]);
-	const {openModal} = useModal()
-	const { loading } = useApi();
+const SliderSection = () => {
+	const [slides, setSlides] = useState([]);
+	const { openModal } = useModal();
 
 	useEffect(() => {
-		setSortedSlide(processedOrder);
-	}, [processedOrder]);
+		const colRef = collection(db, "slides");
+		const unsub = onSnapshot(colRef, (snap) => {
+			const slides = [];
+			snap.forEach((doc) => {
+				slides.push(doc.data());
+			});
+			setSlides(slides);
+		});
+		return () => unsub();
+	}, []);
 
 	return (
 		<div className="mb-10">
-			<div className="flex justify-between mb-3 gap-x-4">
-				<SectionTitle className={"mb-[0px]"}>スライダー</SectionTitle>
-				<EditButton onClick={() => openModal(<SlideAddModal />)}>編集</EditButton>
-			</div>
-			{loading ? (
-				<Skeleton></Skeleton>
-			) : (
-				<div className="grid grid-cols-2 gap-4">
-					{sortedSlide.length > 0 && sortedSlide.map(slide => (
+			<SliderHeader />
+			<div className="grid grid-cols-2 gap-4">
+				{slides &&
+					slides.length > 0 &&
+					slides.map((slide) => (
 						<SliderManageCard key={slide.slideId} item={slide} />
 					))}
+				<div
+					onClick={() => openModal(<SlideAddModal />)}
+					className="border-gray-200 cursor-pointer group border-dashed border-[1.5px] justify-center p-2 rounded-lg flex gap-4 items-center w-full h-full"
+				>
+					<span className="w-[186px] aspect-video flex items-center group-hover:text-gray-800 group-hover:scale-105 transition-all justify-center text-3xl text-gray-400">
+						<GoPlus
+							size={40}
+							className="text-gray-300 transition-all group-hover:text-gray-400 group-hover:scale-105"
+						/>
+					</span>
 				</div>
-			)}
+			</div>
 		</div>
 	);
 };
 
-function Skeleton() {
+function SliderHeader() {
+	const { openModal } = useModal();
 	return (
-		<div className="mb-10">
-			<div>
-				<div className="border-gray-200 w-full border-[1px] mb-4 p-2 rounded-lg flex gap-4 items-center">
-					<div className="w-[120px] skeleton aspect-video overflow-hidden rounded-md"></div>
-					<div className="flex-1 mr-20">
-						<div className={"mb-2 h-6 skeleton w-2/3"}></div>
-						<div className="w-1/2 h-4 line-clamp-1 skeleton"></div>
-					</div>
-				</div>
-			</div>
+		<div className="flex justify-between mb-3 gap-x-4">
+			<ModalBase></ModalBase>
+			<SectionTitle className={"mb-[0px]"}>スライダー</SectionTitle>
+			<EditButton onClick={() => openModal(<SlideAddModal />)}>
+				編集
+			</EditButton>
 		</div>
 	);
 }

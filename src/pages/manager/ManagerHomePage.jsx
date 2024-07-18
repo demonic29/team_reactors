@@ -7,19 +7,11 @@ import React from "react";
 import "react-quill/dist/quill.snow.css";
 
 const ManagerHomePage = () => {
-	const { data } = useApi();
-
-	const slideOrder = data?.general?.sliderOrder || [];
-	const slides = data?.slides || [];
-	const processedOrder = slideOrder.map((id) =>
-		slides.find((s) => s.slideId === id)
-	);
 
 	return (
 		<div className="flex-1">
-			<ModalBase />
-			<SliderSection processedOrder={processedOrder} />
-			<AboutSection homeAbout={data?.about?.homePage} />
+			<SliderSection/>
+			{/* <AboutSection homeAbout={data?.about?.homePage} /> */}
 			<RecommendTourSection></RecommendTourSection>
 		</div>
 	);

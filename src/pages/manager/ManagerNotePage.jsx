@@ -13,26 +13,26 @@ const ManagerNotePage = () => {
 
 	useEffect(() => {
 		const colRef = collection(db, "notes");
-		const unsubscribe = onSnapshot(colRef, (querySnapshot) => {
+		const unsub = onSnapshot(colRef, (snap) => {
 			const notes = [];
-			querySnapshot.forEach((doc) => {
+			snap.forEach((doc) => {
 				notes.push(doc.data());
 			});
 			console.log("Current cities in CA: ", notes);
 			setNotes(notes);
 		});
-		return () => unsubscribe();
+		return () => unsub();
 	}, []);
 
 	return (
 		<div className="w-full">
-			<HeaderBar />
+			<NoteHeader />
 			<NoteList notes={notes} />
 		</div>
 	);
 };
 
-function HeaderBar() {
+function NoteHeader() {
 	const { openModal } = useModal();
 
 	return (

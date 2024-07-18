@@ -13,7 +13,7 @@ const ModalInput = ({
 				type={type}
 				placeholder={placeholder}
 				defaultValue={defaultValue}
-				className={`w-2/3 ml-1 border border-gray-300 rounded-md ${className}`}
+				className={` ${className}`}
 				{...props}
 			/>
 		</div>
