@@ -13,16 +13,16 @@ const ManagerAboutPage = () => {
 			{/* Col 1  */}
 			<div>
 				<BannerSection />
-				{/* <AccessSection access={about?.access} /> */}
+				<AccessSection />
 			</div>
 			{/* Col 2  */}
 			<div>
-				{/* <CompanySection company={about?.company} /> */}
-				{/* <CompanyImageSection companyImages={about?.companyImages} /> */}
+				<CompanySection />
+				<CompanyImageSection />
 			</div>
 			{/* Col 3  */}
 			<div>
-				{/* <VisionSection vision={about?.vision} /> */}
+				<VisionSection />
 			</div>
 		</div>
 	);

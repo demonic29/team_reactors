@@ -30,7 +30,7 @@ const BannerSection = () => {
 					setFilePreview(docSnap.data().about.banner.downloadURL);
 					setLoading(false);
 				} else {
-					toast.error("バナーを見つけられません");
+					toast.error("データを見つけられません");
 					setLoading(false);
 				}
 			} catch (error) {

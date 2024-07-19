@@ -37,7 +37,7 @@ const SliderManageCard = ({ drag, item }) => {
 			const desertRef = ref(storage, `images/${name}`);
 			await deleteDoc(doc(db, "slides", slideId));
 			await deleteObject(desertRef)
-			toast.success("スライドを削除しました");
+			toast.success("スライドが削除されました");
 		} catch (error) {
 			console.log(error);
 			toast.error("スライドの削除に失敗しました");

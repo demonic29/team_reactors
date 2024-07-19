@@ -1,42 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, {  } from "react";
 import SectionTitle from "components/managerPage/SectionTitle";
 import Button from "components/buttons/Button";
-import { useApi } from "contexts/managerPage/api-context";
 import { useModal } from "contexts/modal-context";
-import { getGeneral } from "utils/managerPage/firebase-getData";
 import HomeAboutEditModal from "modules/managerPage/modals/home/HomeAboutEditModal";
-import { doc, updateDoc } from "firebase/firestore";
-import { db } from "firebase-config";
-import { toast } from "react-toastify";
 import { useData } from "contexts/managerPage/data-context";
 
 const AboutSection = () => {
-	const { loading } = useApi();
 	const { openModal } = useModal();
-	const {data} = useData()
+	const {data, loading} = useData()
 
 	const homeAbout = data?.about?.homeAbout || {}
-
-	
-
-	const AddData = async () => {
-		try {
-			const data = {
-				homeAbout: {
-					image: "https://media.themoviedb.org/t/p/w500/zI30FzyetpAENTcADmswChoKZlz.jpg",
-					content:
-						"ブブラウザで実行され、ユーザーインターフェースを動的に操作するために使われます。HTMLやCSSと共に、インタラクティブなウェブページを作成するための重要な技術です。また、Node.jsを使えばサーバーサイドでも実行可能です。",
-				},
-				
-			};
-			const docRef = doc(db, "general", "pageData");
-			await updateDoc(docRef, { about: data });
-			toast.success("完成");
-		} catch (error) {
-			console.log(error);
-			toast.error("エラーが発生しました！");
-		}
-	};
 
 	return (
 		<div className="mb-10">

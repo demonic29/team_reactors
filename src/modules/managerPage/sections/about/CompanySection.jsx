@@ -1,15 +1,39 @@
 import EditButton from "components/managerPage/buttons/EditButton";
 import SectionTitle from "components/managerPage/SectionTitle";
 import ModalBase from "components/modals/ModalBase";
-import { useApi } from "contexts/managerPage/api-context";
 import { useModal } from "contexts/modal-context";
+import { db } from "firebase-config";
+import { doc, getDoc } from "firebase/firestore";
 import CompanyModal from "modules/managerPage/modals/about/CompanyModal";
 import { SectionContainer, SectionImage } from "pages/manager/ManagerAboutPage";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
-const CompanySection = ({ company }) => {
-	const { loading } = useApi();
+const CompanySection = () => {
 	const { openModal } = useModal();
+	const [loading, setLoading] = useState(false);
+	const [company, setCompany] = useState({});
+
+	useEffect(() => {
+		async function getCompany() {
+			try {
+				setLoading(true);
+				const docRef = doc(db, "general", "pageData");
+				const docSnap = await getDoc(docRef);
+				if (docSnap.exists()) {
+					setCompany(docSnap.data().about.company);
+					setLoading(false);
+				} else {
+					toast.error("バナーを見つけられません");
+					setLoading(false);
+				}
+			} catch (error) {
+				toast.error("エラーが発生しました");
+				setLoading(false);
+			}
+		}
+		getCompany();
+	}, []);
 
 	return (
 		<>
@@ -23,12 +47,14 @@ const CompanySection = ({ company }) => {
 							会社概要
 						</SectionTitle>
 						<EditButton
-							onClick={() => openModal(<CompanyModal company={company} />)}
+							onClick={() =>
+								openModal(<CompanyModal company={company} />)
+							}
 						></EditButton>
 					</div>
 					<div>
 						<SectionImage
-							src={company?.image}
+							src={company?.image?.downloadURL}
 							alt="about-company-img"
 						/>
 						<div className="mt-4 text-lg">{company?.content}</div>

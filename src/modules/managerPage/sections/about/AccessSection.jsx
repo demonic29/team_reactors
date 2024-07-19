@@ -1,14 +1,38 @@
 import EditButton from "components/managerPage/buttons/EditButton";
 import SectionTitle from "components/managerPage/SectionTitle";
-import { useApi } from "contexts/managerPage/api-context";
 import { useModal } from "contexts/modal-context";
+import { db } from "firebase-config";
+import { doc, getDoc } from "firebase/firestore";
 import AccessModal from "modules/managerPage/modals/about/AccessModal";
 import { SectionContainer } from "pages/manager/ManagerAboutPage";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
-const AccessSection = ({ access }) => {
-	const { loading } = useApi();
-	const {openModal} = useModal()
+const AccessSection = () => {
+	const { openModal } = useModal();
+	const [loading, setLoading] = useState(false);
+	const [access, setAccess] = useState({});
+
+	useEffect(() => {
+		async function getAccess() {
+			try {
+				setLoading(true);
+				const docRef = doc(db, "general", "pageData");
+				const docSnap = await getDoc(docRef);
+				if (docSnap.exists()) {
+					setAccess(docSnap.data().about.access);
+					setLoading(false);
+				} else {
+					toast.error("データを見つけられません");
+					setLoading(false);
+				}
+			} catch (error) {
+				toast.error("エラーが発生しました");
+				setLoading(false);
+			}
+		}
+		getAccess();
+	}, []);
 
 	return (
 		<>

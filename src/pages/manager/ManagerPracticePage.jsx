@@ -1,24 +1,128 @@
-import React, {  } from "react";
+import Button from "components/buttons/Button";
+import { db } from "firebase-config";
+import { collection, doc, setDoc, updateDoc } from "firebase/firestore";
+import React from "react";
+import { toast } from "react-toastify";
 
 const ManagerPracticePage = () => {
-	return <div>
-		
-	</div>;
+	const data = {
+		homeAbout: {
+			image: {
+				name: "7e2465be70c242661b66806f5baba862.jpg",
+				downloadURL:
+					"https://firebasestorage.googleapis.com/v0/b/rekiteku-2024.appspot.com/o/images%2F7e2465be70c242661b66806f5baba862.jpg?alt=media&token=22635500-288c-414f-99aa-1d4922b8ebee",
+			},
+			content:
+				"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima quaerat voluptatem ipsa perferendis! Eos nobis dolorem deleniti et. Dolorum, quis.",
+		},
+		banner: {
+			name: "img10.webp",
+			downloadURL:
+				"https://firebasestorage.googleapis.com/v0/b/rekiteku-2024.appspot.com/o/images%2Fimg10.webp?alt=media&token=93fa06fb-84ca-4838-b194-baab40c04e1f",
+		},
+		company: {
+			image: {
+				downloadURL:
+					"https://i.pinimg.com/736x/3f/ac/71/3fac710478f89d1a54d27b58c8a23d9f.jpg",
+				name: "company_img.jpg",
+			},
+			content:
+				"ブブラウザで実行され、ユーザーインターフェースを動的に操作するために使われます。HTMLやCSSと共に、インタラクティブなウェブページを作成するための重要な技術です。また、Node.jsを使えばサーバーサイドでも実行可能です。",
+		},
+		vision: {
+			image: {
+				downloadURL:
+					"https://i.pinimg.com/564x/04/df/58/04df58ce2a1767a2c80c3fdf37dcdbda.jpg",
+				name: "vision_img.jpg",
+			},
+			content:
+				"歴史は人が生きていくための教科書。栄養剤です。いにしえの人物それぞれが歩んだ足跡を訪ね、遺構や文物を目にすると、生き方の助けになる「発見」があります。また、地域の過去~現在にわたる史跡を巡り、通史を知れば、その地域の「個性」が見えてきます。 有名、無名の史跡をてくてくと歩き、「今後の人生の糧」や「地域のより深い魅力」を見つけませんか。",
+		},
+		access: {
+			map: '<iframe src="https://www.google.com/maps/d/u/0/embed?mid=10QqdXqgN2QDRJgB2eTwiTQp8JT_759c&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>',
+			distance: [
+				"博多駅から３分徒歩",
+				"大阪梅田から６分徒歩",
+				"大阪梅田から６分徒歩",
+			],
+			desc: "歴史は人が生きていくための教科書。栄養剤です。いにしえの人物それぞれが歩んだ足跡を訪ね、遺構や文物を目にすると、生き方の助けになる「発見」があります。",
+		},
+		companyImages: [
+			{
+				downloadURL:
+					"https://i.pinimg.com/564x/30/a1/38/30a1387a9e10879bb676094053fd0a48.jpg",
+				name: "company_img1.jpg",
+			},
+			{
+				downloadURL:
+					"https://i.pinimg.com/564x/24/35/17/243517410327bb53e74f08e8c7371f7b.jpg",
+				name: "company_img1.jpg",
+			},
+			{
+				downloadURL:
+					"https://i.pinimg.com/564x/90/1e/f3/901ef38f9941923ec14e2e5bba40f56e.jpg",
+				name: "company_img1.jpg",
+			},
+			{
+				downloadURL:
+					"https://i.pinimg.com/564x/24/35/17/243517410327bb53e74f08e8c7371f7b.jpg",
+				name: "company_img1.jpg",
+			},
+			{
+				downloadURL:
+					"https://i.pinimg.com/564x/30/a1/38/30a1387a9e10879bb676094053fd0a48.jpg",
+				name: "company_img1.jpg",
+			},
+			{
+				downloadURL:
+					"https://i.pinimg.com/564x/24/35/17/243517410327bb53e74f08e8c7371f7b.jpg",
+				name: "company_img1.jpg",
+			},
+			{
+				downloadURL:
+					"https://i.pinimg.com/564x/90/1e/f3/901ef38f9941923ec14e2e5bba40f56e.jpg",
+				name: "company_img1.jpg",
+			},
+			{
+				downloadURL:
+					"https://i.pinimg.com/564x/30/a1/38/30a1387a9e10879bb676094053fd0a48.jpg",
+				name: "company_img1.jpg",
+			},
+			{
+				downloadURL:
+					"https://i.pinimg.com/564x/90/1e/f3/901ef38f9941923ec14e2e5bba40f56e.jpg",
+				name: "company_img1.jpg",
+			},
+		],
+	};
+
+	const handleAddData = async () => {
+		try {
+			const docRef = doc(db, "general", "pageData");
+			await updateDoc(docRef, {
+				about: { ...data },
+			});
+
+			// Add a new document with a generated id
+			// const newCityRef = doc(collection(db, "tours"));
+			// await setDoc(newCityRef, data);
+
+			// ----------------------------------------------------------------
+			toast.success("Successfully added");
+		} catch (error) {
+			console.log(error);
+			toast.error("Error");
+		}
+	};
+
+	return (
+		<div>
+			{/* <Button onClick={handleAddData}>Add Data</Button> */}
+		</div>
+	);
 };
 
 export default ManagerPracticePage;
-
-
-
-
-
-
-
-
-
-
-
-
 
 // const ManagerPracticePage = () => {
 // 	const { loading } = useApi();
@@ -322,5 +426,3 @@ export default ManagerPracticePage;
 // 		</div>
 // 	);
 // }; // Đóng hàm ở đây
-
-

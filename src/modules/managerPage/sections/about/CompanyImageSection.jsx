@@ -2,13 +2,38 @@ import EditButton from "components/managerPage/buttons/EditButton";
 import SectionTitle from "components/managerPage/SectionTitle";
 import { useApi } from "contexts/managerPage/api-context";
 import { useModal } from "contexts/modal-context";
+import { db } from "firebase-config";
+import { doc, getDoc } from "firebase/firestore";
 import CompanyImagesModal from "modules/managerPage/modals/about/CompanyImagesModal";
 import { SectionContainer } from "pages/manager/ManagerAboutPage";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
-const CompanyImageSection = ({ companyImages }) => {
-	const { loading } = useApi();
+const CompanyImageSection = () => {
 	const { openModal } = useModal();
+	const [loading, setLoading] = useState(false);
+	const [companyImages, setAccess] = useState({});
+
+	useEffect(() => {
+		async function getCompanyImages() {
+			try {
+				setLoading(true);
+				const docRef = doc(db, "general", "pageData");
+				const docSnap = await getDoc(docRef);
+				if (docSnap.exists()) {
+					setAccess(docSnap.data().about.companyImages);
+					setLoading(false);
+				} else {
+					toast.error("データを見つけられません");
+					setLoading(false);
+				}
+			} catch (error) {
+				toast.error("エラーが発生しました");
+				setLoading(false);
+			}
+		}
+		getCompanyImages();
+	}, []);
 
 	return (
 		<>
@@ -63,7 +88,7 @@ function ImageItem({ image }) {
 	return (
 		<div className="overflow-hidden rounded-md aspect-square">
 			<img
-				src={image}
+				src={image.downloadURL}
 				alt="company-img"
 				className="object-cover object-center w-full h-full"
 			/>

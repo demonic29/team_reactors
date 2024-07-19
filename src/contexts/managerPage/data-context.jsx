@@ -18,7 +18,7 @@ const DataProvider = ({ children }) => {
 			});
       // console.log('data', data)
       const processedData = {
-        about: data[0]?.about,
+        about: data[1]?.about,
       }
 			setData(processedData);
       setLoading(false)
