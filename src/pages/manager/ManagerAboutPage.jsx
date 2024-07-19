@@ -4,8 +4,6 @@ import CompanySection from "modules/managerPage/sections/about/CompanySection";
 import VisionSection from "modules/managerPage/sections/about/VisionSection";
 import AccessSection from "modules/managerPage/sections/about/AccessSection";
 import CompanyImageSection from "modules/managerPage/sections/about/CompanyImageSection";
-import { useApi } from "contexts/managerPage/api-context";
-import { useData } from "contexts/managerPage/data-context";
 
 const ManagerAboutPage = () => {
 	return (

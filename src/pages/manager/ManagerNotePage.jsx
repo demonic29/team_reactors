@@ -3,31 +3,38 @@ import NoteManagerCard from "components/managerPage/cards/NoteManagerCard";
 import SectionTitle from "components/managerPage/SectionTitle";
 import ModalBase from "components/modals/ModalBase";
 import { useModal } from "contexts/modal-context";
-import { db } from "firebase-config";
-import { collection, onSnapshot } from "firebase/firestore";
 import AddNoteModal from "modules/managerPage/modals/note/AddNoteModal";
 import React, { useEffect, useState } from "react";
+import { getGeneral } from "utils/managerPage/getGeneral";
+import { getItemFromOrderList } from "utils/managerPage/getItemFromOrderList";
 
 const ManagerNotePage = () => {
 	const [notes, setNotes] = useState([]);
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
-		const colRef = collection(db, "notes");
-		const unsub = onSnapshot(colRef, (snap) => {
-			const notes = [];
-			snap.forEach((doc) => {
-				notes.push(doc.data());
-			});
-			console.log("Current cities in CA: ", notes);
-			setNotes(notes);
-		});
-		return () => unsub();
+		const getTour = async () => {
+			setLoading(true);
+			try {
+				const general = await getGeneral();
+				const notes = await getItemFromOrderList(
+					general?.noteOrder,
+					"notes"
+				);
+				setNotes(notes);
+				setLoading(false);
+			} catch (error) {
+				console.log(error);
+				setLoading(false);
+			}
+		};
+		getTour();
 	}, []);
 
 	return (
 		<div className="w-full">
 			<NoteHeader />
-			<NoteList notes={notes} />
+			<NoteList notes={notes} loading={loading} />
 		</div>
 	);
 };

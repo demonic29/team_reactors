@@ -1,6 +1,7 @@
 import Button from "components/buttons/Button";
-import { db } from "firebase-config";
+import { db, storage } from "firebase-config";
 import { collection, doc, setDoc, updateDoc } from "firebase/firestore";
+import { ref } from "firebase/storage";
 import React from "react";
 import { toast } from "react-toastify";
 
@@ -14,6 +15,18 @@ const ManagerPracticePage = () => {
 			},
 			content:
 				"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima quaerat voluptatem ipsa perferendis! Eos nobis dolorem deleniti et. Dolorum, quis.",
+		},
+		owner: {
+			name: "Rekite",
+			introduce:
+				"一穂ミチさん初の犯罪小説集『ツミデミック』の直木賞ノミネートを記念し、第一話「違う羽の鳥」を特別全文公開します！是非この機会にご一読ください。パンデミック×“犯罪”を描いた大注目の傑作集をお見逃しなく！",
+			image: {
+				downloadURL:
+					"https://i.pinimg.com/564x/93/18/8f/93188f3384eb080b0c93ce5ad0d1c8ae.jpg",
+				name: "yoshimaru.jpg",
+			},
+			accessLink: "https://note.com/yamabi_howa/n/n093834af421f",
+			buttonContent: "ノートへ",
 		},
 		banner: {
 			name: "img10.webp",
@@ -98,10 +111,10 @@ const ManagerPracticePage = () => {
 
 	const handleAddData = async () => {
 		try {
-			const docRef = doc(db, "general", "pageData");
-			await updateDoc(docRef, {
-				about: { ...data },
-			});
+			// const docRef = doc(db, "general", "pageData");
+			// await updateDoc(docRef, {
+			// 	about: { ...data },
+			// });
 
 			// Add a new document with a generated id
 			// const newCityRef = doc(collection(db, "tours"));
@@ -115,11 +128,9 @@ const ManagerPracticePage = () => {
 		}
 	};
 
-	return (
-		<div>
-			{/* <Button onClick={handleAddData}>Add Data</Button> */}
-		</div>
-	);
+	return <div className="items-center justify-center flex-1">
+		{/* <Button onClick={handleAddData}>Add Data</Button> */}
+		</div>;
 };
 
 export default ManagerPracticePage;

@@ -1,6 +1,5 @@
 import EditButton from "components/managerPage/buttons/EditButton";
 import SectionTitle from "components/managerPage/SectionTitle";
-import { useApi } from "contexts/managerPage/api-context";
 import { useModal } from "contexts/modal-context";
 import { db } from "firebase-config";
 import { doc, getDoc } from "firebase/firestore";
