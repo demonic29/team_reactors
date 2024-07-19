@@ -2,7 +2,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Button from 'components/buttons/Button';
-
 const Card = ({ imgSrc, title, desc, location, link }) => {
   return (
     <div className="bg-white mt-[100px]">

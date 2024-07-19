@@ -14,7 +14,6 @@ import PublicRoute from "pages/PublicRoute";
 import PrivateRoute from "pages/PrivateRoute";
 import PrivacyPolicyPage from "pages/PrivacyPolicyPage";
 import TravelAgencyAgreementPage from "pages/TravelAgencyAgreementPage";
-import TourList from "pages/TourList";
 
 const App = () => {
   return (
@@ -23,7 +22,6 @@ const App = () => {
         <Route path="/" element={<HomePage></HomePage>} default></Route>
         <Route path="/about" element={<AboutPage></AboutPage>}></Route>
         <Route path="/tour" element={<TourPage></TourPage>}></Route>
-        <Route path="/tourList" element={<TourList></TourList>}></Route>
         <Route
           path="/travelAgencyAgreement"
           element={<TravelAgencyAgreementPage />}

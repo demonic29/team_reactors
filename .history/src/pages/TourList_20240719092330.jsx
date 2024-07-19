@@ -20,6 +20,7 @@ export default function TourList() {
     return (
         <div>
             <div className='container'>
+                {/* <NavBar/> */}
 
                 {tourImg.images && <CarouselImages slides={tourImg.images.map(img => ({ src: img, title: tourImg.title, desc: tourImg.shortDesc }))}/>}
 

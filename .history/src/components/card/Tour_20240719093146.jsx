@@ -1,7 +1,7 @@
 // Card.js
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Button from 'components/buttons/Button';
+// import img from '../card/tour-img-1.jpg'
 
 const Card = ({ imgSrc, title, desc, location, link }) => {
   return (

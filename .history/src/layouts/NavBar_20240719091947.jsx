@@ -74,7 +74,7 @@ const navs = [
   },
   {
     content: "ツアー",
-    to: "/tourList",
+    to: "/tour",
   },
 ];
 
