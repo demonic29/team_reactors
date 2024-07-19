@@ -1,0 +1,21 @@
+[
+
+  {
+    "title" : "忠義の福岡武将物語",
+    "desc" : "心を込めて、私たちはお客さんにいろいろなツアーを提供しています。",
+    "src": "https://picsum.photos/seed/img1/1240/700",
+    "alt": "Image 1 for carousel"
+  },
+  {
+    "title" : "忠義の福岡武将物語",
+    "desc" : "心を込めて、私たちはお客さんにいろいろなツアーを提供しています。",
+    "src": "https://picsum.photos/seed/img2/1240/700",
+    "alt": "Image 2 for carousel"
+  },
+  {
+    "title" : "忠義の福岡武将物語",
+    "desc" : "心を込めて、私たちはお客さんにいろいろなツアーを提供しています。",
+    "src": "https://picsum.photos/seed/img3/1240/700",
+    "alt": "Image 3 for carousel"
+  }
+]
