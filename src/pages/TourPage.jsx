@@ -82,13 +82,13 @@ const TourPage = () => {
 
                                 {/* note */}
                                 <div>
-                                    <div className="text-center mt-[100px]">
+                                    <div className="text-center pt-[100px]">
                                         <h2 className="text-3xl font-bold">
                                             ノート
                                         </h2>
                                     </div>
 
-                                    <div className="flex mt-5">
+                                    <div className="flex flex-wrap mt-5">
                                         {noteData.map((item, index) => (
                                             <div
                                                 key={index}
@@ -99,7 +99,7 @@ const TourPage = () => {
                                         border: 0; 
                                         display: block; 
                                         max-width: 99%; 
-                                        width: 500px; 
+                                        width: 400px; 
                                         padding: 0px; 
                                         margin: 10px 0px; 
                                         position: static; 
