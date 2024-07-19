@@ -5,6 +5,7 @@ import ReviewCard from "../layouts/ReviewCard";
 import Footer from "../layouts/Footer";
 import { useApi } from "../contexts/managerPage/api-context";
 import { useEffect, useState } from "react";
+import note from "../../src/components/card/note.json";
 
 const TourPage = () => {
     const { loading, data } = useApi();
@@ -13,11 +14,14 @@ const TourPage = () => {
     useEffect(() => {
         if (data && data.tours && data.tours.length > 0) {
             setTourList(data.tours[0]);
-            setNoteData(data.notes);
         }
     }, [data]);
 
     console.log(noteData);
+
+    useEffect(() => {
+        setNoteData(note);
+    }, []);
 
     return (
         <>
@@ -68,7 +72,6 @@ const TourPage = () => {
                                 {/* end about the fee */}
                                 {/* Accordion */}
                                 <Accordion />
-                                <Accordion />
                                 {/* end Accordion */}
                                 {/* gallery */}
                                 <Gallery />
@@ -85,22 +88,29 @@ const TourPage = () => {
                                         </h2>
                                     </div>
 
-                                    <div className="flex flex-wrap justify-between items-center mt-5">
-                                        {noteData &&
-                                            noteData.length > 0 &&
-                                            noteData
-                                                .slice(0, 3)
-                                                .map((note, index) => (
-                                                    <div
-                                                        key={index}
-                                                        dangerouslySetInnerHTML={{
-                                                            __html: note.iframe.replace(
-                                                                "<iframe",
-                                                                '<iframe style="border: 0; display: flex; justify-contents : center; max-width: 100%; width: 350px; height: 300px; margin: 0px 0;"'
-                                                            ),
-                                                        }}
-                                                    />
-                                                ))}
+                                    <div className="flex mt-5">
+                                        {noteData.map((item, index) => (
+                                            <div
+                                                key={index}
+                                                dangerouslySetInnerHTML={{
+                                                    __html: `<iframe class="note-embed" 
+                                    src=${item.link} 
+                                    style="
+                                        border: 0; 
+                                        display: block; 
+                                        max-width: 99%; 
+                                        width: 500px; 
+                                        padding: 0px; 
+                                        margin: 10px 0px; 
+                                        position: static; 
+                                        visibility: visible;" 
+                                        height="300px"
+                                    >
+                                </iframe>
+                                <script async src="https://note.com/scripts/embed.js" charset="utf-8"></script>`,
+                                                }}
+                                            />
+                                        ))}
                                     </div>
                                 </div>
                                 {/* end note */}
