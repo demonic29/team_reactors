@@ -7,7 +7,6 @@ import { useApi } from "../contexts/managerPage/api-context";
 import { useEffect, useState } from "react";
 // import note from '../../src/components/card/note.josn'
 import Button from "components/buttons/Button";
-import { NavLink } from "react-router-dom";
 
 const TourPage = () => {
     const { loading, data } = useApi();
@@ -37,7 +36,7 @@ const TourPage = () => {
                                     tourList.images.length > 0 && (
                                         <div>
                                             <img
-                                                className="w-full h-[600px] nd object-cover rounded-lg"
+                                                className="w-full aspect-[10/3.5] nd object-cover rounded-lg"
                                                 srcSet={tourList.images[0]}
                                                 alt={`main-images`}
                                             />
@@ -111,9 +110,9 @@ const TourPage = () => {
                 />
               ))}
             </div>
-            <NavLink className='flex justify-center' to={"https://note.com/reki_teku0531/"} target="_blank">
+            <div className='text-center'>
               <Button>ノートのページへ</Button>
-            </NavLink>
+            </div>
           </div>
                                 {/* end note */}
                             </div>

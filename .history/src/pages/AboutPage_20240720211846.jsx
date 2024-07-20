@@ -1,6 +1,5 @@
 import React from "react";
 import Footer from "../layouts/Footer";
-import { NavLink } from "react-router-dom";
 
 const AboutPage = () => {
     const yoshimaru = require("../assets/img/yoshimarusan.jpg");
@@ -11,7 +10,7 @@ const AboutPage = () => {
 
             <div className="container rounded-lg overflow-hidden mt-5">
                 <img
-                    className="w-full h-[600px] nd object-cover rounded-lg"
+                    className="w-full aspect-[10/3.5] nd object-cover rounded-lg"
                     srcSet={`${mainImg}`}
                     alt="main-building"
                 />
@@ -39,9 +38,9 @@ const AboutPage = () => {
                         趣味は名所や旧跡、足跡巡り。特に好きな時代は中世史と幕末。
                     </p>
                     <div className="mt-[80px]">
-                        <NavLink to={"https://note.com/reki_teku0531/"} target="_blank">
-                            <button className="text-black bg-white px-5 py-2 rounded-md">note ページへ</button>
-                        </NavLink>
+                        <button className="text-black bg-white px-5 py-2 rounded-md">
+                            note ページへ
+                        </button>
                     </div>
                 </div>
                 <div>
@@ -57,7 +56,7 @@ const AboutPage = () => {
             <h2 className="text-3xl text-center font-bold mt-[100px]">
                 会社概要
             </h2>
-            <div className="flex mt-[50px] justify-center items-center">
+            <div className="flex mt-[50px] justify-evenly items-center">
                 <div>
                     <ul className="grid gap-5">
                         <li>

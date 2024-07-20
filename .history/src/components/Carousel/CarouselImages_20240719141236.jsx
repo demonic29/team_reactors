@@ -31,12 +31,12 @@ const CarouselImages = ({ slides }) => {
 			onSlideChange={() => null}
 			// onSwiper={(swiper) => console.log(swiper)}
 			onSwiper={(swiper) => null}
-			className="h-[600px] rounded-lg"
+			className="h-[700px]"
 		>
 			{slides.map((slide, index) => (
 				<SwiperSlide
 					key={index}
-					className={`relative left-0 top-0 bg-cover bg-center fade-in duration-100 transition-all`}
+					className={`relative left-0 top-0 h-[500px] bg-cover bg-center fade-in duration-100 transition-all`}
 					onMouseEnter={() => setImgHover(true)}
 					onMouseLeave={() => setImgHover(false)}
 					style={{
@@ -47,7 +47,7 @@ const CarouselImages = ({ slides }) => {
 					data-swiper-parallax="-23%"
 				>
 					{imgHover && (
-						<div className="absolute z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50 fade-in">
+						<div className="absolute z-50 flex items-center w-full h-full bg-black bg-opacity-50 fade-in">
 							<div className="px-[50px] grid gap-4 ms-5">
 								<div
 									className="text-3xl font-bold text-white"

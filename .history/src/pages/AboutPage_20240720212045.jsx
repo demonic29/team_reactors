@@ -39,8 +39,8 @@ const AboutPage = () => {
                         趣味は名所や旧跡、足跡巡り。特に好きな時代は中世史と幕末。
                     </p>
                     <div className="mt-[80px]">
-                        <NavLink to={"https://note.com/reki_teku0531/"} target="_blank">
-                            <button className="text-black bg-white px-5 py-2 rounded-md">note ページへ</button>
+                        <NavLink>
+                        <button className="text-black bg-white px-5 py-2 rounded-md">note ページへ</button>
                         </NavLink>
                     </div>
                 </div>

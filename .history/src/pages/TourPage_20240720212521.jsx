@@ -7,7 +7,6 @@ import { useApi } from "../contexts/managerPage/api-context";
 import { useEffect, useState } from "react";
 // import note from '../../src/components/card/note.josn'
 import Button from "components/buttons/Button";
-import { NavLink } from "react-router-dom";
 
 const TourPage = () => {
     const { loading, data } = useApi();
@@ -111,9 +110,9 @@ const TourPage = () => {
                 />
               ))}
             </div>
-            <NavLink className='flex justify-center' to={"https://note.com/reki_teku0531/"} target="_blank">
+            <div className='text-center'>
               <Button>ノートのページへ</Button>
-            </NavLink>
+            </div>
           </div>
                                 {/* end note */}
                             </div>

@@ -31,7 +31,7 @@ const CarouselImages = ({ slides }) => {
 			onSlideChange={() => null}
 			// onSwiper={(swiper) => console.log(swiper)}
 			onSwiper={(swiper) => null}
-			className="h-[600px] rounded-lg"
+			className="h-[600px]"
 		>
 			{slides.map((slide, index) => (
 				<SwiperSlide

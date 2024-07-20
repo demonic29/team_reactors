@@ -111,7 +111,7 @@ const TourPage = () => {
                 />
               ))}
             </div>
-            <NavLink className='flex justify-center' to={"https://note.com/reki_teku0531/"} target="_blank">
+            <NavLink className='text-center'>
               <Button>ノートのページへ</Button>
             </NavLink>
           </div>

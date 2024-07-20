@@ -70,9 +70,9 @@ const HomePage = () => {
                 知名度が低い国内の歴史的な場所や、歴史上の人物に焦点を当てたツアーを企画。
               </p>
              
-              <NavLink to={"/about"}>
+              <div>
                 <Button>詳しくはこちら</Button>
-              </NavLink>
+              </div>
             </div>
           </div>
         </div>

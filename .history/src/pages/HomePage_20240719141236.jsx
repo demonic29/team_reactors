@@ -51,10 +51,10 @@ const HomePage = () => {
 
   return (
     <div>
-      
       <div className="container">
-      {tourImg.images && <CarouselImages slides={tourImg.images.map(img => ({ src: img, title: tourImg.title, desc: tourImg.shortDesc }))}/>}
         
+      {tourImg.images && <CarouselImages slides={tourImg.images.map(img => ({ src: img, title: tourImg.title, desc: tourImg.shortDesc }))}/>}
+
         {/* about-us */}
         <div className='sub-container'>
           <h2 className='text-3xl text-center font-bold mt-[120px]'>私たちについて</h2>
@@ -70,9 +70,9 @@ const HomePage = () => {
                 知名度が低い国内の歴史的な場所や、歴史上の人物に焦点を当てたツアーを企画。
               </p>
              
-              <NavLink to={"/about"}>
+              <div>
                 <Button>詳しくはこちら</Button>
-              </NavLink>
+              </div>
             </div>
           </div>
         </div>
