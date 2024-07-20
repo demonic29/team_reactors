@@ -13,6 +13,8 @@ import PropTypes from 'prop-types';
 const CarouselImages = ({ slides }) => {
 	const [imgHover, setImgHover] = useState(false);
 
+	
+
 	return (
 		<Swiper
 			style={{
@@ -33,9 +35,8 @@ const CarouselImages = ({ slides }) => {
 			// onSwiper={(swiper) => console.log(swiper)}
 			onSwiper={(swiper) => null}
 			autoplay = {{
-				delay : 2000,
-				disableOnInteraction: false,
-				pauseOnMouseEnter: true
+				delay : 1000,
+				disableOnInteraction: false
 			}}
 			className="h-[600px] rounded-lg"
 		>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y, Parallax, Autoplay, } from 'swiper/modules';
+import { Swiper }
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -26,16 +27,14 @@ const CarouselImages = ({ slides }) => {
 			spaceBetween={100}
 			slidesPerView={1}
 			navigation
-			loop={true}
 			pagination={{ clickable: true }}
 			// onSlideChange={() => console.log('slide change')}
 			onSlideChange={() => null}
 			// onSwiper={(swiper) => console.log(swiper)}
 			onSwiper={(swiper) => null}
 			autoplay = {{
-				delay : 2000,
-				disableOnInteraction: false,
-				pauseOnMouseEnter: true
+				delay : 1000,
+				disableOnInteraction: false
 			}}
 			className="h-[600px] rounded-lg"
 		>

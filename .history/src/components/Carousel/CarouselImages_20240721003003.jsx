@@ -33,9 +33,9 @@ const CarouselImages = ({ slides }) => {
 			// onSwiper={(swiper) => console.log(swiper)}
 			onSwiper={(swiper) => null}
 			autoplay = {{
-				delay : 2000,
+				delay : 1000,
 				disableOnInteraction: false,
-				pauseOnMouseEnter: true
+				pauseOnMouseEnter: false
 			}}
 			className="h-[600px] rounded-lg"
 		>

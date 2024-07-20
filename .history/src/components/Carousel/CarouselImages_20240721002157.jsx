@@ -26,16 +26,14 @@ const CarouselImages = ({ slides }) => {
 			spaceBetween={100}
 			slidesPerView={1}
 			navigation
-			loop={true}
 			pagination={{ clickable: true }}
 			// onSlideChange={() => console.log('slide change')}
 			onSlideChange={() => null}
 			// onSwiper={(swiper) => console.log(swiper)}
 			onSwiper={(swiper) => null}
 			autoplay = {{
-				delay : 2000,
-				disableOnInteraction: false,
-				pauseOnMouseEnter: true
+				delay : 1000,
+				disableOnInteraction: false
 			}}
 			className="h-[600px] rounded-lg"
 		>
