@@ -2,8 +2,8 @@ import React from "react";
 import BannerSection from "modules/managerPage/sections/about/BannerSection";
 import CompanySection from "modules/managerPage/sections/about/CompanySection";
 import VisionSection from "modules/managerPage/sections/about/VisionSection";
-import AccessSection from "modules/managerPage/sections/about/AccessSection";
-import CompanyImageSection from "modules/managerPage/sections/about/CompanyImageSection";
+import OwnerSection from "modules/managerPage/sections/about/OwnerSection";
+import FooterSection from "modules/managerPage/sections/about/FooterSection";
 
 const ManagerAboutPage = () => {
 	return (
@@ -11,16 +11,18 @@ const ManagerAboutPage = () => {
 			{/* Col 1  */}
 			<div>
 				<BannerSection />
-				<AccessSection />
+				<OwnerSection />
+				{/* <AccessSection /> */}
 			</div>
 			{/* Col 2  */}
 			<div>
-				<CompanySection />
-				<CompanyImageSection />
+				<VisionSection />
+				<FooterSection />
+				{/* <CompanyImageSection /> */}
 			</div>
 			{/* Col 3  */}
 			<div>
-				<VisionSection />
+				<CompanySection />
 			</div>
 		</div>
 	);
@@ -57,7 +59,5 @@ export const SectionContainer = ({ children }) => {
 		</div>
 	);
 };
-
-
 
 export default ManagerAboutPage;

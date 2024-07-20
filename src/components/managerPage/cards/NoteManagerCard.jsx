@@ -1,5 +1,5 @@
 import { db } from "firebase-config";
-import { deleteDoc, doc } from "firebase/firestore";
+import { arrayRemove, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import React from "react";
 import { HiMiniXMark } from "react-icons/hi2";
 import { toast } from "react-toastify";
@@ -26,6 +26,10 @@ const NoteManagerCard = ({ note: { noteId, content }, reloadPage }) => {
 			try {
 				const docRef = doc(db, 'notes', noteId)
 				await deleteDoc(docRef)
+				const itemOrderRef = doc(db, 'general', 'itemOrder')
+				await updateDoc(itemOrderRef, {
+					noteOrder: arrayRemove(noteId),
+				})
 				toast.success("削除済み");
 				reloadPage()
 			} catch (error) {

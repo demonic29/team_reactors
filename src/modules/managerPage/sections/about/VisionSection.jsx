@@ -3,7 +3,8 @@ import SectionTitle from "components/managerPage/SectionTitle";
 import { useModal } from "contexts/modal-context";
 import { db } from "firebase-config";
 import { doc, getDoc } from "firebase/firestore";
-import VisionModal from "modules/managerPage/modals/about/VisionModal";
+import { useReload } from "hooks/useReload";
+import VisionEditModal from "modules/managerPage/modals/about/VisionEditModal";
 import { SectionContainer, SectionImage } from "pages/manager/ManagerAboutPage";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -12,6 +13,7 @@ const VisionSection = () => {
 	const { openModal } = useModal();
 	const [loading, setLoading] = useState(false);
 	const [vision, setVision] = useState({});
+	const {reload, reloadData} = useReload()
 
 	useEffect(() => {
 		async function getVision() {
@@ -32,7 +34,7 @@ const VisionSection = () => {
 			}
 		}
 		getVision();
-	}, []);
+	}, [reload]);
 
 	return (
 		<>
@@ -43,7 +45,7 @@ const VisionSection = () => {
 					<div className="flex items-center justify-between mb-3">
 						<SectionTitle className="mb-[0px]">理念</SectionTitle>
 						<EditButton
-							onClick={() => openModal(<VisionModal vision={vision} />)}
+							onClick={() => openModal(<VisionEditModal reloadData={reloadData} vision={vision} />)}
 						></EditButton>
 					</div>
 					<div>
@@ -51,7 +53,7 @@ const VisionSection = () => {
 							src={vision?.image?.downloadURL}
 							alt="about-company-img"
 						/>
-						<div className="mt-4 text-lg">{vision?.content}</div>
+						<div className="mt-4 text-lg" dangerouslySetInnerHTML={{__html: `${vision?.content}`}}></div>
 					</div>
 				</SectionContainer>
 			)}
