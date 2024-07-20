@@ -62,8 +62,8 @@ const AboutPage = () => {
 			<div className="text-center mt-[50px] flex justify-center">
 				<div className="w-full max-w-[1080px] px-10">
 					<h2 className="mb-10 text-3xl font-bold">我々の理念</h2>
-					<p className="text-xl leading-8 text-gray-800">
-						{aboutData.vision.content}
+					<p className="text-xl leading-8 text-gray-800" dangerouslySetInnerHTML={{__html: `${aboutData.vision.content}`}}>
+						
 					</p>
 				</div>
 			</div>
