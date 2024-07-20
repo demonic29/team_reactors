@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { deleteObject, ref } from "firebase/storage";
 
-const SliderManageCard = ({ drag, item }) => {
+const SliderManageCard = ({ drag, cardFeature = true, item, reloadData }) => {
 	const { openModal } = useModal();
 	const { banner, title, desc, slideId } = item;
 
@@ -27,6 +27,7 @@ const SliderManageCard = ({ drag, item }) => {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				deleteSlide(slideId, name);
+				reloadData()
 			}
 		});
 	};
@@ -65,10 +66,10 @@ const SliderManageCard = ({ drag, item }) => {
 					</Title>
 					<p className="line-clamp-2">{desc}</p>
 				</div>
-				<div className={`flex items-center gap-4 ${!drag && "mr-4"}`}>
+				{cardFeature && <div className={`flex items-center gap-4 ${!drag && "mr-4"}`}>
 					<div
 						onClick={() =>
-							openModal(<SlideEditModal item={item} />)
+							openModal(<SlideEditModal reloadData={reloadData} item={item} />)
 						}
 						className="flex items-center justify-center transition-all bg-gray-200 rounded-full cursor-pointer size-11 hover:bg-gray-300"
 					>
@@ -80,10 +81,10 @@ const SliderManageCard = ({ drag, item }) => {
 					>
 						<IoTrashOutline size={20} />
 					</div>
-				</div>
+				</div>}
 				{drag && (
 					<div className="text-gray-400 cursor-move" ref={drag}>
-						<MdOutlineDragHandle size={30} />
+						<MdOutlineDragHandle size={36} />
 					</div>
 				)}
 			</div>

@@ -1,7 +1,3 @@
-import Button from "components/buttons/Button";
-import { db, storage } from "firebase-config";
-import { collection, doc, setDoc, updateDoc } from "firebase/firestore";
-import { ref } from "firebase/storage";
 import React from "react";
 import { toast } from "react-toastify";
 

@@ -15,7 +15,7 @@ import { timestamp } from "utils/functions";
 import { getGeneral } from "utils/managerPage/getGeneral";
 import { getItemFromOrderList } from "utils/managerPage/getItemFromOrderList";
 
-const SlideAddModal = () => {
+const SlideAddModal = ({reloadData}) => {
 	const inputFileRef = useRef(null);
 	const [tourList, setTourList] = useState([]);
 	const [choosedTour, setChoosedTour] = useState();
@@ -84,6 +84,7 @@ const SlideAddModal = () => {
 			});
 			toast.success("スライドを追加済み");
 			closeModal();
+			reloadData()
 		} catch (error) {
 			console.log(error);
 			toast.error("追加が失敗しました");

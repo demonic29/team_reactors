@@ -2,48 +2,49 @@ import React, { useEffect, useState } from "react";
 import { useModal } from "contexts/modal-context";
 import SlideAddModal from "modules/managerPage/modals/home/SlideAddModal";
 import ModalBase from "components/modals/ModalBase";
-import { collection, onSnapshot } from "firebase/firestore";
-import { db } from "firebase-config";
 import { GoPlus } from "react-icons/go";
 import EditButton from "components/managerPage/buttons/EditButton";
 import SliderManageCard from "components/managerPage/cards/SliderManageCard";
 import SectionTitle from "components/managerPage/SectionTitle";
+import SlideOrderEditModal from "modules/managerPage/modals/home/SlideOrderEditModal";
+import { getGeneral } from "utils/managerPage/getGeneral";
+import { getItemFromOrderList } from "utils/managerPage/getItemFromOrderList";
+import { useReload } from "hooks/useReload";
 
 const SliderSection = () => {
 	const [slides, setSlides] = useState([]);
 	const { openModal } = useModal();
 	const [loading, setLoading] = useState(false);
+	const { reload, reloadData } = useReload();
 
 	useEffect(() => {
-		const colRef = collection(db, "slides");
-		const unsub = onSnapshot(colRef, (snap) => {
+		const getSlides = async () => {
 			setLoading(true);
-			const slides = [];
-			snap.forEach((doc) => {
-				slides.push(doc.data());
-			});
+			const general = await getGeneral("itemOrder");
+			const slideOrder = general?.slideOrder;
+			const slides = await getItemFromOrderList(slideOrder, "slides");
 			setSlides(slides);
 			setLoading(false);
-		});
+		};
 
-		return () => unsub();
-	}, []);
+		getSlides();
+	}, [reload]);
 
 	return (
 		<div className="mb-10">
-			<SliderHeader />
+			<SliderHeader slides={slides} reloadData={reloadData} />
 			<div className="grid grid-cols-2 gap-4">
 				{!loading &&
 					slides &&
 					slides.length > 0 &&
 					slides.map((slide) => (
-						<SliderManageCard key={slide.slideId} item={slide} />
+						<SliderManageCard key={slide.slideId} item={slide} reloadData={reloadData} />
 					))}
 				{loading ? (
 					<Skeleton></Skeleton>
 				) : (
 					<div
-						onClick={() => openModal(<SlideAddModal />)}
+						onClick={() => openModal(<SlideAddModal reloadData={reloadData} />)}
 						className="border-gray-200 cursor-pointer group border-dashed border-[1.5px] justify-center p-2 rounded-lg flex gap-4 items-center w-full h-full"
 					>
 						<span className="w-[186px] aspect-video flex items-center group-hover:text-gray-800 group-hover:scale-105 transition-all justify-center text-3xl text-gray-400">
@@ -72,13 +73,22 @@ const Skeleton = () => {
 	);
 };
 
-function SliderHeader() {
+function SliderHeader({ reloadData, slides }) {
 	const { openModal } = useModal();
 	return (
 		<div className="flex justify-between mb-3 gap-x-4">
 			<ModalBase></ModalBase>
 			<SectionTitle className={"mb-[0px]"}>スライダー</SectionTitle>
-			<EditButton onClick={() => openModal(<SlideAddModal />)}>
+			<EditButton
+				onClick={() =>
+					openModal(
+						<SlideOrderEditModal
+							reloadData={reloadData}
+							slides={slides}
+						/>
+					)
+				}
+			>
 				順番を編集
 			</EditButton>
 		</div>

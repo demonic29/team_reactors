@@ -20,7 +20,7 @@ import { timestamp } from "utils/functions";
 import { getGeneral } from "utils/managerPage/getGeneral";
 import { getItemFromOrderList } from "utils/managerPage/getItemFromOrderList";
 
-const SlideEditModal = ({ item }) => {
+const SlideEditModal = ({ item, reloadData }) => {
 	const inputFileRef = useRef(null);
 	const [tourList, setTourList] = useState([]);
 	const [choosedTour, setChoosedTour] = useState(item.accessTour);
@@ -79,6 +79,7 @@ const SlideEditModal = ({ item }) => {
 			}
 			toast.success("更新成功！");
 			closeModal();
+			reloadData();
 		} catch (error) {
 			console.log(error);
 			toast.error("更新失敗！");
