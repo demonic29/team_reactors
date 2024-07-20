@@ -17,6 +17,10 @@
 	h2 {
 		font-size: 1.5rem;
 	}
+	p > a {
+		text-decoration: underline;
+		color: rgb(13, 13, 192) !important;
+	}
 }
 
 @layer components {

@@ -1,15 +1,28 @@
-import React, {  } from "react";
+import React, { useEffect, useState } from "react";
 import SectionTitle from "components/managerPage/SectionTitle";
 import Button from "components/buttons/Button";
 import { useModal } from "contexts/modal-context";
 import HomeAboutEditModal from "modules/managerPage/modals/home/HomeAboutEditModal";
-import { useData } from "contexts/managerPage/data-context";
+import { db } from "firebase-config";
+import { doc, getDoc } from "firebase/firestore";
+import { useReload } from "hooks/useReload";
 
 const AboutSection = () => {
 	const { openModal } = useModal();
-	const {data, loading} = useData()
+	const { reload, reloadData } = useReload();
+	const [homeAbout, setHomeAbout] = useState({});
+	const [loading, setLoading] = useState(false);
 
-	const homeAbout = data?.about?.homeAbout || {}
+	useEffect(() => {
+		const getHomeAbout = async () => {
+			setLoading(true);
+			const docRef = doc(db, "general", "pageData");
+			const docSnap = await getDoc(docRef);
+			setHomeAbout(docSnap.data().about.homeAbout);
+			setLoading(false);
+		};
+		getHomeAbout();
+	}, [reload]);
 
 	return (
 		<div className="mb-10">
@@ -26,14 +39,25 @@ const AboutSection = () => {
 						/>
 					</div>
 					<div className="w-full max-w-[580px] text-lg tracking-wider leading-relaxed">
-						<div className="mb-4" dangerouslySetInnerHTML={{__html: `${homeAbout?.content}`}}></div>
+						<div
+							className="mb-4"
+							dangerouslySetInnerHTML={{
+								__html: `${homeAbout?.content}`,
+							}}
+						></div>
 						<Button
 							className={"px-6 py-[6px]"}
-							onClick={() => openModal(<HomeAboutEditModal homeAbout={homeAbout} />)}
+							onClick={() =>
+								openModal(
+									<HomeAboutEditModal
+										homeAbout={homeAbout}
+										reloadData={reloadData}
+									/>
+								)
+							}
 						>
 							編集
 						</Button>
-						{/* <Button onClick={AddData}>add data</Button> */}
 					</div>
 				</div>
 			)}

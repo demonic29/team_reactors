@@ -4,13 +4,20 @@ import SectionTitle from "components/managerPage/SectionTitle";
 import ModalFooter from "components/modals/ModalFooter";
 import { useModal } from "contexts/modal-context";
 import { db } from "firebase-config";
-import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
+import {
+	addDoc,
+	arrayUnion,
+	collection,
+	doc,
+	setDoc,
+	updateDoc,
+} from "firebase/firestore";
 import React, { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-import { getTimestampInSeconds } from "utils/functions";
+import { getTimestampInSeconds, timestamp } from "utils/functions";
 
-const AddNoteModal = () => {
+const AddNoteModal = ({ reloadPage }) => {
 	const [noteFrame, setNoteFrame] = useState("");
 	const inputRef = useRef(null);
 	const { closeModal } = useModal();
@@ -36,15 +43,18 @@ const AddNoteModal = () => {
 			return;
 		}
 		try {
-			const docRef = await addDoc(collection(db, "notes"), {
-				content: inputRef.current.value,
-				noteId: getTimestampInSeconds(),
+			const noteStamp = timestamp();
+			const newNote = doc(db, "notes", noteStamp);
+			await setDoc(newNote, {
+				content: noteFrame,
+				noteId: noteStamp,
 			});
-			const docId = docRef.id;
-			await updateDoc(doc(db, "notes", docId), {
-				noteId: docId,
+			const noteOrderRef = doc(db, "general", "itemOrder");
+			await updateDoc(noteOrderRef, {
+				noteOrder: arrayUnion(noteStamp),
 			});
 			closeModal();
+			reloadPage();
 			toast.success("ノートを追加済み");
 		} catch (e) {
 			console.error("Error adding document: ", e);

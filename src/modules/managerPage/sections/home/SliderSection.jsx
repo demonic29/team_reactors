@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import SectionTitle from "../../../../components/managerPage/SectionTitle";
-import EditButton from "../../../../components/managerPage/buttons/AddButton";
-import SliderManageCard from "../../../../components/managerPage/cards/SliderManageCard";
 import { useModal } from "contexts/modal-context";
 import SlideAddModal from "modules/managerPage/modals/home/SlideAddModal";
 import ModalBase from "components/modals/ModalBase";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "firebase-config";
 import { GoPlus } from "react-icons/go";
+import EditButton from "components/managerPage/buttons/EditButton";
+import SliderManageCard from "components/managerPage/cards/SliderManageCard";
+import SectionTitle from "components/managerPage/SectionTitle";
 
 const SliderSection = () => {
 	const [slides, setSlides] = useState([]);
@@ -79,7 +79,7 @@ function SliderHeader() {
 			<ModalBase></ModalBase>
 			<SectionTitle className={"mb-[0px]"}>スライダー</SectionTitle>
 			<EditButton onClick={() => openModal(<SlideAddModal />)}>
-				編集
+				順番を編集
 			</EditButton>
 		</div>
 	);

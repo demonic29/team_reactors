@@ -4,25 +4,27 @@ import SectionTitle from "components/managerPage/SectionTitle";
 import ModalFooter from "components/modals/ModalFooter";
 import { useModal } from "contexts/modal-context";
 import { db, storage } from "firebase-config";
-import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { arrayUnion, doc, setDoc, updateDoc } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { useFileChange } from "hooks/useFileChange";
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-import { getTimestampInSeconds } from "utils/functions";
-import { getTourList } from "utils/managerPage/firebase-getData";
+import { timestamp } from "utils/functions";
+import { getGeneral } from "utils/managerPage/getGeneral";
+import { getItemFromOrderList } from "utils/managerPage/getItemFromOrderList";
 
 const SlideAddModal = () => {
-	const [file, setFile] = useState();
-	const [filePreview, setFilePreview] = useState();
-	const [choosedTour, setChoosedTour] = useState();
-	const { closeModal } = useModal();
 	const inputFileRef = useRef(null);
 	const [tourList, setTourList] = useState([]);
+	const [choosedTour, setChoosedTour] = useState();
+	const { closeModal } = useModal();
+	const { file, filePreview, handleFileChange, setFilePreview } =
+		useFileChange();
 	const {
-		register,
 		handleSubmit,
+		register,
 		formState: { isSubmitting },
 	} = useForm({
 		defaultValues: {
@@ -31,92 +33,66 @@ const SlideAddModal = () => {
 		},
 	});
 
-	const handleFileChange = (e) => {
-		setFile(e.target.files[0]);
-		const image = new FileReader();
-		image.readAsDataURL(e.target.files[0]);
-		image.onloadend = () => {
-			setFilePreview(image.result);
+	// get tours
+	useEffect(() => {
+		const getTours = async () => {
+			const general = await getGeneral();
+			const tourOrder = general?.tourOrder;
+			const tours = await getItemFromOrderList(tourOrder, "tours");
+			setTourList(tours);
 		};
-	};
+		getTours();
+	}, []);
 
 	const handleAddSlide = async (values) => {
 		if (!values.title || !values.desc || !choosedTour) {
 			Swal.fire({
-				icon: "warning",
-				text: "データを全部入力してください",
+				title: "注意",
+				text: "コンテンツを入力してください",
 				confirmButtonColor: "#3085d6",
 			});
 			return;
 		}
-		try {
-			const downloadURL = await uploadFile();
-			if (!downloadURL) {
-				return;
-			}
-
-			const colRef = collection(db, "slides");
-			const docRef = await addDoc(colRef, {
-				slideId: getTimestampInSeconds(),
-				title: values.title,
-				desc: values.desc,
-				accessTour: choosedTour,
-				banner: {
-					downloadURL: downloadURL,
-					name: file.name,
-				},
-			});
-			const docId = docRef.id;
-			await updateDoc(doc(db, "slides", docId), {
-				slideId: docId,
-			});
-			closeModal();
-			toast.success("追加成功");
-		} catch (error) {
-			toast.error("追加失敗");
-		}
-	};
-
-	const uploadFile = async () => {
 		if (!file) {
 			inputFileRef.current.click();
-			return null;
+			return;
 		}
-
 		try {
-			const storageRef = ref(storage, "images/" + file.name);
-			const uploadTask = uploadBytesResumable(storageRef, file);
-
-			return new Promise((resolve, reject) => {
-				uploadTask.on(
-					"state_changed",
-					() => null,
-					(error) => reject(error),
-					async () => {
-						try {
-							const downloadURL = await getDownloadURL(
-								uploadTask.snapshot.ref
-							);
-							resolve(downloadURL);
-						} catch (error) {
-							reject(error);
-						}
-					}
-				);
+			const stamp = timestamp();
+			// add new image
+			const newRef = ref(storage, `images/${stamp}`);
+			await uploadBytes(newRef, file);
+			await getDownloadURL(newRef).then((url) => {
+				setFilePreview(url);
+				// add slide to colection
+				const newDoc = doc(db, "slides", stamp);
+				setDoc(newDoc, {
+					title: values.title,
+					desc: values.desc,
+					slideId: stamp,
+					accessTour: choosedTour,
+					banner: {
+						downloadURL: url,
+						name: stamp,
+					},
+				});
+				// add slide to slide order
+				const itemOrderDoc = doc(db, "general", "itemOrder");
+				updateDoc(itemOrderDoc, {
+					slideOrder: arrayUnion(stamp),
+				});
 			});
+			toast.success("スライドを追加済み");
+			closeModal();
 		} catch (error) {
 			console.log(error);
-			throw error;
+			toast.error("追加が失敗しました");
 		}
 	};
-
-	useEffect(() => {
-		getTourList(setTourList);
-	}, []);
 
 	return (
 		<div className="flex flex-col h-full">
-			<SectionTitle>スライド編集</SectionTitle>
+			<SectionTitle>新規スライド</SectionTitle>
 			<div className="overflow-y-auto">
 				<div className="h-[300px] shrink-0 aspect-video mx-auto rounded-md relative overflow-hidden group mb-8">
 					<div className="overlay">

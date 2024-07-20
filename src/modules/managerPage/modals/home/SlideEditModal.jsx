@@ -9,123 +9,91 @@ import {
 	deleteObject,
 	getDownloadURL,
 	ref,
-	uploadBytesResumable,
+	uploadBytes,
 } from "firebase/storage";
+import { useFileChange } from "hooks/useFileChange";
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-import { getTourList } from "utils/managerPage/firebase-getData";
+import { timestamp } from "utils/functions";
+import { getGeneral } from "utils/managerPage/getGeneral";
+import { getItemFromOrderList } from "utils/managerPage/getItemFromOrderList";
 
 const SlideEditModal = ({ item }) => {
-	const [file, setFile] = useState();
-	const [filePreview, setFilePreview] = useState(item?.banner?.downloadURL);
-	const [choosedTour, setChoosedTour] = useState(item?.accessTour);
-	const { closeModal } = useModal();
 	const inputFileRef = useRef(null);
 	const [tourList, setTourList] = useState([]);
-
+	const [choosedTour, setChoosedTour] = useState(item.accessTour);
+	const { closeModal } = useModal();
+	const { file, filePreview, handleFileChange, setFilePreview } =
+		useFileChange(item?.banner?.downloadURL);
 	const {
-		register,
 		handleSubmit,
+		register,
 		formState: { isSubmitting },
 	} = useForm({
 		defaultValues: {
-			title: item.title,
-			desc: item.desc,
+			title: item?.title,
+			desc: item?.desc,
 		},
 	});
 
-	const handleFileChange = (e) => {
-		setFile(e.target.files[0]);
-		const image = new FileReader();
-		image.readAsDataURL(e.target.files[0]);
-		image.onloadend = () => {
-			setFilePreview(image.result);
-		};
-	};
-
-	const handleAddSlide = async (values) => {
-		if (!values.title || !values.desc || !choosedTour) {
+	const handleEditSlide = async (values) => {
+		if (!values.title || !values.desc) {
 			Swal.fire({
-				icon: "warning",
-				text: "データを全部入力してください",
-				confirmButtonColor: "#3085d6",
+				icon: "error",
+				title: "注意",
+				text: "コンテンツを入力してください",
 			});
 			return;
 		}
-
-		if (filePreview === item?.banner?.downloadURL) {
-			// if image no changes
-			await updateDoc(doc(db, "slides", item.slideId), {
-				title: values.title,
-				desc: values.desc,
-				accessTour: choosedTour,
-			});
-			closeModal();
-			toast.success("更新成功");
-			return;
-		} else {
-			// if image changed
-			try {
-				const desertRef = ref(storage, `images/${item?.banner.name}`);
-				await deleteObject(desertRef);
-				const downloadURL = await uploadFile();
-				if (!downloadURL) {
-					return;
-				}
-				const slideRef = doc(db, "slides", item.slideId)
-				await updateDoc(slideRef, {
+		try {
+			const slideDoc = doc(db, "slides", item.slideId);
+			if (!file) {
+				await updateDoc(slideDoc, {
 					title: values.title,
 					desc: values.desc,
 					accessTour: choosedTour,
-					banner: {
-						downloadURL: downloadURL,
-						name: file.name,
-					},
 				});
-				closeModal();
-				toast.success("更新成功");
-			} catch (error) {
-				toast.error("更新失敗");
+			} else if (file) {
+				const stamp = timestamp();
+				// delete old file
+				const deleteRef = ref(storage, `images/${item?.banner?.name}`);
+				await deleteObject(deleteRef);
+				// add new file
+				const newRef = ref(storage, `images/${stamp}`);
+				await uploadBytes(newRef, file);
+				await getDownloadURL(newRef).then((url) => {
+					setFilePreview(url);
+					// update data to document
+					updateDoc(slideDoc, {
+						title: values.title,
+						desc: values.desc,
+						accessTour: choosedTour,
+						banner: {
+							downloadURL: url,
+							name: stamp,
+						},
+					});
+				});
 			}
-		}
-	};
-
-	const uploadFile = async () => {
-		if (!file) {
-			inputFileRef.current.click();
-			return null;
-		}
-		try {
-			const storageRef = ref(storage, "images/" + file.name);
-			const uploadTask = uploadBytesResumable(storageRef, file);
-
-			return new Promise((resolve, reject) => {
-				uploadTask.on(
-					"state_changed",
-					() => null,
-					(error) => reject(error),
-					async () => {
-						try {
-							const downloadURL = await getDownloadURL(
-								uploadTask.snapshot.ref
-							);
-							resolve(downloadURL);
-						} catch (error) {
-							reject(error);
-						}
-					}
-				);
-			});
+			toast.success("更新成功！");
+			closeModal();
 		} catch (error) {
 			console.log(error);
-			throw error;
+			toast.error("更新失敗！");
 		}
 	};
 
+	// get tours
 	useEffect(() => {
-		getTourList(setTourList);
+		const getTours = async () => {
+			const general = await getGeneral();
+			const tourOrder = general?.tourOrder;
+			const tours = await getItemFromOrderList(tourOrder, "tours");
+			setTourList(tours);
+		};
+		getTours();
 	}, []);
 
 	return (
@@ -217,8 +185,8 @@ const SlideEditModal = ({ item }) => {
 				</div>
 			</div>
 			<ModalFooter
-				buttonOnClick={handleSubmit(handleAddSlide)}
-				buttonContent="追加"
+				buttonOnClick={handleSubmit(handleEditSlide)}
+				buttonContent="更新"
 				loading={isSubmitting}
 			></ModalFooter>
 		</div>

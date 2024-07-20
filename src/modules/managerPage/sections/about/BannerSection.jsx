@@ -11,6 +11,7 @@ import {
 } from "firebase/storage";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
+import { timestamp } from "utils/functions";
 
 const BannerSection = () => {
 	const [banner, setBanner] = useState({});
@@ -39,7 +40,7 @@ const BannerSection = () => {
 			}
 		}
 		getBanner();
-	}, []);
+	}, [filePreview]);
 
 	const handleFileChange = async (e) => {
 		if (e.target.files[0]) {
@@ -48,9 +49,12 @@ const BannerSection = () => {
 		try {
 			setUpdating(true);
 			const file = e.target.files[0];
+			const nameStamp = timestamp()
+			// delete old file
 			const deleteBannerRef = ref(storage, "images/" + banner.name);
 			await deleteObject(deleteBannerRef);
-			const newBannerRef = ref(storage, "images/" + file.name, file.type);
+			// add new file
+			const newBannerRef = ref(storage, `images/${nameStamp}`, file.type);
 			await uploadBytes(newBannerRef, file);
 			await getDownloadURL(newBannerRef).then((url) => {
 				toast.success("写真がアップロードされました");
@@ -59,7 +63,7 @@ const BannerSection = () => {
 				updateDoc(bannerDocRef, {
 					"about.banner": {
 						downloadURL: url,
-						name: file.name,
+						name: nameStamp,
 					},
 				});
 			});

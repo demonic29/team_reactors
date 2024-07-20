@@ -11,6 +11,11 @@ import { getItemFromOrderList } from "utils/managerPage/getItemFromOrderList";
 const ManagerNotePage = () => {
 	const [notes, setNotes] = useState([]);
 	const [loading, setLoading] = useState(false);
+	const [reload, setReload] = useState(true)
+
+	const reloadPage = () => {
+		setReload(!reload);
+	}
 
 	useEffect(() => {
 		const getTour = async () => {
@@ -29,17 +34,17 @@ const ManagerNotePage = () => {
 			}
 		};
 		getTour();
-	}, []);
+	}, [reload]);
 
 	return (
 		<div className="w-full">
-			<NoteHeader />
-			<NoteList notes={notes} loading={loading} />
+			<NoteHeader reloadPage={reloadPage} />
+			<NoteList notes={notes} loading={loading} reloadPage={reloadPage} />
 		</div>
 	);
 };
 
-function NoteHeader() {
+function NoteHeader({reloadPage}) {
 	const { openModal } = useModal();
 
 	return (
@@ -49,7 +54,7 @@ function NoteHeader() {
 				<SectionTitle className="mb-[0px]">
 					ノードマネジャー
 				</SectionTitle>
-				<AddButton onClick={() => openModal(<AddNoteModal />)}>
+				<AddButton onClick={() => openModal(<AddNoteModal reloadPage={reloadPage} />)}>
 					ノートを追加
 				</AddButton>
 			</div>
@@ -57,7 +62,7 @@ function NoteHeader() {
 	);
 }
 
-function NoteList({ loading, notes }) {
+function NoteList({ loading, notes, reloadPage }) {
 	return (
 		<>
 			{loading ? (
@@ -69,6 +74,7 @@ function NoteList({ loading, notes }) {
 							<NoteManagerCard
 								key={note.noteId}
 								note={note}
+								reloadPage={reloadPage}
 							></NoteManagerCard>
 						))}
 				</div>

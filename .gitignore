@@ -25,3 +25,4 @@ yarn-error.log*
 
 # production
 /src/drafts
+outline.md

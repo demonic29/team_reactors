@@ -5,7 +5,7 @@ import { HiMiniXMark } from "react-icons/hi2";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
-const NoteManagerCard = ({ note: { noteId, content } }) => {
+const NoteManagerCard = ({ note: { noteId, content }, reloadPage }) => {
 	const handleDeleteNote = async (noteId) => {
 		Swal.fire({
 			title: "ノートを削除しますか？",
@@ -27,6 +27,7 @@ const NoteManagerCard = ({ note: { noteId, content } }) => {
 				const docRef = doc(db, 'notes', noteId)
 				await deleteDoc(docRef)
 				toast.success("削除済み");
+				reloadPage()
 			} catch (error) {
 				console.log(error);
 				toast.error("ノートの削除に失敗しました");

@@ -8,117 +8,73 @@ import {
 	deleteObject,
 	getDownloadURL,
 	ref,
-	uploadBytesResumable,
+	uploadBytes,
 } from "firebase/storage";
-import React, { useRef, useState } from "react";
+import { useFileChange } from "hooks/useFileChange";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import QuillEditor from "react-quill";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import { timestamp } from "utils/functions";
 
-const HomeAboutEditModal = ({ homeAbout }) => {
+const HomeAboutEditModal = ({ homeAbout, reloadData }) => {
 	const [value, setValue] = useState(homeAbout?.content);
-	const [file, setFile] = useState();
-	const [filePreview, setFilePreview] = useState(
-		homeAbout?.image?.downloadURL
-	);
-	const inputFileRef = useRef();
 	const { closeModal } = useModal();
+	const { file, filePreview, handleFileChange, setFilePreview } =
+		useFileChange(homeAbout?.image?.downloadURL);
 	const {
-		formState: { isSubmitting },
 		handleSubmit,
-	} = useForm({
-		defaultValues: {
-			content: "",
-		},
-	});
+		formState: { isSubmitting },
+	} = useForm();
 
-	const handleFileChange = (e) => {
-		setFile(e.target.files[0]);
-		const image = new FileReader();
-		image.readAsDataURL(e.target.files[0]);
-		image.onloadend = () => {
-			setFilePreview(image.result);
-		};
-	};
-
-	const handleUpdateHomeAbout = async (values) => {
-		if (!values) {
+	const handleUpdateHomeAbout = async () => {
+		if (!value) {
 			Swal.fire({
-				icon: "warning",
-				text: "データを全部入力してください",
-				confirmButtonColor: "#3085d6",
+				icon: "error",
+				title: "注意",
+				text: "コンテンツを入力してください",
 			});
 			return;
 		}
-
-		if (filePreview === homeAbout?.image?.downloadURL) {
-			// if image no changes
-			await updateDoc(doc(db, "general", "pageData"), {
-				"about.homeAbout.content": value,
-			});
-			closeModal();
-			toast.success("更新成功");
-			return;
-		} else {
-			// if image changed
-			try {
-				const desertRef = ref(
+		try {
+			const docRef = doc(db, "general", "pageData");
+			if (!file) {
+				// update content to document
+				await updateDoc(docRef, {
+					"about.homeAbout.content": value,
+				});
+			} else if (file) {
+				const stamp = timestamp();
+				// delete old file
+				const deleteRef = ref(
 					storage,
 					`images/${homeAbout?.image?.name}`
 				);
-				await deleteObject(desertRef);
-				const downloadURL = await uploadFile();
-				if (!downloadURL) {
-					return;
-				}
-				const docRef = doc(db, "general", "pageData");
-				await updateDoc(docRef, {
-					"about.homeAbout": {
-						content: value,
-						image: {
-							name: file?.name,
-							downloadURL: downloadURL,
+				await deleteObject(deleteRef);
+				// add new file
+				const newRef = ref(storage, `images/${stamp}`);
+				await uploadBytes(newRef, file);
+				await getDownloadURL(newRef).then((url) => {
+					setFilePreview(url);
+					// update data to document
+					updateDoc(docRef, {
+						"about.homeAbout": {
+							content: value,
+							image: {
+								downloadURL: url,
+								name: stamp,
+							},
 						},
-					},
+					});
 				});
-				closeModal();
-				toast.success("更新成功");
-			} catch (error) {
-				toast.error("更新失敗");
 			}
-		}
-	};
-
-	const uploadFile = async () => {
-		if (!file) {
-			inputFileRef.current.click();
-			return null;
-		}
-		try {
-			const storageRef = ref(storage, "images/" + file.name);
-			const uploadTask = uploadBytesResumable(storageRef, file);
-
-			return new Promise((resolve, reject) => {
-				uploadTask.on(
-					"state_changed",
-					() => null,
-					(error) => reject(error),
-					async () => {
-						try {
-							const downloadURL = await getDownloadURL(
-								uploadTask.snapshot.ref
-							);
-							resolve(downloadURL);
-						} catch (error) {
-							reject(error);
-						}
-					}
-				);
-			});
+			toast.success("更新成功！");
+			closeModal();
+			reloadData();
 		} catch (error) {
 			console.log(error);
-			throw error;
+			toast.error("更新失敗！");
 		}
 	};
 
@@ -136,7 +92,6 @@ const HomeAboutEditModal = ({ homeAbout }) => {
 							<input
 								type="file"
 								className="hidden"
-								ref={inputFileRef}
 								onChange={(e) => handleFileChange(e)}
 								id="choose-homeAbout-img"
 							/>

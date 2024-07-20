@@ -5,12 +5,11 @@ import { FiEdit } from "react-icons/fi";
 import { IoTrashOutline } from "react-icons/io5";
 import { useModal } from "contexts/modal-context";
 import SlideEditModal from "modules/managerPage/modals/home/SlideEditModal";
-import { deleteDoc, doc } from "firebase/firestore";
+import { arrayRemove, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { db, storage } from "firebase-config";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { deleteObject, ref } from "firebase/storage";
-
 
 const SliderManageCard = ({ drag, item }) => {
 	const { openModal } = useModal();
@@ -34,9 +33,15 @@ const SliderManageCard = ({ drag, item }) => {
 
 	const deleteSlide = async (slideId, name) => {
 		try {
-			const desertRef = ref(storage, `images/${name}`);
+			// delete from slides collection
+			const deleteRef = ref(storage, `images/${name}`);
 			await deleteDoc(doc(db, "slides", slideId));
-			await deleteObject(desertRef)
+			await deleteObject(deleteRef);
+			// delete from slideOrder
+			const itemOrderDoc = doc(db, "general", "itemOrder");
+			await updateDoc(itemOrderDoc, {
+				slideOrder: arrayRemove(slideId),
+			});
 			toast.success("スライドが削除されました");
 		} catch (error) {
 			console.log(error);
