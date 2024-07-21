@@ -162,4 +162,8 @@ export function AuthProvider({ children }) {
       </AuthContext.Provider>
     );
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> feature/loginPage
