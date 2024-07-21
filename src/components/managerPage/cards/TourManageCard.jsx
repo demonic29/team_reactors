@@ -1,9 +1,10 @@
 import React from "react";
 import { cardFeature, MdDragHandle } from "utils/managerPage/cardFeature";
 
-const TourManageCard = ({ drag, item: tour }) => {
+const TourManageCard = ({ drag, item: tour, featureButton = true, className }) => {
 	return (
-		<div className="flex h-full gap-4 p-2 border border-gray-200 rounded-lg">
+		<div className={`flex h-full gap-4 p-2 border border-gray-200 rounded-lg ${className}`}>
+			{/* banner  */}
 			<div className="w-[200px] h-[140px] rounded-md overflow-hidden">
 				<img
 					src={tour.banner}
@@ -11,6 +12,8 @@ const TourManageCard = ({ drag, item: tour }) => {
 					className="object-cover object-center w-full h-full"
 				/>
 			</div>
+
+			{/* title, short description  */}
 			<div className="flex-1 py-2">
 				<div className="mb-1 text-sm text-gray-400">
 					作成日：{"2024/07/06"}
@@ -22,7 +25,9 @@ const TourManageCard = ({ drag, item: tour }) => {
 					{tour.shortDesc}
 				</p>
 			</div>
-			<div className="flex items-center gap-4">
+
+			{/* feature  */}
+			{featureButton && <div className="flex items-center gap-4">
 				<div className="flex items-center gap-4">
 					{cardFeature.map((feature) => (
 						<div
@@ -36,7 +41,7 @@ const TourManageCard = ({ drag, item: tour }) => {
 				<div className="text-gray-400 cursor-move" ref={drag}>
 					<MdDragHandle size={30} />
 				</div>
-			</div>
+			</div>}
 		</div>
 	);
 };

@@ -5,9 +5,7 @@ import ModalFooter from "components/modals/ModalFooter";
 import { useModal } from "contexts/modal-context";
 import { db } from "firebase-config";
 import {
-	addDoc,
 	arrayUnion,
-	collection,
 	doc,
 	setDoc,
 	updateDoc,
@@ -15,7 +13,7 @@ import {
 import React, { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-import { getTimestampInSeconds, timestamp } from "utils/functions";
+import { timestamp } from "utils/functions";
 
 const AddNoteModal = ({ reloadPage }) => {
 	const [noteFrame, setNoteFrame] = useState("");

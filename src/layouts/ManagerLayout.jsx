@@ -49,13 +49,16 @@ const ManagerLayout = () => {
 	return (
 		<div className="flex h-screen">
 			{/*navigation  */}
-			<div className="w-[230px] border-r border-r-gray-200 flex flex-col">
+			<div className="w-[220px] border-r border-r-gray-200 flex flex-col">
+				{/* logo and site name  */}
 				<div className="h-[65px] border-b border-b-gray-200 px-4 flex items-center">
 					<div className="flex items-center gap-2 font-bold text-secondaryColor text-[22px]">
 						<img srcSet={`${logo} 2.2x`} alt="rekiteku-logo" />
 						<span>歴てく</span>
 					</div>
 				</div>
+
+				{/* navi  */}
 				<div className="flex flex-col justify-between flex-1 p-2">
 					<div>
 						{managerNavs.map((managerNav, index) => (
@@ -85,8 +88,10 @@ const ManagerLayout = () => {
 					</div>
 				</div>
 			</div>
+
 			{/* main container  */}
 			<div className="flex-1">
+				{/* right container top bar  */}
 				<div className="h-[65px] border-b border-b-gray-200 flex items-center justify-between px-4">
 					<span className="text-2xl font-semibold text-secondaryColor">
 						{getPageName()}
@@ -105,6 +110,8 @@ const ManagerLayout = () => {
 						</div>
 					</div>
 				</div>
+
+				{/* main space  */}
 				<div className="flex w-full h-full px-4 pt-4 max-h-[calc(100vh-65px)] overflow-auto">
 					<Outlet></Outlet>
 				</div>
@@ -134,10 +141,10 @@ const managerNavs = [
 		name: "Privacy",
 		to: "/manager/privacy",
 	},
-	{
-		name: "Practice",
-		to: "/manager/practice",
-	},
+	// {
+	// 	name: "Practice",
+	// 	to: "/manager/practice",
+	// },
 ];
 
 export default ManagerLayout;
