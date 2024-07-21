@@ -1,9 +1,16 @@
 import React from "react";
 import { cardFeature, MdDragHandle } from "utils/managerPage/cardFeature";
 
-const TourManageCard = ({ drag, item: tour, featureButton = true, className }) => {
+const TourManageCard = ({
+	drag,
+	item: tour,
+	featureButton = true,
+	className,
+}) => {
 	return (
-		<div className={`flex h-full gap-4 p-2 border border-gray-200 rounded-lg ${className}`}>
+		<div
+			className={`flex h-full gap-4 p-2 border border-gray-200 rounded-lg ${className}`}
+		>
 			{/* banner  */}
 			<div className="w-[200px] h-[140px] rounded-md overflow-hidden">
 				<img
@@ -27,21 +34,30 @@ const TourManageCard = ({ drag, item: tour, featureButton = true, className }) =
 			</div>
 
 			{/* feature  */}
-			{featureButton && <div className="flex items-center gap-4">
+			{featureButton && (
 				<div className="flex items-center gap-4">
-					{cardFeature.map((feature) => (
-						<div
-							key={feature.name}
-							className="flex items-center justify-center transition-all bg-gray-200 rounded-full cursor-pointer size-11 hover:bg-gray-300"
-						>
-							{feature.icon}
-						</div>
-					))}
+					<div className="flex items-center gap-4">
+						{cardFeature.map((feature) => (
+							<div
+								key={feature.name}
+								className="flex items-center justify-center transition-all bg-gray-200 rounded-full cursor-pointer size-11 hover:bg-gray-300"
+							>
+								{feature.icon}
+							</div>
+						))}
+					</div>
+					<div className="text-gray-400 cursor-move" ref={drag}>
+						<MdDragHandle size={30} />
+					</div>
 				</div>
-				<div className="text-gray-400 cursor-move" ref={drag}>
-					<MdDragHandle size={30} />
+			)}
+			{drag && (
+				<div className="flex items-center">
+					<div className="text-gray-400 cursor-move" ref={drag}>
+						<MdDragHandle size={30} />
+					</div>
 				</div>
-			</div>}
+			)}
 		</div>
 	);
 };

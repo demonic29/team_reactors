@@ -1,5 +1,4 @@
 import EditButton from "components/managerPage/buttons/EditButton";
-import TourManageCard from "components/managerPage/cards/TourManageCard";
 import SectionTitle from "components/managerPage/SectionTitle";
 import { useModal } from "contexts/modal-context";
 import React, { useEffect, useState } from "react";
@@ -8,13 +7,12 @@ import { getItemFromOrderList } from "utils/managerPage/getItemFromOrderList";
 import { GoPlus } from "react-icons/go";
 import RecommendTourAddModal from "modules/managerPage/modals/home/RecommendTourAddModal";
 import { useReload } from "hooks/useReload";
-import FiEdit from "components/managerPage/icons/FiEdit";
-import { IoTrashOutline } from "react-icons/io5";
 import { HiMiniXMark } from "react-icons/hi2";
 import { toast } from "react-toastify";
 import { arrayRemove, doc, updateDoc } from "firebase/firestore";
 import { db } from "firebase-config";
 import Swal from "sweetalert2";
+import RecommendTourOrderEditModal from "modules/managerPage/modals/home/RecommendTourOrderEditModal";
 
 const RecommendTourSection = () => {
 	const [tourOrder, setTourOrder] = useState([]);
@@ -52,7 +50,7 @@ const RecommendTourSection = () => {
 				deleteRecommendTour(tourId);
 			}
 		});
-		
+
 		const deleteRecommendTour = async (tourId) => {
 			try {
 				const pageDataRef = doc(db, "general", "itemOrder");
@@ -74,7 +72,18 @@ const RecommendTourSection = () => {
 				<SectionTitle className={"mb-[0px]"}>
 					おすすめツアー
 				</SectionTitle>
-				<EditButton>編集</EditButton>
+				<EditButton
+					onClick={() =>
+						openModal(
+							<RecommendTourOrderEditModal
+								tourOrder={tourOrder}
+								reloadData={reloadData}
+							/>
+						)
+					}
+				>
+					編集
+				</EditButton>
 			</div>
 			<div className="grid grid-cols-2 gap-4 2xl:grid-cols-1">
 				{loading ? (

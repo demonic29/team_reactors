@@ -94,6 +94,7 @@ const RecommendTourAddModal = ({ tourIdList, reloadData }) => {
 							></TourManageCard>
 						</div>
 					))}
+					{!loading && tourLeft.length === 0 && <div className="h-[100%] flex items-center justify-center text-gray-400">追加可能なツアーがありません！</div>}
 			</div>
 			<ModalFooter
 				buttonContent="追加"

@@ -381,10 +381,8 @@ const PickImage = ({
 
 const tourTypeOptions = [
 	{ id: 1, name: "日帰り" },
-	{ id: 2, name: "2日1泊" },
-	{ id: 3, name: "2日2泊" },
-	{ id: 4, name: "3日2泊" },
-	{ id: 5, name: "3日3泊" },
+	{ id: 2, name: "1泊2日" },
+	{ id: 4, name: "2泊3日" },
 	{ id: 6, name: "その他" },
 ];
 
