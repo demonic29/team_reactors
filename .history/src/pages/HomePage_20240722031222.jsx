@@ -21,8 +21,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { useApi } from '../contexts/managerPage/api-context';
 
 // firebase
-import { db } from "firebase-config";
-import { doc, getDoc } from "firebase/firestore";
+import {doc} 
 
 const HomePage = () => {
   const [info, setInfo] = useState([]);
@@ -38,7 +37,7 @@ const HomePage = () => {
     }
 }, [data]) 
 
-  // about
+
   const [homeAbout, setHomeAbout] = useState({}); 
   useEffect(() => {
     const getHomeAbout = async () => {
@@ -48,21 +47,6 @@ const HomePage = () => {
     };
     getHomeAbout();
   }, []);
-
-  // tour
-  useEffect(() => {
-		const getRecommendTour = async () => {
-			const general = await getGeneral();
-			const recommendTour = await getItemFromOrderList(
-				general.recommendTourOrder,
-				"tours"
-			);
-			setTourIdList(general.recommendTourOrder);
-			setTourOrder(recommendTour);
-
-		};
-		getRecommendTour();
-	}, [reload]);
 
   const filterImages = tourInfo.filter(item => item.show)
 
@@ -89,16 +73,14 @@ const HomePage = () => {
           <h2 className='text-3xl text-center font-bold mt-[120px]'>私たちについて</h2>
           <div className='grid grid-cols-2 gap-10 mt-[50px]  items-center'>
             <div>
-              <img src={homeAbout?.image?.downloadURL} alt="" className="w-[700px] rounded-xl" />
+              <img src={mainImg} alt="" className="w-[700px] rounded-xl" />
             </div>
             <div className='grid gap-10'>
-              <p 
-                className="text-md leading-10"
-                dangerouslySetInnerHTML={{
-                  __html : `${homeAbout?.content}`
-                }}
-                >
-              
+              <p className="text-md leading-10">
+                「歴てく」は、歴史をてくてくと歩き回るツアーサイトです。<br />
+                知名度が低い国内の歴史的な場所や、歴史上の人物に焦点を当てたツアーを企画。
+                「歴てく」は、歴史をてくてくと歩き回るツアーサイトです。<br />
+                知名度が低い国内の歴史的な場所や、歴史上の人物に焦点を当てたツアーを企画。
               </p>
              
               <NavLink to={"/about"}>

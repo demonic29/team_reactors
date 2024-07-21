@@ -23,6 +23,8 @@ import { useApi } from '../contexts/managerPage/api-context';
 // firebase
 import { db } from "firebase-config";
 import { doc, getDoc } from "firebase/firestore";
+import { getGeneral } from "utils/managerPage/getGeneral";
+import { getItemFromOrderList } from "utils/managerPage/getItemFromOrderList";
 
 const HomePage = () => {
   const [info, setInfo] = useState([]);

@@ -38,7 +38,7 @@ const HomePage = () => {
     }
 }, [data]) 
 
-  // about
+
   const [homeAbout, setHomeAbout] = useState({}); 
   useEffect(() => {
     const getHomeAbout = async () => {
@@ -48,21 +48,6 @@ const HomePage = () => {
     };
     getHomeAbout();
   }, []);
-
-  // tour
-  useEffect(() => {
-		const getRecommendTour = async () => {
-			const general = await getGeneral();
-			const recommendTour = await getItemFromOrderList(
-				general.recommendTourOrder,
-				"tours"
-			);
-			setTourIdList(general.recommendTourOrder);
-			setTourOrder(recommendTour);
-
-		};
-		getRecommendTour();
-	}, [reload]);
 
   const filterImages = tourInfo.filter(item => item.show)
 
