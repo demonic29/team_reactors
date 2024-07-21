@@ -1,107 +1,64 @@
+import { useApi } from "../contexts/managerPage/api-context";
 import React, { useEffect, useState } from "react";
 import "swiper/css";
-import "swiper/css/navigation";
+import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination } from "swiper/modules";
+import "./css/slide.css";
 
 export default function ReviewCard() {
-    // const { data } = useApi();
-    // const [tourList, setTourList] = useState([]);
-    // useEffect(() => {
-    //     if (data && data.tours && data.tours.length > 0) {
-    //         setTourList(data.tours[0]);
-    //     }
-    // }, [data]);
-
-    const [tourList, setTourList] = useState({});
+    const { data } = useApi();
+    const [tourList, setTourList] = useState([]);
 
     useEffect(() => {
-        // JSONデータ
-        const data = {
-            tours: [
-                {
-                    id: 1,
-                    title: "Amazing Japan Tour",
-                    description:
-                        "Explore the beauty of Japan with this amazing tour.",
-                    feedback: [
-                        {
-                            rate: 5,
-                            name: "John Doe",
-                            age: 30,
-                            avatar: "/path/to/avatar1.jpg",
-                            address: "New York, USA",
-                            time: "2 hours ago",
-                            content:
-                                "This was an incredible experience! Highly recommended.",
-                        },
-                        {
-                            rate: 4,
-                            name: "Jane Smith",
-                            age: 25,
-                            avatar: "/path/to/avatar2.jpg",
-                            address: "London, UK",
-                            time: "1 day ago",
-                            content:
-                                "Beautiful sights and great service. Would love to do it again.",
-                        },
-                        {
-                            rate: 5,
-                            name: "Akira Tanaka",
-                            age: 35,
-                            avatar: "/path/to/avatar3.jpg",
-                            address: "Tokyo, Japan",
-                            time: "3 days ago",
-                            content: "最高のツアーでした！また行きたいです。",
-                        },
-                    ],
-                },
-            ],
-        };
-        // データを設定
-        setTourList(data.tours[0]);
-    }, []);
+        if (data && data.tours && data.tours.length > 0) {
+            setTourList(data.tours[0]);
+        }
+    }, [data]);
 
     return (
         <div>
             <div
-                className="overflow-hidden m-auto bg-cover bg-center"
+                className="w-full m-auto bg-cover bg-center"
                 style={{
-                    backgroundImage: "url('/path/to/background.jpg')",
+                    backgroundImage:
+                        "url('https://images.unsplash.com/photo-1719683193558-1d08017c2217?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
                 }}
             >
-                <div className="min-h-full w-full  py-[100px]">
+                <div className="max-h-full max-w-full py-[100px]">
                     <Swiper
                         effect={"coverflow"}
                         grabCursor={true}
                         centeredSlides={true}
                         slidesPerView={"auto"}
                         coverflowEffect={{
-                            rotate: 50,
-                            stretch: -40,
-                            depth: 100,
+                            rotate: 0,
+                            stretch: -200,
+                            depth: 800,
                             modifier: 1,
                             slideShadows: true,
                         }}
                         modules={[EffectCoverflow, Pagination]}
-                        spaceBetween={50}
                     >
                         {tourList.feedback &&
                             tourList.feedback.length > 0 &&
                             tourList.feedback.map((feedback, index) => (
-                                <SwiperSlide key={index}>
-                                    <div className="w-[800px]">
-                                        <div className="block w-[800px] h-[350px] my-[20px] bg-white rounded-lg shadow-md">
+                                <SwiperSlide
+                                    key={index}
+                                    className="custom-slide"
+                                >
+                                    <div className="w-[800px] px-[50px] ">
+                                        <div className="block w-full h-[350px] bg-white rounded-lg drop-shadow-xl">
                                             <div className="flex gap-[20px] p-[30px] pb-[15px]">
-                                                <div>
+                                                <div className="w-[150px] ">
                                                     <img
                                                         src={feedback.avatar}
                                                         alt="Avatar"
-                                                        className="w-[100px] h-[100px] rounded-full"
+                                                        className="w-[100px] h-[100px] object-cover rounded-full"
                                                     />
                                                 </div>
-                                                <div className="w-[500px] p-4">
+                                                <div className="w-full p-4">
                                                     <div className="flex justify-between">
                                                         <div className="w-full flex justify-between items-center">
                                                             <div className="w-[150px] flex justify-between items-center">
