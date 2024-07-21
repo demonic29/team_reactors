@@ -1,9 +1,9 @@
 import React from "react";
 import { DraggableItem } from "./DraggableItem";
 
-const DraggableList = ({ items, setItems, children }) => {
+const DraggableList = ({ items, setItems, className = '', children }) => {
 	return (
-		<>
+		<div className={className}>
 			{items.map((item, index) => (
 				<DraggableItem
 					key={index}
@@ -15,7 +15,7 @@ const DraggableList = ({ items, setItems, children }) => {
 					{children}
 				</DraggableItem>
 			))}
-		</>
+		</div>
 	);
 };
 

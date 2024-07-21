@@ -2,30 +2,27 @@ import React from "react";
 import BannerSection from "modules/managerPage/sections/about/BannerSection";
 import CompanySection from "modules/managerPage/sections/about/CompanySection";
 import VisionSection from "modules/managerPage/sections/about/VisionSection";
-import AccessSection from "modules/managerPage/sections/about/AccessSection";
-import CompanyImageSection from "modules/managerPage/sections/about/CompanyImageSection";
-import { useApi } from "contexts/managerPage/api-context";
+import OwnerSection from "modules/managerPage/sections/about/OwnerSection";
+import FooterSection from "modules/managerPage/sections/about/FooterSection";
 
 const ManagerAboutPage = () => {
-	const { data } = useApi();
-
-	const { about } = data;
-
 	return (
 		<div className="grid flex-1 grid-cols-3 gap-4 2xl:grid-cols-2">
 			{/* Col 1  */}
 			<div>
-				<BannerSection banner={about?.banner} />
-				<AccessSection access={about?.access} />
+				<BannerSection />
+				<OwnerSection />
+				{/* <AccessSection /> */}
 			</div>
 			{/* Col 2  */}
 			<div>
-				<CompanySection company={about?.company} />
-				<CompanyImageSection companyImages={about?.companyImages} />
+				<VisionSection />
+				<FooterSection />
+				{/* <CompanyImageSection /> */}
 			</div>
 			{/* Col 3  */}
 			<div>
-				<VisionSection vision={about?.vision} />
+				<CompanySection />
 			</div>
 		</div>
 	);

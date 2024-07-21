@@ -1,9 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const SectionTitle = ({ children = "Your title", className }) => {
+const SectionTitle = ({ children = "Your title", sticky, className }) => {
 	return (
-		<h2 className={`text-[22px] font-semibold mb-3 ${className}`}>
+		<h2
+			className={`text-[22px] font-semibold mb-3 ${
+				sticky && "sticky top-0 z-20 bg-white"
+			} ${className}`}
+		>
 			{children}
 		</h2>
 	);

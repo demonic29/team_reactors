@@ -3,7 +3,6 @@ import loginImg from "../assets/img/about-main-img.jpg";
 import logo from "../assets/img/rekiteku-logo.svg";
 import { auth } from "../firebase-config";
 import {
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import Swal from "sweetalert2";

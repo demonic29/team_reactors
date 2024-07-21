@@ -15,7 +15,7 @@ module.exports = {
       kiwiMaru: ["Kiwi Maru", "serif"],
     },
 		screens: {
-			"2xl": { max: "1535px" },
+			"2xl": { max: "1435px" },
 			// => @media (max-width: 1535px) { ... }
 
 			xl: { max: "1279px" },

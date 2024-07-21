@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SectionTitle from "components/managerPage/SectionTitle";
 import Button from "components/buttons/Button";
-import { useApi } from "contexts/managerPage/api-context";
+import { useModal } from "contexts/modal-context";
+import HomeAboutEditModal from "modules/managerPage/modals/home/HomeAboutEditModal";
+import { db } from "firebase-config";
+import { doc, getDoc } from "firebase/firestore";
+import { useReload } from "hooks/useReload";
 
-const AboutSection = ({homeAbout}) => {
-	const { loading } = useApi();
+const AboutSection = () => {
+	const { openModal } = useModal();
+	const { reload, reloadData } = useReload();
+	const [homeAbout, setHomeAbout] = useState({});
+	const [loading, setLoading] = useState(false);
+
+	useEffect(() => {
+		const getHomeAbout = async () => {
+			setLoading(true);
+			const docRef = doc(db, "general", "pageData");
+			const docSnap = await getDoc(docRef);
+			setHomeAbout(docSnap.data().about.homeAbout);
+			setLoading(false);
+		};
+		getHomeAbout();
+	}, [reload]);
 
 	return (
 		<div className="mb-10">
@@ -13,16 +31,33 @@ const AboutSection = ({homeAbout}) => {
 				<Skeleton></Skeleton>
 			) : (
 				<div className="flex gap-8">
-					<div className="w-[300px] h-[200px] rounded-lg overflow-hidden">
+					<div className="w-[320px] h-[220px] rounded-lg overflow-hidden">
 						<img
-							src={homeAbout?.image}
+							src={homeAbout?.image?.downloadURL}
 							alt="about-image"
 							className="object-cover object-center w-full h-full"
 						/>
 					</div>
-					<div className="w-full max-w-[580px] text-lg tracking-wider leading-relaxed">
-						<p className="mb-4">{homeAbout?.content}</p>
-						<Button className={"px-6 py-[6px]"}>編集</Button>
+					<div className="w-full max-w-[650px] text-lg tracking-wider leading-relaxed">
+						<div
+							className="mb-4"
+							dangerouslySetInnerHTML={{
+								__html: `${homeAbout?.content}`,
+							}}
+						></div>
+						<Button
+							className={"px-6 py-[6px]"}
+							onClick={() =>
+								openModal(
+									<HomeAboutEditModal
+										homeAbout={homeAbout}
+										reloadData={reloadData}
+									/>
+								)
+							}
+						>
+							編集
+						</Button>
 					</div>
 				</div>
 			)}

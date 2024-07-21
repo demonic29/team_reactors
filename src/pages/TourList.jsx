@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import CarouselImages from '../components/Carousel/CarouselImages'
-import NavBar from '../layouts/NavBar';
 import Card from '../components/card/Tour';
 import Footer from '../layouts/Footer';
 
@@ -15,7 +14,7 @@ export default function TourList() {
         if(data && data.tours && data.tours.length > 0) {
             setTourImg(data.tours[0])
         }
-    }, [data]) 
+    }, [data])
 
     return (
         <div>
@@ -29,7 +28,7 @@ export default function TourList() {
                 </div>
                 
                 <div className='flex justify-center'>
-                    <div className='grid gap-10 grid-cols-2 justify-center'>
+                    <div className='grid justify-center grid-cols-2 gap-10'>
                         {
                             tourImg.images && tourImg.images.map((image,index) => (
                                 <Card
