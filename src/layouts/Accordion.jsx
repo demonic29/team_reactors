@@ -204,7 +204,7 @@ export default function Accordion() {
                                 <div className="flex justify-center mx-auto align-center text-[12px] text-[#9f9f9f] pb-[30px] ">
                                     <p>※体力消費率について :</p>
                                     <p className="max-w-[50%]">
-                                        各地点を訪れる際にどれくらい体力を消費するかを、5段階で評価し可視化したものです。星の数が増えるほど、体力の消費が大きくなることを示しています。{" "}
+                                        各地点を訪れる際にどれくらい体力を消費するかを、5段階で評価し可視化したものです。星の数が増えるほど、体力の消費が大きくなることを示しています。
                                     </p>
                                 </div>
                             </div>
