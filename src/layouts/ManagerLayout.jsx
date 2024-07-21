@@ -131,6 +131,10 @@ const managerNavs = [
 		to: "/manager/notes",
 	},
 	{
+		name: "Privacy",
+		to: "/manager/privacy",
+	},
+	{
 		name: "Practice",
 		to: "/manager/practice",
 	},

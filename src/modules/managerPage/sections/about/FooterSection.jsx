@@ -12,7 +12,6 @@ import { toast } from "react-toastify";
 const FooterSection = () => {
 	const { openModal } = useModal();
 	const [footer, setFooter] = useState({});
-	console.log("🚀 ~ FooterSection ~ footer:", footer);
 	const { reload, reloadData } = useReload();
 	const [loading, setLoading] = useState(false);
 
@@ -63,6 +62,7 @@ const FooterSection = () => {
 						{footer[item.field]}
 					</li>
 				))}
+				<li>...</li>
 			</div>
 		</SectionContainer>
 	);

@@ -31,14 +31,14 @@ const AboutSection = () => {
 				<Skeleton></Skeleton>
 			) : (
 				<div className="flex gap-8">
-					<div className="w-[300px] h-[200px] rounded-lg overflow-hidden">
+					<div className="w-[320px] h-[220px] rounded-lg overflow-hidden">
 						<img
 							src={homeAbout?.image?.downloadURL}
 							alt="about-image"
 							className="object-cover object-center w-full h-full"
 						/>
 					</div>
-					<div className="w-full max-w-[580px] text-lg tracking-wider leading-relaxed">
+					<div className="w-full max-w-[650px] text-lg tracking-wider leading-relaxed">
 						<div
 							className="mb-4"
 							dangerouslySetInnerHTML={{

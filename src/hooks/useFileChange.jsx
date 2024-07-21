@@ -14,5 +14,5 @@ export const useFileChange = (initFile) => {
 		};
 	};
 
-	return { file, filePreview, handleFileChange, setFilePreview };
+	return { file, filePreview, handleFileChange, setFilePreview, setFile };
 };

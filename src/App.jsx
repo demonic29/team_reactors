@@ -12,6 +12,7 @@ import ManagerTourPage from "pages/manager/ManagerTourPage";
 import PageNotFound from "pages/PageNotFound";
 import ManagerNotePage from "pages/manager/ManagerNotePage";
 import ManagerPracticePage from "pages/manager/ManagerPracticePage";
+import ManagerPrivacyPage from "pages/manager/ManagerPrivacyPage";
 
 const App = () => {
 	return (
@@ -38,6 +39,10 @@ const App = () => {
 				<Route
 					path="/manager/notes"
 					element={<ManagerNotePage />}
+				></Route>
+				<Route
+					path="/manager/privacy"
+					element={<ManagerPrivacyPage />}
 				></Route>
 				<Route
 					path="/manager/practice"

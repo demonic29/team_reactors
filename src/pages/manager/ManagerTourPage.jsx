@@ -8,8 +8,7 @@ import FiEdit from "components/managerPage/icons/FiEdit";
 import { IoTrashOutline } from "react-icons/io5";
 import { GoPlus } from "react-icons/go";
 import { getGeneral } from "utils/managerPage/getGeneral";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "firebase-config";
+import TourAddNewModal from "modules/managerPage/modals/tour/TourAddNewModal";
 
 const ManagerTourPage = () => {
 	const [tourList, setTourList] = useState([]);
@@ -47,6 +46,7 @@ const ManagerTourPage = () => {
 					<Skeleton></Skeleton>
 				) : (
 					<>
+						{/* Render existing tours  */}
 						{tourList.map((tour) => (
 							<div
 								key={tour?.tourId}
@@ -80,7 +80,9 @@ const ManagerTourPage = () => {
 								</div>
 							</div>
 						))}
-						<div className="border-gray-200 cursor-pointer group border-dashed border-[1.5px] justify-center p-2 rounded-lg flex gap-4 items-center w-full h-full">
+
+						{/* Add new tour  */}
+						<div onClick={() => openModal(<TourAddNewModal />)} className="border-gray-200 cursor-pointer group border-dashed border-[1.5px] justify-center p-2 rounded-lg flex gap-4 items-center w-full h-full">
 							<span className="w-[186px] aspect-video flex items-center group-hover:text-gray-800 group-hover:scale-105 transition-all justify-center text-3xl text-gray-400">
 								<GoPlus
 									size={40}
@@ -97,7 +99,7 @@ const ManagerTourPage = () => {
 
 function Skeleton() {
 	return (
-		<div className="flex w-1/2 gap-4 p-2 border border-gray-200 rounded-lg">
+		<div className="flex w-full gap-4 p-2 border border-gray-200 rounded-lg">
 			<div className="w-[200px] h-[140px] rounded-md overflow-hidden skeleton"></div>
 			<div className="flex-1 py-2">
 				<div className="w-1/4 h-4 mb-2 skeleton"></div>
