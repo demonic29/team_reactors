@@ -137,8 +137,8 @@ const HomePage = () => {
 
           {/* tour-datas */}
           <div className="flex flex-wrap justify-center gap-10 sub-container">
-            {tourList.slice(0,3).map((tour) => (
-              <div key={tour?.tourId} className="max-w-[calc((100%-(40px)*2)/3)]">
+            {tourList.map((tour) => (
+              <div key={tour?.tourId} className={`${tourList.length > 3 ? 'max-w-[calc((100%-(40px)*1)/2)]' : 'max-w-[calc((100%-(40px)*2)/3)]' }`}>
                 <Card
                   imgSrc={tour.banner}
                   alt="tour-banner"
@@ -175,7 +175,7 @@ const HomePage = () => {
               <p>No notes available.</p>
             )}
           </div>
-          <NavLink to={""} className="mt-[100px] flex justify-center">
+          <NavLink to={"https://note.com/reki_teku0531/"} className="mt-[-100px] flex justify-center">
             <Button>もっとツアーをみる</Button>
           </NavLink>
         </div>
