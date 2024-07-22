@@ -22,7 +22,13 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+<<<<<<< HEAD
 .vercel
+=======
+<<<<<<< HEAD
+.vercel
+=======
+>>>>>>> feature/fixUiUx
 
 # production
 /src/drafts

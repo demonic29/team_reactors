@@ -1,78 +1,135 @@
 
-import React, { useEffect, useState } from 'react';
-import Button from '../components/buttons/Button';
-import Card from '../components/card/Tour';
-import Footer from '../layouts/Footer';
-import CarouselImages from '../components/Carousel/CarouselImages';
 
-// Json-Datas
-import slides from '../components/Carousel/CarouselData.json';
-import tourInfo from '../components/card/tourInfo.json';
-import note from '../components/card/note.json';
-
-// Import-Images
-import mainImg from '../assets/img/about-main-img.jpg'
-import tourImg1 from '../assets/img/tour-img-1.jpg';
-import tourImg2 from '../assets/img/tour-img-2.jpg';
-import tourImg3 from '../assets/img/tour-img-3.jpg';
-import { Link, NavLink } from 'react-router-dom';
-
-// useApi
-import { useApi } from '../contexts/managerPage/api-context';
+import React, { useEffect, useState } from "react";
+import Button from "../components/buttons/Button";
+import Card from "../components/card/Tour";
+import Footer from "../layouts/Footer";
+// import { Swiper, SwiperSlide } from 'swiper/react';
+// import 'swiper/swiper-bundle.min.css';
+// import { Navigation, Pagination, Parallax, Scrollbar, A11y } from 'swiper';
+import { getGeneral } from "utils/managerPage/getGeneral";
+import { getItemFromOrderList } from "utils/managerPage/getItemFromOrderList";
+import { doc, getDoc, collection } from "firebase/firestore";
+import { db } from "firebase-config";
+import { NavLink } from "react-router-dom";
+import CarouselImages from "components/Carousel/CarouselImages";
+import { useApi } from "contexts/managerPage/api-context";
 
 const HomePage = () => {
-  const [info, setInfo] = useState([]);
-  const [noteData, setNoteData] = useState([]);
   const [carouselImgs, setCarouselImgs] = useState([]);
-
-  // useApi
-  const { data } = useApi();
-  const [tourImg , setTourImg] = useState({});
-  useEffect(() => {
-    if(data && data.tours && data.tours.length > 0) {
-        setTourImg(data.tours[0])
-    }
-}, [data]) 
-
-
-  const filterImages = tourInfo.filter(item => item.show)
+  const [loading, setLoading] = useState(false);
+  const [tourList, setTourList] = useState([]);
+  const [about, setAbout] = useState({});
+  const [imgSlides, setImgSlides] = useState([]);
 
   useEffect(() => {
-    setInfo(tourInfo);
+    const getTour = async () => {
+      setLoading(true);
+      try {
+        const general = await getGeneral();
+        const tours = await getItemFromOrderList(general.recommendTourOrder, "tours");
+        setTourList(tours);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getTour();
   }, []);
 
   useEffect(() => {
-    setNoteData(note);
+    const getHomeAbout = async () => {
+      setLoading(true);
+      try {
+        const docRef = doc(db, "general", "pageData");
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setAbout(docSnap.data().about.homeAbout);
+        } else {
+          console.log("No such document!");
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getHomeAbout();
   }, []);
 
-  useEffect(() => { setCarouselImgs(slides) }, []);
+  const [notes, setNotes] = useState([]);
+  useEffect(() => {
+    const getNotes = async () => {
+      setLoading(true);
+      try {
+        const general = await getGeneral();
+        const getNoteDatas = await getItemFromOrderList(general.recommendNoteOrder, "notes");
+        setNotes(getNoteDatas);
+        console.log(getNoteDatas)
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getNotes();
+  }, []);
 
-  const tourImages = [tourImg1, tourImg2, tourImg3];
+  useEffect(() => {
+    const getSlides = async () => {
+      setLoading(true);
+      try {
+        const general = await getGeneral();
+        const slideOrder = general?.slideOrder;
+        const slides = await getItemFromOrderList(slideOrder, "slides");
+        setImgSlides(slides);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getSlides();
+  }, []);
+
+    // useApi
+    const { data } = useApi();
+    const [tourImg , setTourImg] = useState({});
+    useEffect(() => {
+      if(data && data.tours && data.tours.length > 0) {
+          setTourImg(data.tours[0])
+      }
+  }, [data]) 
 
   return (
     <div>
       <div className="container">
-        
-      {tourImg.images && <CarouselImages slides={tourImg.images.map(img => ({ src: img, title: tourImg.title, desc: tourImg.shortDesc }))}/>}
+        <div className="mt-5">
+        {tourImg.images && <CarouselImages slides={tourImg.images.map(img => ({ src: img, title: tourImg.title, desc: tourImg.shortDesc }))}/>}
+        </div>
 
         {/* about-us */}
-        <div className='sub-container'>
-          <h2 className='text-3xl text-center font-bold mt-[120px]'>私たちについて</h2>
-          <div className='grid grid-cols-2 gap-10 mt-[50px]  items-center'>
+        <div className="sub-container">
+          <h2 className="text-3xl text-center font-bold mt-[120px]">私たちについて</h2>
+          <div className="grid grid-cols-2 gap-10 mt-[50px] items-center">
             <div>
-              <img src={mainImg} alt="" className="w-[700px] rounded-xl" />
+              <img
+                src={about?.image?.downloadURL}
+                alt=""
+                className="w-[700px] rounded-xl"
+              />
             </div>
-            <div className='grid gap-10'>
-              <p className="text-md leading-10">
-                「歴てく」は、歴史をてくてくと歩き回るツアーサイトです。<br />
-                知名度が低い国内の歴史的な場所や、歴史上の人物に焦点を当てたツアーを企画。
-                「歴てく」は、歴史をてくてくと歩き回るツアーサイトです。<br />
-                知名度が低い国内の歴史的な場所や、歴史上の人物に焦点を当てたツアーを企画。
-              </p>
-             
-              <div>
-                <Button>詳しくはこちら</Button>
-              </div>
+            <div className="grid gap-10">
+              <p
+                className="leading-10 text-md"
+                dangerouslySetInnerHTML={{
+                  __html: `${about.content}`,
+                }}
+              ></p>
+              <NavLink to={"/tourList"}>
+                <Button>もっとツアーをみる</Button>
+              </NavLink>
             </div>
           </div>
         </div>
@@ -84,63 +141,50 @@ const HomePage = () => {
             <p>心を込めて、私たちはお客さんにいろいろなツアーを提供しています。</p>
           </div>
 
-          {/* card-datas */}
-          <div className='flex gap-10 justify-center'>
-            {filterImages.map((item, index) => (
-              <Card
-                key={index}
-                imgSrc={tourImages[index % tourImages.length]}
-                item={item}
-                title={item.title}
-                desc={item.desc}
-                location={item.location}
-                link={item.link}
-              />
+          {/* tour-datas */}
+          <div className="flex flex-wrap justify-center gap-10 sub-container">
+            {tourList.slice(0,3).map((tour) => (
+              <div key={tour?.tourId} className="max-w-[calc((100%-(40px)*2)/3)]">
+                <Card
+                  imgSrc={tour.banner}
+                  alt="tour-banner"
+                  title={tour.title}
+                  desc={tour.shortDesc}
+                />
+              </div>
             ))}
           </div>
 
-          <div className='mt-[100px] text-center'>
-            <NavLink to={"/tourList"}>
-              <Button>もっとツアーをみる</Button>
-            </NavLink>
-          </div>
+          <NavLink to={"/tourList"} className="mt-[100px] flex justify-center">
+            <Button>もっとツアーをみる</Button>
+          </NavLink>
         </div>
 
         {/* note */}
-          <div>
-            <div className="text-center mt-[100px]">
-              <h2 className="text-3xl font-bold">ノート</h2>
-            </div>
-
-            <div className='flex mt-5'>
-              {noteData.map((item, index) => (
-                <div 
-                  key={index}
-                  dangerouslySetInnerHTML={{ 
-                    __html: 
-                      `<iframe class="note-embed" 
-                        src=${item.link} 
-                        style="
-                          border: 0; 
-                          display: block; 
-                          max-width: 99%; 
-                          width: 500px; 
-                          padding: 0px; 
-                          margin: 10px 0px; 
-                          position: static; 
-                          visibility: visible;" 
-                          height="300px"
-                        >
-                      </iframe>
-                      <script async src="https://note.com/scripts/embed.js" charset="utf-8"></script>`
-                  }} 
-                />
-              ))}
-            </div>
-            <div className='text-center'>
-              <Button>ノートのページへ</Button>
-            </div>
+        <div>
+          <div className="text-center mt-[100px]">
+            <h2 className="text-3xl font-bold">ノート</h2>
           </div>
+
+          <div className="flex gap-5 mt-5">
+            {notes && notes.length > 0 ? (
+              notes.map((note) => (
+                <div key={note.noteId}>
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: `${note.content}`,
+                    }}
+                  ></p>
+                </div>
+              ))
+            ) : (
+              <p>No notes available.</p>
+            )}
+          </div>
+          <NavLink to={"https://note.com/reki_teku0531/"} className="mt-[-100px] flex justify-center">
+            <Button>もっとツアーをみる</Button>
+          </NavLink>
+        </div>
       </div>
 
       <Footer />
