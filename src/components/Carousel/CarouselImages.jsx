@@ -1,17 +1,45 @@
-import React, { useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar, A11y, Parallax, Autoplay, } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
-import './Carousel.css';
-import Button from '../buttons/Button'
-import { NavLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React, { useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import {
+	Navigation,
+	Pagination,
+	Scrollbar,
+	A11y,
+	Parallax,
+	Autoplay,
+} from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import "./Carousel.css";
+import Button from "../buttons/Button";
+import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
+import { getGeneral } from "utils/managerPage/getGeneral";
+import { getItemFromOrderList } from "utils/managerPage/getItemFromOrderList";
 
-const CarouselImages = ({ slides }) => {
+const CarouselImages = () => {
 	const [imgHover, setImgHover] = useState(false);
+
+	const [slides, setSlides] = useState([]);
+
+	useEffect(() => {
+		const getSlides = async () => {
+			try {
+				const general = await getGeneral();
+				const slides = await getItemFromOrderList(
+					general.slideOrder,
+					"slides"
+				);
+				console.log("🚀 ~ getSlides ~ slides:", slides);
+				setSlides(slides);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		getSlides();
+	}, []);
 
 	return (
 		<Swiper
@@ -22,7 +50,14 @@ const CarouselImages = ({ slides }) => {
 			speed={600}
 			rewind={true}
 			parallax={true}
-			modules={[Navigation, Pagination, Parallax, Scrollbar, A11y, Autoplay]}
+			modules={[
+				Navigation,
+				Pagination,
+				Parallax,
+				Scrollbar,
+				A11y,
+				Autoplay,
+			]}
 			spaceBetween={100}
 			slidesPerView={1}
 			navigation
@@ -32,10 +67,10 @@ const CarouselImages = ({ slides }) => {
 			onSlideChange={() => null}
 			// onSwiper={(swiper) => console.log(swiper)}
 			onSwiper={(swiper) => null}
-			autoplay = {{
-				delay : 2000,
+			autoplay={{
+				delay: 2000,
 				disableOnInteraction: false,
-				pauseOnMouseEnter: true
+				pauseOnMouseEnter: true,
 			}}
 			className="h-[600px] rounded-lg"
 		>
@@ -46,7 +81,7 @@ const CarouselImages = ({ slides }) => {
 					onMouseEnter={() => setImgHover(true)}
 					onMouseLeave={() => setImgHover(false)}
 					style={{
-						backgroundImage: `url(${slide.src})`,
+						backgroundImage: `url(${slide.banner.downloadURL})`,
 						backgroundSize: "cover",
 						backgroundRepeat: "no-repeat",
 					}}
@@ -80,15 +115,14 @@ const CarouselImages = ({ slides }) => {
 	);
 };
 
-
 CarouselImages.propTypes = {
 	slides: PropTypes.arrayOf(
-	  PropTypes.shape({
-		src: PropTypes.string.isRequired,
-		title: PropTypes.string,
-		desc: PropTypes.string,
-	  })
+		PropTypes.shape({
+			src: PropTypes.string.isRequired,
+			title: PropTypes.string,
+			desc: PropTypes.string,
+		})
 	).isRequired,
-  };
+};
 
 export default CarouselImages;

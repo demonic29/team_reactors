@@ -84,15 +84,15 @@ const HomePage = () => {
 		<div>
 			<div className="container">
 				<div className="mt-5">
-					{tourImg.images && (
+					{/* {tourImg.images && ( */}
 						<CarouselImages
-							slides={tourImg.images.map((img) => ({
-								src: img,
-								title: tourImg.title,
-								desc: tourImg.shortDesc,
-							}))}
+							// slides={tourImg.images.map((img) => ({
+							// 	src: img,
+							// 	title: tourImg.title,
+							// 	desc: tourImg.shortDesc,
+							// }))}
 						/>
-					)}
+					{/* )} */}
 				</div>
 
 				{/* about-us */}
