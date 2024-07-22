@@ -32,6 +32,7 @@
 		"web-vitals": "^2.1.4",
 		"yup": "^1.4.0"
 	},
+	"proxy": "reki-teku.vercel.app",
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "npm run generate-meta-tag && react-scripts build",
