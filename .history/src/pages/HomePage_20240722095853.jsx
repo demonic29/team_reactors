@@ -13,7 +13,6 @@ import { doc, getDoc, collection } from "firebase/firestore";
 import { db } from "firebase-config";
 import { NavLink } from "react-router-dom";
 import CarouselImages from "components/Carousel/CarouselImages";
-import { useApi } from "contexts/managerPage/api-context";
 
 const HomePage = () => {
   const [carouselImgs, setCarouselImgs] = useState([]);
@@ -93,20 +92,15 @@ const HomePage = () => {
     getSlides();
   }, []);
 
-    // useApi
-    const { data } = useApi();
-    const [tourImg , setTourImg] = useState({});
-    useEffect(() => {
-      if(data && data.tours && data.tours.length > 0) {
-          setTourImg(data.tours[0])
-      }
-  }, [data]) 
-
   return (
     <div>
       <div className="container">
         <div className="mt-5">
-        {tourImg.images && <CarouselImages slides={tourImg.images.map(img => ({ src: img, title: tourImg.title, desc: tourImg.shortDesc }))}/>}
+          {imgSlides.length > 0 ? (
+            <CarouselImages slides={imgSlides} />
+          ) : (
+            <p>Loading slides...</p>
+          )}
         </div>
 
         {/* about-us */}
@@ -144,7 +138,7 @@ const HomePage = () => {
           {/* tour-datas */}
           <div className="flex flex-wrap justify-center gap-10 sub-container">
             {tourList.map((tour) => (
-              <div key={tour?.tourId} className={`${tourList.length > 3 ? 'max-w-[calc((100%-(40px)*1)/2)]' : 'max-w-[calc((100%-(40px)*2)/3)]' }`}>
+              <div key={tour?.tourId} className="max-w-[calc((100%-(40px)*2)/3)]">
                 <Card
                   imgSrc={tour.banner}
                   alt="tour-banner"
@@ -166,7 +160,7 @@ const HomePage = () => {
             <h2 className="text-3xl font-bold">ノート</h2>
           </div>
 
-          <div className="flex gap-5 mt-5">
+          <div className="flex mt-5 gap-5">
             {notes && notes.length > 0 ? (
               notes.map((note) => (
                 <div key={note.noteId}>
