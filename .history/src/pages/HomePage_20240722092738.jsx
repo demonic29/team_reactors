@@ -1,25 +1,22 @@
-
-
 import React, { useEffect, useState } from "react";
 import Button from "../components/buttons/Button";
 import Card from "../components/card/Tour";
 import Footer from "../layouts/Footer";
-// import { Swiper, SwiperSlide } from 'swiper/react';
-// import 'swiper/swiper-bundle.min.css';
-// import { Navigation, Pagination, Parallax, Scrollbar, A11y } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.min.css';
+import { Navigation, Pagination, Parallax, Scrollbar, A11y } from 'swiper';
 import { getGeneral } from "utils/managerPage/getGeneral";
 import { getItemFromOrderList } from "utils/managerPage/getItemFromOrderList";
 import { doc, getDoc, collection } from "firebase/firestore";
 import { db } from "firebase-config";
 import { NavLink } from "react-router-dom";
-import CarouselImages from "components/Carousel/CarouselImages";
-import { useApi } from "contexts/managerPage/api-context";
 
 const HomePage = () => {
   const [carouselImgs, setCarouselImgs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [tourList, setTourList] = useState([]);
   const [about, setAbout] = useState({});
+  const [notes, setNotes] = useState([]);
   const [imgSlides, setImgSlides] = useState([]);
 
   useEffect(() => {
@@ -27,7 +24,7 @@ const HomePage = () => {
       setLoading(true);
       try {
         const general = await getGeneral();
-        const tours = await getItemFromOrderList(general.recommendTourOrder, "tours");
+        const tours = await getItemFromOrderList(general?.tourOrder, "tours");
         setTourList(tours);
       } catch (error) {
         console.log(error);
@@ -58,15 +55,19 @@ const HomePage = () => {
     getHomeAbout();
   }, []);
 
-  const [notes, setNotes] = useState([]);
   useEffect(() => {
     const getNotes = async () => {
       setLoading(true);
       try {
-        const general = await getGeneral();
-        const getNoteDatas = await getItemFromOrderList(general.recommendNoteOrder, "notes");
-        setNotes(getNoteDatas);
-        console.log(getNoteDatas)
+        const notesCollectionRef = collection(db, "notes");
+        const notesDocRef = doc(notesCollectionRef, "noteData");
+        const docSnap = await getDoc(notesDocRef);
+        if (docSnap.exists()) {
+          setNotes(docSnap.data().content); // Adjust according to your Firestore structure
+          console.log(docSnap.data().content); // Debug log
+        } else {
+          console.log("No such document!");
+        }
       } catch (error) {
         console.log(error);
       } finally {
@@ -93,20 +94,15 @@ const HomePage = () => {
     getSlides();
   }, []);
 
-    // useApi
-    const { data } = useApi();
-    const [tourImg , setTourImg] = useState({});
-    useEffect(() => {
-      if(data && data.tours && data.tours.length > 0) {
-          setTourImg(data.tours[0])
-      }
-  }, [data]) 
-
   return (
     <div>
       <div className="container">
         <div className="mt-5">
-        {tourImg.images && <CarouselImages slides={tourImg.images.map(img => ({ src: img, title: tourImg.title, desc: tourImg.shortDesc }))}/>}
+          {imgSlides.length > 0 ? (
+            <CarouselImages slides={imgSlides} />
+          ) : (
+            <p>Loading slides...</p>
+          )}
         </div>
 
         {/* about-us */}
@@ -143,7 +139,7 @@ const HomePage = () => {
 
           {/* tour-datas */}
           <div className="flex flex-wrap justify-center gap-10 sub-container">
-            {tourList.slice(0,3).map((tour) => (
+            {tourList.map((tour) => (
               <div key={tour?.tourId} className="max-w-[calc((100%-(40px)*2)/3)]">
                 <Card
                   imgSrc={tour.banner}
@@ -155,7 +151,7 @@ const HomePage = () => {
             ))}
           </div>
 
-          <NavLink to={"/tourList"} className="mt-[100px] flex justify-center">
+          <NavLink to={"/tourList"} className="mt-[100px] text-center">
             <Button>もっとツアーをみる</Button>
           </NavLink>
         </div>
@@ -166,9 +162,9 @@ const HomePage = () => {
             <h2 className="text-3xl font-bold">ノート</h2>
           </div>
 
-          <div className="flex gap-5 mt-5">
+          <div className="flex mt-5">
             {notes && notes.length > 0 ? (
-              notes.map((note) => (
+              notes.slice(0, 3).map((note) => (
                 <div key={note.noteId}>
                   <p
                     dangerouslySetInnerHTML={{
@@ -181,9 +177,9 @@ const HomePage = () => {
               <p>No notes available.</p>
             )}
           </div>
-          <NavLink to={"https://note.com/reki_teku0531/"} className="mt-[-100px] flex justify-center">
-            <Button>もっとツアーをみる</Button>
-          </NavLink>
+          <div className="text-center">
+            <Button>ノートのページへ</Button>
+          </div>
         </div>
       </div>
 
@@ -193,3 +189,69 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+const CarouselImages = ({ slides }) => {
+  const [imgHover, setImgHover] = useState(false);
+
+  if (!Array.isArray(slides)) {
+    return null;
+  }
+
+  return (
+    <Swiper
+      style={{
+        "--swiper-navigation-color": "#fff",
+        "--swiper-pagination-color": "#fff",
+      }}
+      speed={600}
+      rewind={true}
+      parallax={true}
+      modules={[Navigation, Pagination, Parallax, Scrollbar, A11y]}
+      spaceBetween={100}
+      slidesPerView={1}
+      navigation
+      pagination={{ clickable: true }}
+      onSlideChange={() => null}
+      onSwiper={(swiper) => null}
+      className="h-[700px]"
+    >
+      {slides.map((slide, index) => (
+        <SwiperSlide
+          key={index}
+          className={`relative left-0 top-0 h-[500px] bg-cover bg-center fade-in duration-100 transition-all`}
+          onMouseEnter={() => setImgHover(true)}
+          onMouseLeave={() => setImgHover(false)}
+          style={{
+            backgroundImage: `url(${slide.src})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+          }}
+          data-swiper-parallax="-23%"
+        >
+          {imgHover && (
+            <div className="absolute z-50 flex items-center w-full h-full bg-black bg-opacity-50 fade-in">
+              <div className="px-[50px] grid gap-4 ms-5">
+                <div
+                  className="text-3xl font-bold text-white"
+                  data-swiper-parallax="-300"
+                >
+                  {slide.title}
+                </div>
+                <div
+                  className="text-white text-md"
+                  data-swiper-parallax="-200"
+                >
+                  {slide.desc}
+                </div>
+
+                <NavLink to={"/tour"}>
+                  <Button>Go Tour</Button>
+                </NavLink>
+              </div>
+            </div>
+          )}
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  );
+};
