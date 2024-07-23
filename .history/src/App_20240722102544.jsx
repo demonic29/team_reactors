@@ -14,7 +14,6 @@ import ManagerNotePage from "pages/manager/ManagerNotePage";
 import ManagerPracticePage from "pages/manager/ManagerPracticePage";
 import ManagerPrivacyPage from "pages/manager/ManagerPrivacyPage";
 
-
 const App = () => {
 	return (
 		<Routes>
@@ -55,7 +54,5 @@ const App = () => {
 		</Routes>
 	);
 };
-
-
 
 export default App;

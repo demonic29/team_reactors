@@ -12,6 +12,7 @@ const firebaseConfig = {
 	appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
+const cors = require("cors");
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -19,4 +20,3 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage();
 export const storageRef = ref(storage, 'images');
-

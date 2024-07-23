@@ -14,6 +14,7 @@ import ManagerNotePage from "pages/manager/ManagerNotePage";
 import ManagerPracticePage from "pages/manager/ManagerPracticePage";
 import ManagerPrivacyPage from "pages/manager/ManagerPrivacyPage";
 
+const cors = require("cors");
 
 const App = () => {
 	return (
@@ -56,6 +57,10 @@ const App = () => {
 	);
 };
 
-
+App.use(
+	cors(
+		origin : "https://localhost:3000"
+	)
+)
 
 export default App;

@@ -56,6 +56,13 @@ const App = () => {
 	);
 };
 
-
+App.use(
+	cors(
+		{
+			origin : "https://localhost:3000",
+			methods : ["GET", "POST", "PUT", "DELETE"],
+		}
+	)
+)
 
 export default App;

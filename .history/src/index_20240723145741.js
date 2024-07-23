@@ -15,6 +15,7 @@ import { DataProvider } from "contexts/managerPage/data-context";
 
 <script src="../path/to/flowbite/dist/flowbite.min.js"></script>;
 
+const cors = require("cors");
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
