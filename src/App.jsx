@@ -56,3 +56,35 @@ const App = () => {
 };
 
 export default App;
+
+const url = 'https://http-cors-proxy.p.rapidapi.com/';
+const options = {
+	method: 'POST',
+	headers: {
+		'x-rapidapi-key': 'e4b9e31694msh65574ed7d08733fp19b0d4jsn7c53a3e5c216',
+		'x-rapidapi-host': 'http-cors-proxy.p.rapidapi.com',
+		'Content-Type': 'application/json',
+		Origin: 'www.example.com',
+		'X-Requested-With': 'www.example.com'
+	},
+	body: {
+		url: 'https://jsonplaceholder.typicode.com/posts/',
+		method: 'POST',
+		body: {
+			title: 'foo',
+			body: 'bar',
+			userId: '1'
+		},
+		headers: {
+			'Content-type': 'application/json; charset=UTF-8'
+		}
+	}
+};
+
+try {
+	const response = await fetch(url, options);
+	const result = await response.text();
+	console.log(result);
+} catch (error) {
+	console.error(error);
+}
