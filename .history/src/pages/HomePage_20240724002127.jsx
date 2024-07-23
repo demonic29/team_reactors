@@ -82,7 +82,7 @@ const HomePage = () => {
         const general = await getGeneral();
         const slideOrder = general?.slideOrder;
         const slides = await getItemFromOrderList(slideOrder, "slides");
-        // console.log(slides);
+        console.log(slides);
         setImgSlides(slides);
       } catch (error) {
         console.log(error);
