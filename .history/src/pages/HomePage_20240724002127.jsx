@@ -82,6 +82,7 @@ const HomePage = () => {
         const general = await getGeneral();
         const slideOrder = general?.slideOrder;
         const slides = await getItemFromOrderList(slideOrder, "slides");
+        console.log(slides);
         setImgSlides(slides);
       } catch (error) {
         console.log(error);
@@ -137,8 +138,8 @@ const HomePage = () => {
 
           {/* tour-datas */}
           <div className="flex flex-wrap justify-center gap-10 sub-container">
-            {tourList.slice(0,3).map((tour) => (
-              <div key={tour?.tourId} className="max-w-[calc((100%-(40px)*2)/3)]">
+            {tourList.map((tour) => (
+              <div key={tour?.tourId} className={`${tourList.length > 3 ? 'max-w-[calc((100%-(40px)*1)/2)]' : 'max-w-[calc((100%-(40px)*2)/3)]'} w-full`}>
                 <Card
                   imgSrc={tour.banner}
                   alt="tour-banner"
