@@ -46,7 +46,7 @@ const CarouselImages = ({ slides }) => {
 					onMouseEnter={() => setImgHover(true)}
 					onMouseLeave={() => setImgHover(false)}
 					style={{
-						backgroundImage: `url(${slide.src})`,
+						backgroundImage: `url(${slide.banner.downloadURL})`,
 						backgroundSize: "cover",
 						backgroundRepeat: "no-repeat",
 					}}
