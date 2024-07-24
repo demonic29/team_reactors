@@ -1,7 +1,12 @@
+
+
 import React, { useEffect, useState } from "react";
 import Button from "../components/buttons/Button";
 import Card from "../components/card/Tour";
 import Footer from "../layouts/Footer";
+// import { Swiper, SwiperSlide } from 'swiper/react';
+// import 'swiper/swiper-bundle.min.css';
+// import { Navigation, Pagination, Parallax, Scrollbar, A11y } from 'swiper';
 import { getGeneral } from "utils/managerPage/getGeneral";
 import { getItemFromOrderList } from "utils/managerPage/getItemFromOrderList";
 import { doc, getDoc, collection } from "firebase/firestore";
@@ -44,7 +49,7 @@ const HomePage = () => {
           console.log("No such document!");
         }
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       } finally {
         setLoading(false);
       }
@@ -60,9 +65,9 @@ const HomePage = () => {
         const general = await getGeneral();
         const getNoteDatas = await getItemFromOrderList(general.recommendNoteOrder, "notes");
         setNotes(getNoteDatas);
-        console.log(getNoteDatas)
+        // console.log(getNoteDatas)
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       } finally {
         setLoading(false);
       }
@@ -80,7 +85,7 @@ const HomePage = () => {
         // console.log(slides);
         setImgSlides(slides);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       } finally {
         setLoading(false);
       }
