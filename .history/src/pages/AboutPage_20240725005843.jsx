@@ -71,7 +71,7 @@ const AboutPage = () => {
       </div>
 
       {/* main-profile */}
-      <div className="grid grid-cols-2 mt-[150px] bg-primaryColor">
+      <div className="grid grid-cols-1 mt-[150px] bg-primaryColor">
         <div className="pl-5 my-auto w-full max-w-[620px] ml-auto pr-16 leading-relaxed">
           <h2 className="text-[50px] font-bold mb-5 text-white">
             {aboutData.owner.name}
