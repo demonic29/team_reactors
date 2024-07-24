@@ -11,7 +11,7 @@ import { getGeneral } from "utils/managerPage/getGeneral";
 import { getItemFromOrderList } from "utils/managerPage/getItemFromOrderList";
 import { doc, getDoc, collection } from "firebase/firestore";
 import { db } from "firebase-config";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import CarouselImages from "components/Carousel/CarouselImages";
 import { useApi } from "contexts/managerPage/api-context";
 
@@ -21,6 +21,7 @@ const HomePage = () => {
   const [tourList, setTourList] = useState([]);
   const [about, setAbout] = useState({});
   const [imgSlides, setImgSlides] = useState([]);
+  const navigate= useNavigate()
 
   useEffect(() => {
     const getTour = async () => {
@@ -66,7 +67,6 @@ const HomePage = () => {
         const general = await getGeneral();
         const getNoteDatas = await getItemFromOrderList(general.recommendNoteOrder, "notes");
         setNotes(getNoteDatas);
-        console.log(getNoteDatas)
       } catch (error) {
         console.log(error);
       } finally {
@@ -145,7 +145,7 @@ const HomePage = () => {
           {/* tour-datas */}
           <div className="flex flex-wrap justify-center gap-10 sub-container">
             {tourList.map((tour) => (
-              <div key={tour?.tourId} className={`${tourList.length > 3 ? 'max-w-[calc((100%-(40px)*1)/2)]' : 'max-w-[calc((100%-(40px)*2)/3)]'} w-full`}>
+              <div key={tour?.tourId} onClick={() => navigate(`/tour/${tour.tourId}`)} className={`${tourList.length > 3 ? 'max-w-[calc((100%-(40px)*1)/2)]' : 'max-w-[calc((100%-(40px)*2)/3)]'} w-full`}>
                 <Card
                   imgSrc={tour.banner}
                   alt="tour-banner"

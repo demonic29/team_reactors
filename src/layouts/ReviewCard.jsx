@@ -19,7 +19,7 @@ export default function ReviewCard() {
     return (
         <div>
             <div
-                className="overflow-hidden m-auto bg-cover bg-center"
+                className="m-auto overflow-hidden bg-center bg-cover"
                 style={{
                     backgroundImage: "url('/path/to/background.jpg')",
                 }}
@@ -34,7 +34,7 @@ export default function ReviewCard() {
                         {tourList.feedback &&
                             tourList.feedback.length > 0 &&
                             tourList.feedback.map((feedback, index) => (
-                                <SwiperSlide key={feedback.rate}>
+                                <SwiperSlide key={index}>
                                     <div className="flex justify-center">
                                         <div className="block w-[800px] h-[350px] my-[20px] bg-white rounded-lg shadow-md">
                                             <div className="flex gap-[20px] p-[30px] pb-[15px]">
@@ -47,7 +47,7 @@ export default function ReviewCard() {
                                                 </div>
                                                 <div className=" w-[500px] p-4">
                                                     <div className="flex justify-between">
-                                                        <div className="w-full flex justify-between items-center">
+                                                        <div className="flex items-center justify-between w-full">
                                                             <div className="w-[150px] flex justify-between items-center">
                                                                 <div className="text-[22px] font-semibold">
                                                                     {

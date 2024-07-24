@@ -19,7 +19,6 @@ export default function Accordion() {
     };
 
     const renderStars = (noteId) => {
-        console.log(noteId);
         const stars = [];
         for (let i = 0; i < 5; i++) {
             stars.push(
@@ -31,7 +30,7 @@ export default function Accordion() {
             );
         }
         return (
-            <div className="relative group flex">
+            <div className="relative flex group">
                 {stars}
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max bg-[#C55A53] text-white text-xs rounded py-2 px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <p>体力消費率 {noteId}/5</p>
@@ -86,7 +85,7 @@ export default function Accordion() {
                                 transitionProperty: "max-height",
                             }}
                         >
-                            <div className="flex justify-between items-start">
+                            <div className="flex items-start justify-between">
                                 <div className="min-h-[330px] flex flex-col justify-between">
                                     <p>{plan.start}</p>
                                     {plan.destination &&
@@ -122,7 +121,7 @@ export default function Accordion() {
 
                             <div className="mt-[30px] flex flex-col items-center">
                                 <h2 className="my-[50px]">体力面について</h2>
-                                <div className="flex flex-wrap justify-between items-center ">
+                                <div className="flex flex-wrap items-center justify-between ">
                                     {tourList.locations &&
                                         tourList.locations.length > 0 &&
                                         plan.id === 1 &&
