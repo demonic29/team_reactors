@@ -14,7 +14,7 @@ const NavBar = () => {
   // };
 
   return (
-    <div className="container h-[65px] bg-white shadow-sm items-center flex justify-between">
+    <div className="container h-[100px] bg-white shadow-sm items-center flex justify-between">
       <div className="flex items-center gap-4">
         <img src={logo} alt="歴てくのロゴ" />
         <span className="font-bold text-3xl text-secondaryColor">歴てく</span>

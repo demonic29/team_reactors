@@ -35,7 +35,7 @@ export const DraggableItem = ({ item, index, items, setItems, children }) => {
 	return (
 		<div
 			ref={ref}
-			className={`${isDragging ? "opacity-50" : "opacity-100"}`}
+			className={`${isDragging ? "opacity-30" : "opacity-100"}`}
 		>
 			{/* <SliderManageCard drag={drag} item={item}></SliderManageCard> */}
 			{cloneElement(children, { drag, item })}

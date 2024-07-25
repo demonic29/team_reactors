@@ -4,7 +4,9 @@ import React, { useEffect, useState } from "react";
 import Button from "../components/buttons/Button";
 import Card from "../components/card/Tour";
 import Footer from "../layouts/Footer";
-
+// import { Swiper, SwiperSlide } from 'swiper/react';
+// import 'swiper/swiper-bundle.min.css';
+// import { Navigation, Pagination, Parallax, Scrollbar, A11y } from 'swiper';
 import { getGeneral } from "utils/managerPage/getGeneral";
 import { getItemFromOrderList } from "utils/managerPage/getItemFromOrderList";
 import { doc, getDoc, collection } from "firebase/firestore";
@@ -105,7 +107,7 @@ const HomePage = () => {
     <div>
       <div className="container">
         <div className="mt-5">
-        {tourImg.images && <CarouselImages slides={tourImg.images.map(img => ({ src: img, title: tourImg.title, desc: tourImg.shortDesc }))}/>}
+          {tourImg.images && <CarouselImages slides={tourImg.images.map(img => ({ src: img, title: tourImg.title, desc: tourImg.shortDesc }))}/>}
         </div>
 
         {/* about-us */}

@@ -470,3 +470,41 @@ export const tourMockData = [
 		],
 	},
 ];
+
+/**
+ * keys
+ * ["name", "age", "friend"]
+ * values
+ * [['nam', 12, [{"name": 'minh', "age": 12}, {"name": 'lam', "age": 14}]], ['mai', 14, [{"name": 'anh', "age": 16}, {"name": 'trung', "age": 16}]]]
+ * 
+ * =>>>>>>
+[
+	{name: 'nam',
+		age: 12,
+		friend: [
+			{
+				name: 'minh',
+				age: 12,
+			},
+			{
+				name: 'lam',
+				age: 14,
+			}
+		]
+	},
+	{name: 'mai',
+		age: 14,
+		friend: [
+			{
+				name: 'anh',
+				age: 16,
+			},
+			{
+				name: 'trung',
+				age: 16,
+			}
+		]
+	}
+]
+ */
+
