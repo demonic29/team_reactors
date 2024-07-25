@@ -1,50 +1,77 @@
-import React, { useEffect, useState } from 'react'
-import CarouselImages from '../components/Carousel/CarouselImages'
-import NavBar from '../layouts/NavBar';
-import Card from '../components/card/Tour';
-import Footer from '../layouts/Footer';
+import React, { useEffect, useState } from "react";
+import CarouselImages from "../components/Carousel/CarouselImages";
+import Card from "../components/card/Tour";
+import Footer from "../layouts/Footer";
 
-import { useApi } from '../contexts/managerPage/api-context';
+import { useApi } from "../contexts/managerPage/api-context";
+import { getItemFromOrderList } from "utils/managerPage/getItemFromOrderList";
+import { getGeneral } from "utils/managerPage/getGeneral";
+import { NavLink } from "react-router-dom";
+import Button from "components/buttons/Button";
 
 export default function TourList() {
-    // const [carouselImgs, setCarouselImgs] = useState([]);
-    const { data } = useApi();
-    const [tourImg , setTourImg] = useState({});
+	const { data } = useApi();
+	const [tourImg, setTourImg] = useState({});
+    const [loading, setLoading] = useState(false);
+    const [tourList, setTourList] = useState([]);
 
     useEffect(() => {
-        if(data && data.tours && data.tours.length > 0) {
-            setTourImg(data.tours[0])
-        }
-    }, [data]) 
+        const getTour = async () => {
+          setLoading(true);
+          try {
+            const general = await getGeneral();
+            const tours = await getItemFromOrderList(general.recommendTourOrder, "tours");
+            setTourList(tours);
+          } catch (error) {
+            console.log(error);
+          } finally {
+            setLoading(false);
+          }
+        };
+        getTour();
+      }, []);
 
-    return (
+	return (
         <div>
-            <div className='container'>
 
-                {tourImg.images && <CarouselImages slides={tourImg.images.map(img => ({ src: img, title: tourImg.title, desc: tourImg.shortDesc }))}/>}
-
-                <div className='mt-[100px] text-center'>
-                    <h1 className='font-bold'>ツアー紹介</h1>
-                    <p>心を込めて、私たちはお客さんにいろいろなツアーを提供しています。</p>
-                </div>
-                
-                <div className='flex justify-center'>
-                    <div className='grid gap-10 grid-cols-2 justify-center'>
-                        {
-                            tourImg.images && tourImg.images.map((image,index) => (
+            <div>
+                <div className="container">
+                    {tourImg.images && (
+                        <CarouselImages
+                            slides={tourImg.images.map((img) => ({
+                                src: img,
+                                title: tourImg.title,
+                                desc: tourImg.shortDesc,
+                            }))}
+                        />
+                    )}
+    
+                    <div className="mt-[100px] text-center">
+                        <h1 className="font-bold">ツアー紹介</h1>
+                        <p>
+                            心を込めて、私たちはお客さんにいろいろなツアーを提供しています。
+                        </p>
+                    </div>
+    
+                    <div className="flex flex-wrap justify-center gap-10 sub-container">
+                        {tourList.map((tour) => (
+                            <div key={tour?.tourId} className={`${tourList.length > 3 ? 'max-w-[calc((100%-(40px)*1)/2)]' : 'max-w-[calc((100%-(40px)*2)/3)]'} w-full`}>
                                 <Card
-                                    key={index}
-                                    title={tourImg.title}
-                                    imgSrc={image}
-                                    desc={tourImg.shortDesc}
+                                imgSrc={tour.banner}
+                                alt="tour-banner"
+                                title={tour.title}
+                                desc={tour.shortDesc}
                                 />
-                            ))
-                        }
+                            </div>
+                        ))}
                     </div>
                 </div>
+                <NavLink to={"/tourList"} className="mt-[100px] flex justify-center">
+                    <Button>もっとツアーをみる</Button>
+                </NavLink>
             </div>
-
             <Footer/>
+            
         </div>
-    )
+	);
 }

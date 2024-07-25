@@ -13,6 +13,8 @@ import PageNotFound from "pages/PageNotFound";
 import ManagerNotePage from "pages/manager/ManagerNotePage";
 import ManagerPracticePage from "pages/manager/ManagerPracticePage";
 import ManagerPrivacyPage from "pages/manager/ManagerPrivacyPage";
+import TourList from "pages/TourList";
+
 
 const App = () => {
 	return (
@@ -21,6 +23,7 @@ const App = () => {
 				<Route path="/" element={<HomePage></HomePage>} default></Route>
 				<Route path="/about" element={<AboutPage></AboutPage>}></Route>
 				<Route path="/tour" element={<TourPage></TourPage>}></Route>
+				<Route path="/tourList" element={<TourList></TourList>}></Route>
 			</Route>
 			<Route path="/login" element={<LoginPage />}></Route>
 			<Route path="/manager" element={<ManagerLayout />}>
