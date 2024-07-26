@@ -182,7 +182,7 @@ export default function Accordion() {
                                             className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-[500px] bg-[#004B88] text-[#fefefe] text-[12px] rounded-lg py-2 px-4 transition-opacity duration-500 ease-in-out 
                                                 ${
                                                     isHovered
-                                                        ? "opacity-100 scale-95"
+                                                        ? "opacity-100 scale-95 "
                                                         : "opacity-0 scale-95"
                                                 }`}
                                         >
