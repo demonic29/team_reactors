@@ -44,6 +44,7 @@ export default function TourList() {
 									title={tourImg.title}
 									imgSrc={image}
 									desc={tourImg.shortDesc}
+									link={"/tour/:tourId"}
 								/>
 							))}
 					</div>
