@@ -97,7 +97,7 @@ const CarouselImages = () => {
 									{slide.desc}
 								</div>
 
-								<NavLink to={"/tour"}>
+								<NavLink to={"/tour/:tourId"}>
 									<Button>Go Tour</Button>
 								</NavLink>
 							</div>
