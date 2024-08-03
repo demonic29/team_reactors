@@ -128,7 +128,7 @@ const HomePage = () => {
                   __html: `${about.content}`,
                 }}
               ></p>
-              <NavLink to={"/tourList"}>
+              <NavLink to={"/about"}>
                 <Button>もっとツアーをみる</Button>
               </NavLink>
             </div>

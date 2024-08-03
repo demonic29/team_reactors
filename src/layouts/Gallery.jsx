@@ -36,7 +36,7 @@ export default function Gallery() {
                     <img
                         src={mainImage}
                         alt="gallery-main-img"
-                        className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
+                        className={`absolute top-0 left-0 w-full h-full object-cover transition-all duration-700 ease-in-out  ${
                             isFading ? "opacity-0" : "opacity-100"
                         }`}
                     />

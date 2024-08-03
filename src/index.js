@@ -12,7 +12,6 @@ import { ModalProvider } from "./contexts/modal-context";
 import { AuthProvider } from "contexts/auth-context";
 import { DataProvider } from "contexts/managerPage/data-context";
 import { ApiProvider } from "contexts/managerPage/api-context";
-<script src="../path/to/flowbite/dist/flowbite.min.js"></script>;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -42,6 +41,7 @@ root.render(
 		</AuthProvider>
 	</React.StrictMode>
 );
+<script src="../path/to/flowbite/dist/flowbite.min.js"></script>;
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
